@@ -1,0 +1,31 @@
+# INACTIVE EXAMPLE: copy to .github/workflows/scheduled-deploy.yml only when ready.
+# First configure the Cloudflare Pages Git integration and create a Deploy Hook.
+# Add its URL as a GitHub Actions secret named CLOUDFLARE_PAGES_DEPLOY_HOOK.
+# GitHub cron uses UTC: 08:00 UTC is 12:00 Asia/Dubai (UTC+04:00).
+# GitHub may delay scheduled runs. Disable this schedule after 18 October 2026.
+name: PLS scheduled article rebuild
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 8 11,18 10 *'
+permissions: {}
+concurrency:
+  group: pls-scheduled-rebuild
+  cancel-in-progress: false
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Request a Cloudflare Pages rebuild
+        env:
+          DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_HOOK }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ] && [ "$(date -u +%Y)" != "2026" ]; then
+            echo "The approved October 2026 publication window has ended."
+            exit 0
+          fi
+          if [ -z "$DEPLOY_HOOK" ]; then
+            echo "Configure the CLOUDFLARE_PAGES_DEPLOY_HOOK secret first."
+            exit 1
+          fi
+          curl --fail --silent --show-error --request POST "$DEPLOY_HOOK" --output /dev/null
