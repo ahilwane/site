@@ -1,0 +1,94 @@
+{
+  "baseUrl": "https://pls-uae.com",
+  "name": "PLS Accounting",
+  "legalName": "Prime Ledger Solution for Accounting Services",
+  "email": "ah@pls-uae.com",
+  "themeColor": "#303e9d",
+  "homeTitle": "PLS Accounting | UAE Accounting & Tax Guidance",
+  "homeDescription": "PLS Accounting provides accounting, bookkeeping and business advisory support in the UAE. Explore Dr. Ahmad Helwani’s VAT and Corporate Tax guidance.",
+  "heroTitle": "Accounting, bookkeeping and UAE tax guidance",
+  "heroIntro": "PLS Accounting provides UAE accounting and bookkeeping support, with VAT and Corporate Tax guidance by Dr. Ahmad Helwani.",
+  "biography": "Dr. Ahmad Helwani is Managing Partner at PLS Accounting. He has over fifteen years of UAE accounting, finance and tax experience, holds a DBA from SBS Swiss Business School (2023), and works in English and Arabic.",
+  "vatDeliverable": "You receive a written explanation of the issue reviewed, any unresolved information gaps and the recommended next steps.",
+  "links": {
+    "biography": "https://www.bonnard-lawson.com/team/ahmad-helwani/",
+    "linkedin": "https://ae.linkedin.com/in/ahmad-helwani",
+    "taxes": "https://uae-taxes.com/",
+    "vat": "https://uae-taxes.com/vat",
+    "corporateTax": "https://uae-taxes.com/corporate-tax",
+    "taxArticles": "https://uae-taxes.com/tax-insights"
+  },
+  "services": [
+    {
+      "title": "Accounting & bookkeeping",
+      "text": "Support for organised business records and financial reporting, so your financial information is easier to understand and use.",
+      "tags": [
+        "Business records",
+        "Financial reporting"
+      ],
+      "icon": "ledger"
+    },
+    {
+      "title": "UAE tax guidance",
+      "text": "Explore Dr. Ahmad Helwani’s guidance on VAT and Corporate Tax, including the facts and supporting records needed to review a business question.",
+      "tags": [
+        "VAT reviews",
+        "Corporate Tax"
+      ],
+      "icon": "document"
+    },
+    {
+      "title": "Financial advisory",
+      "text": "Budgeting and forecasting support to help you consider your plans alongside the financial information available.",
+      "tags": [
+        "Budgeting",
+        "Forecasting"
+      ],
+      "icon": "chart"
+    },
+    {
+      "title": "Business consulting",
+      "text": "Practical discussions about business operations, plans and the information needed for informed decisions.",
+      "tags": [
+        "Business planning",
+        "Operations"
+      ],
+      "icon": "compass"
+    }
+  ],
+  "faq": [
+    {
+      "question": "What services does PLS Accounting provide?",
+      "answer": "PLS Accounting, Prime Ledger Solution for Accounting Services, provides accounting and bookkeeping, financial advisory and business consulting support in the UAE. Dr. Ahmad Helwani’s UAE Taxes website explains his VAT and Corporate Tax guidance."
+    },
+    {
+      "question": "What should I prepare before making an enquiry?",
+      "answer": "Share your business activity, the service or question involved, the relevant period and any approaching deadline. Explain which accounts, invoices or other supporting records are available. You can make an enquiry before every document has been gathered."
+    },
+    {
+      "question": "What does Dr. Ahmad Helwani’s VAT review include?",
+      "answer": "You receive a written explanation of the issue reviewed, any unresolved information gaps and the recommended next steps. The scope of Dr. Ahmad Helwani’s VAT review is discussed using the transaction details and available supporting records."
+    },
+    {
+      "question": "How can I contact PLS Accounting?",
+      "answer": "Email ah@pls-uae.com with a short description of your business question. Enquiries can be made in English or Arabic."
+    }
+  ],
+  "externalArticles": [
+    {
+      "title": "CapEx vs OpEx in the UAE: Corporate Tax Deductions",
+      "url": "https://uae-taxes.com/tax-insights/f/capex-vs-opex-in-the-uae-corporate-tax-deductions",
+      "description": "How to distinguish capital and operating expenditure, document the accounting treatment and review Corporate Tax deductions."
+    },
+    {
+      "title": "UAE VAT Profit Margin Scheme: A Used Goods Dealer Checklist",
+      "url": "https://uae-taxes.com/tax-insights/f/uae-vat-profit-margin-scheme-a-used-goods-dealer-checklist",
+      "description": "A practical checklist for used-goods dealers covering scheme eligibility, stock records, calculations and invoicing."
+    },
+    {
+      "title": "How to Choose a Suitable Tax Agent for Your Business in the UAE",
+      "url": "https://uae-taxes.com/tax-insights/f/how-to-choose-the-best-tax-agent-in-dubai-and-the-uae",
+      "description": "What to check when comparing tax advisers, including professional status, relevant experience, scope and fees."
+    }
+  ]
+}
