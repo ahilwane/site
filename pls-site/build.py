@@ -82,6 +82,7 @@ class Builder:
             "url": self.base + "/", "logo": self.base + "/assets/pls-logo.png",
             "email": self.site["email"], "areaServed": {"@type": "Country", "name": "United Arab Emirates"},
             "description": self.site["homeDescription"],
+            "address": {"@type": "PostalAddress", "addressLocality": "Dubai", "addressCountry": "AE"},
             "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Accounting and business services in the UAE", "itemListElement": [
                 {"@type": "Offer", "itemOffered": {"@type": "Service", "name": item["title"], "description": item["text"]}}
                 for item in self.site["services"]
@@ -116,11 +117,12 @@ class Builder:
         image = image or self.base + "/assets/pls-logo.png"
         canonical = "" if noindex else f'<link rel="canonical" href="{h(url)}">'
         robots = '<meta name="robots" content="noindex, follow">' if noindex else ""
+        verification = '<meta name="google-site-verification" content="zUTLfmqYzChhmWgAQjYGrYNKUWl5BHOes7OxhkO8JHI">' if path == "/" else ""
         graph = graph or [self.company()]
         structured = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("<", "\\u003c")
         return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{h(title)}</title><meta name="description" content="{h(description)}"><meta name="theme-color" content="#303e9d">{canonical}{robots}
+<title>{h(title)}</title><meta name="description" content="{h(description)}"><meta name="theme-color" content="#303e9d">{canonical}{robots}{verification}
 <meta property="og:type" content="{'article' if article else 'website'}"><meta property="og:title" content="{h(title)}"><meta property="og:description" content="{h(description)}"><meta property="og:url" content="{h(url)}"><meta property="og:image" content="{h(image)}"><meta property="og:image:alt" content="{h(image_alt)}"><meta property="og:site_name" content="PLS Accounting"><meta name="twitter:card" content="{'summary_large_image' if article else 'summary'}">
 <link rel="icon" href="/assets/pls-logo.png" type="image/png"><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script>
 <script type="application/ld+json">{structured}</script></head><body>{self.header(active)}<main id="main">{content}</main>{self.footer()}</body></html>\n'''
