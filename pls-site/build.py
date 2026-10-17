@@ -117,7 +117,7 @@ class Builder:
         image = image or self.base + "/assets/pls-logo.png"
         canonical = "" if noindex else f'<link rel="canonical" href="{h(url)}">'
         robots = '<meta name="robots" content="noindex, follow">' if noindex else ""
-        verification = '<meta name="google-site-verification" content="zUTLfmqYzChhmWgAQjYGrYNKUWl5BHOes7OxhkO8JHI">' if path == "/" else ""
+        verification = '<meta name="google-site-verification" content="zUTLfmqYzChhmWgAQjYGrYNKUWl5BHOes7OxhkO8JHI"><meta name="msvalidate.01" content="5369E22398CA740655C138DAD554D86F">' if path == "/" else ""
         graph = graph or [self.company()]
         structured = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("<", "\\u003c")
         return f'''<!doctype html>
