@@ -14,6 +14,7 @@ test('release guard admits both approved Dubai noon dates and a single recovery 
   assert.equal(eligibleRelease(noon, noon)?.title, title);
   assert.equal(eligibleRelease(recovery, recovery)?.title, title);
   assert.match(eligibleRelease(epoch('2026-10-18T12:00:00+04:00'), epoch('2026-10-18T12:00:00+04:00'))?.title, /^AI and Tax Services/);
+  assert.match(eligibleRelease(epoch('2026-10-18T12:00:25.833+04:00'), epoch('2026-10-18T12:00:26.652+04:00'))?.title, /^AI and Tax Services/);
   assert.equal(eligibleRelease(noon, noon - 1), null);
   assert.equal(eligibleRelease(recovery, recovery - 1), null);
   assert.equal(eligibleRelease(noon, noon + 40 * 60000 + 1), null);
@@ -68,7 +69,7 @@ test('verified article skips the hook, while a missing article triggers one boun
     await worker.scheduled({ scheduledTime: noon }, env);
     assert.equal(calls.length, 2);
     assert.equal(calls[1].options.method, 'POST');
-    assert.ok(calls.every(call => call.options.signal instanceof AbortSignal && call.options.redirect === 'error'));
+    assert.ok(calls.every(call => call.options.signal instanceof AbortSignal && call.options.redirect === 'manual'));
     assert.ok(!logs.join(' ').includes('https://'));
     assert.ok(!logs.join(' ').includes(env.PAGES_DEPLOY_HOOK));
   });
@@ -135,4 +136,19 @@ test('network failures are capped at three attempts and log no error messages or
     assert.equal(posts, 3);
     assert.ok(!logs.join(' ').includes(env.PAGES_DEPLOY_HOOK));
   });
+});
+
+
+test('Worker-compatible fetches reject redirects without forwarding the private hook', async () => {
+  const destinations = [];
+  await withRuntime(noon, async (url, options) => {
+    assert.equal(options.redirect, 'manual');
+    destinations.push(url);
+    return new Response('', { status: 302, headers: { Location: 'https://unexpected.invalid/' } });
+  }, async () => {
+    await assert.rejects(worker.scheduled({ scheduledTime: noon }, env), /Pages rebuild request failed/);
+  });
+  assert.equal(destinations.length, 2);
+  assert.equal(destinations[1], env.PAGES_DEPLOY_HOOK);
+  assert.ok(!destinations.some(url => url.includes('unexpected.invalid')));
 });

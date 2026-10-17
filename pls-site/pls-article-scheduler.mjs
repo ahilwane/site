@@ -64,7 +64,7 @@ async function articleIsLive(url, title) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
-    const response = await fetch(url, { signal: controller.signal, redirect: 'error', headers: { 'Cache-Control': 'no-cache' }, cf: { cacheTtl: 0 } });
+    const response = await fetch(url, { signal: controller.signal, redirect: 'manual', headers: { 'Cache-Control': 'no-cache' }, cf: { cacheTtl: 0 } });
     if (response.status !== 200 || !response.headers.get('Content-Type')?.toLowerCase().includes('text/html') || !response.body) {
       await response.body?.cancel();
       return false;
@@ -104,7 +104,7 @@ export async function requestBuild(hook, verifyPublication) {
     let category = 'network';
     try {
       const response = await fetch(hook, {
-        method: 'POST', signal: controller.signal, redirect: 'error',
+        method: 'POST', signal: controller.signal, redirect: 'manual',
       });
       status = response.status;
       await response.body?.cancel();
