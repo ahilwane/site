@@ -4,11 +4,11 @@
   "legalName": "Prime Ledger Solution for Accounting Services",
   "email": "ah@pls-uae.com",
   "themeColor": "#303e9d",
-  "homeTitle": "PLS Accounting | UAE Accounting & Tax Guidance",
-  "homeDescription": "PLS Accounting provides accounting, bookkeeping and business advisory support in the UAE. Explore Dr. Ahmad Helwani’s VAT and Corporate Tax guidance.",
-  "heroTitle": "Accounting, bookkeeping and UAE tax guidance",
-  "heroIntro": "PLS Accounting provides UAE accounting and bookkeeping support, with VAT and Corporate Tax guidance by Dr. Ahmad Helwani.",
-  "biography": "Dr. Ahmad Helwani is Managing Partner at PLS Accounting. He has over fifteen years of UAE accounting, finance and tax experience, holds a DBA from SBS Swiss Business School (2023), and works in English and Arabic.",
+  "homeTitle": "PLS Accounting | Dubai Accounting & UAE Tax Guidance",
+  "homeDescription": "PLS Accounting is based in Dubai and provides UAE accounting, bookkeeping and business advisory support, with VAT and Corporate Tax guidance by Dr. Ahmad Helwani.",
+  "heroTitle": "Accounting, bookkeeping and UAE tax guidance in Dubai",
+  "heroIntro": "PLS Accounting is based in Dubai and provides UAE accounting and bookkeeping support, with VAT and Corporate Tax guidance by Dr. Ahmad Helwani.",
+  "biography": "Dr. Ahmad Helwani is Managing Partner at PLS Accounting in Dubai, United Arab Emirates. He has over fifteen years of UAE accounting, finance and tax experience, holds a DBA from SBS Swiss Business School (2023), and works in English and Arabic.",
   "vatDeliverable": "You receive a written explanation of the issue reviewed, any unresolved information gaps and the recommended next steps.",
   "links": {
     "biography": "https://www.bonnard-lawson.com/team/ahmad-helwani/",
@@ -57,6 +57,10 @@
     }
   ],
   "faq": [
+    {
+      "question": "Where is PLS Accounting based?",
+      "answer": "PLS Accounting is based in Dubai, United Arab Emirates. For accounting, bookkeeping, VAT or Corporate Tax enquiries, email ah@pls-uae.com in English or Arabic."
+    },
     {
       "question": "What services does PLS Accounting provide?",
       "answer": "PLS Accounting, Prime Ledger Solution for Accounting Services, provides accounting and bookkeeping, financial advisory and business consulting support in the UAE. Dr. Ahmad Helwani’s UAE Taxes website explains his VAT and Corporate Tax guidance."

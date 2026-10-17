@@ -50,11 +50,11 @@
       "id": "tax-planning-vs-tax-evasion",
       "title": "Tax Planning vs Tax Evasion in the UAE: Where Is the Line?",
       "slug": "tax-planning-vs-tax-evasion-in-the-uae-where-is-the-line",
-      "date": "2026-10-11",
-      "dateText": "11 October 2026",
+      "date": "2026-10-17",
+      "dateText": "17 October 2026",
       "publicationAt": "2026-10-11T12:00:00+04:00",
-      "status": "scheduled",
-      "includeInCurrentPublicBuild": false,
+      "status": "published",
+      "includeInCurrentPublicBuild": true,
       "description": "The distinction between lawful UAE tax planning, tax evasion and anti-abuse rules, with practical questions to review before proceeding.",
       "imageAlt": "Conceptual illustration of financial records, a calculator, a magnifying glass and balance scales.",
       "author": "Dr. Ahmad Helwani",
@@ -77,7 +77,8 @@
         "https://mof.gov.ae/wp-content/uploads/2023/04/Ministerial-Decision-No.-73-of-2023-on-Small-Business-Relief-for-the-Purposes-of-Federal-Decree-Law-No.-47-of-2022.pdf"
       ],
       "sourceLinkInstances": 5,
-      "wordCountApprox": 762
+      "wordCountApprox": 762,
+      "actualPublicationAt": "2026-10-17T10:40:51+04:00"
     },
     {
       "id": "ai-and-the-future-of-tax-services",
