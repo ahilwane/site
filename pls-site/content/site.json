@@ -4,11 +4,11 @@
   "legalName": "Prime Ledger Solution for Accounting Services",
   "email": "ah@pls-uae.com",
   "themeColor": "#303e9d",
-  "homeTitle": "PLS Accounting | Dubai Accounting & UAE Tax Guidance",
-  "homeDescription": "PLS Accounting is based in Dubai and provides UAE accounting, bookkeeping and business advisory support, with VAT and Corporate Tax guidance by Dr. Ahmad Helwani.",
-  "heroTitle": "Accounting, bookkeeping and UAE tax guidance in Dubai",
-  "heroIntro": "PLS Accounting is based in Dubai and provides UAE accounting and bookkeeping support, with VAT and Corporate Tax guidance by Dr. Ahmad Helwani.",
-  "biography": "Dr. Ahmad Helwani is Managing Partner at PLS Accounting in Dubai, United Arab Emirates. He has over fifteen years of UAE accounting, finance and tax experience, holds a DBA from SBS Swiss Business School (2023), and works in English and Arabic.",
+  "homeTitle": "VAT, Corporate Tax & Accounting in Dubai | PLS Accounting",
+  "homeDescription": "Dubai accounting and bookkeeping, VAT and Corporate Tax support, and Zoho Books implementation. Discuss your requirements with Dr. Ahmad Helwani in English or Arabic.",
+  "heroTitle": "VAT, Corporate Tax and accounting support in Dubai",
+  "heroIntro": "PLS Accounting helps UAE businesses with bookkeeping, VAT and Corporate Tax registration and filing, transaction reviews, and Zoho Books implementation. Dr. Ahmad Helwani brings over fifteen years of UAE accounting, finance and tax experience. Enquiries are welcome in English and Arabic.",
+  "biography": "Dr. Ahmad Helwani is Managing Partner at PLS Accounting in Dubai and an FTA Tax Agent for VAT and Corporate Tax with Bonnard Lawson Dubai. He has over fifteen years of UAE accounting, finance and tax experience, holds a DBA from SBS Swiss Business School (2023), and works in English and Arabic.",
   "vatDeliverable": "You receive a written explanation of the issue reviewed, any unresolved information gaps and the recommended next steps.",
   "links": {
     "biography": "https://www.bonnard-lawson.com/team/ahmad-helwani/",
@@ -16,12 +16,13 @@
     "taxes": "https://uae-taxes.com/",
     "vat": "https://uae-taxes.com/vat",
     "corporateTax": "https://uae-taxes.com/corporate-tax",
-    "taxArticles": "https://uae-taxes.com/tax-insights"
+    "taxArticles": "https://uae-taxes.com/tax-insights",
+    "ftaDirectory": "https://tax.gov.ae/en/tax.support/tax.agents/registered.tax.agents.aspx"
   },
   "services": [
     {
       "title": "Accounting & bookkeeping",
-      "text": "Support for organised business records and financial reporting, so your financial information is easier to understand and use.",
+      "text": "Bookkeeping, account reconciliations and financial reporting to support management decisions and tax preparation.",
       "tags": [
         "Business records",
         "Financial reporting"
@@ -29,13 +30,34 @@
       "icon": "ledger"
     },
     {
-      "title": "UAE tax guidance",
-      "text": "Explore Dr. Ahmad Helwani’s guidance on VAT and Corporate Tax, including the facts and supporting records needed to review a business question.",
+      "title": "Corporate Tax advisory & filing",
+      "text": "Corporate Tax registration, review of accounting records and tax adjustments, return preparation and filing support, with advice on your business’s specific questions.",
       "tags": [
-        "VAT reviews",
-        "Corporate Tax"
+        "Registration & filing",
+        "Tax reviews"
       ],
-      "icon": "document"
+      "icon": "document",
+      "url": "/services/corporate-tax-dubai/"
+    },
+    {
+      "title": "VAT advisory & compliance",
+      "text": "VAT registration and return filing support, plus invoice and transaction reviews that explain the treatment, supporting evidence and next steps.",
+      "tags": [
+        "VAT returns",
+        "Transaction reviews"
+      ],
+      "icon": "document",
+      "url": "/services/vat-reviews-dubai/"
+    },
+    {
+      "title": "Zoho Books & e-invoicing readiness",
+      "text": "As a Zoho partner, PLS supports accounting setup, data migration, invoicing workflows and UAE e-invoicing readiness, including coordination with an Accredited Service Provider where required.",
+      "tags": [
+        "Zoho partner",
+        "Implementation support"
+      ],
+      "icon": "ledger",
+      "url": "/services/zoho-books-e-invoicing-uae/"
     },
     {
       "title": "Financial advisory",
@@ -63,7 +85,15 @@
     },
     {
       "question": "What services does PLS Accounting provide?",
-      "answer": "PLS Accounting, Prime Ledger Solution for Accounting Services, provides accounting and bookkeeping, financial advisory and business consulting support in the UAE. Dr. Ahmad Helwani’s UAE Taxes website explains his VAT and Corporate Tax guidance."
+      "answer": "PLS Accounting, Prime Ledger Solution for Accounting Services, provides accounting and bookkeeping, VAT and Corporate Tax support, Zoho Books implementation, financial advisory and business consulting. The engagement scope identifies the services, responsible adviser and any required representation arrangements."
+    },
+    {
+      "question": "Is PLS a Zoho partner?",
+      "answer": "Yes. PLS is a Zoho partner and supports Zoho Books implementation and accounting workflows. E-invoicing readiness work includes reviewing data and processes and coordinating with an Accredited Service Provider where required."
+    },
+    {
+      "question": "Who provides specialist tax advice?",
+      "answer": "Dr. Ahmad Helwani is Managing Partner at PLS Accounting and an FTA Tax Agent for VAT and Corporate Tax with Bonnard Lawson Dubai. His professional biography is linked on his profile. Formal representation before the FTA is confirmed separately in the engagement and appointment arrangements."
     },
     {
       "question": "What should I prepare before making an enquiry?",
