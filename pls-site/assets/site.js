@@ -2,20 +2,28 @@ document.documentElement.classList.add('js');
 const toggle = document.querySelector('.nav-toggle');
 const nav = document.querySelector('.nav');
 if (toggle && nav) {
+  const services = nav.querySelector('.service-nav');
+  const closeServices = () => services?.removeAttribute('open');
   const close = () => {
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-label', 'Open navigation');
     nav.classList.remove('is-open');
+    closeServices();
   };
   toggle.addEventListener('click', () => {
     const open = toggle.getAttribute('aria-expanded') !== 'true';
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
     nav.classList.toggle('is-open', open);
+    if (!open) closeServices();
   });
   nav.addEventListener('click', (event) => { if (event.target.closest('a')) close(); });
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+    if (event.key !== 'Escape') return;
+    if (services?.open) {
+      closeServices();
+      services.querySelector('summary')?.focus();
+    } else if (toggle.getAttribute('aria-expanded') === 'true') {
       close();
       toggle.focus();
     }

@@ -67,6 +67,11 @@ class Builder:
         self.site = json.loads((ROOT / "content/site.json").read_text(encoding="utf-8"))
         self.manifest = json.loads((ROOT / "content/articles.json").read_text(encoding="utf-8"))
         self.base = self.site["baseUrl"].rstrip("/")
+        # A new asset URL prevents returning visitors from mixing old styles/scripts with new HTML.
+        self.asset_urls = {
+            name: f"/assets/{Path(name).stem}.{hashlib.sha256((ROOT / 'assets' / name).read_bytes()).hexdigest()[:12]}{Path(name).suffix}"
+            for name in ("site.css", "site.js")
+        }
         if urlparse(self.base).scheme != "https" or not urlparse(self.base).netloc:
             raise ValueError("baseUrl must be an absolute HTTPS URL.")
         self.articles = []
@@ -134,7 +139,7 @@ class Builder:
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{h(title)}</title><meta name="description" content="{h(description)}"><meta name="theme-color" content="#303e9d">{canonical}{robots}{verification}
 <meta property="og:type" content="{'article' if article else 'website'}"><meta property="og:title" content="{h(title)}"><meta property="og:description" content="{h(description)}"><meta property="og:url" content="{h(url)}"><meta property="og:image" content="{h(image)}"><meta property="og:image:alt" content="{h(image_alt)}"><meta property="og:site_name" content="PLS Accounting"><meta name="twitter:card" content="{'summary_large_image' if article else 'summary'}">
-<link rel="icon" href="/assets/pls-logo.png" type="image/png"><link rel="stylesheet" href="/assets/site.css"><script src="/assets/site.js" defer></script>
+<link rel="icon" href="/assets/pls-logo.png" type="image/png"><link rel="stylesheet" href="{h(self.asset_urls['site.css'])}"><script src="{h(self.asset_urls['site.js'])}" defer></script>
 <script type="application/ld+json">{structured}</script></head><body>{self.header(active)}<main id="main">{content}</main>{self.footer()}</body></html>\n'''
 
     def faq(self):
@@ -256,6 +261,8 @@ class Builder:
         (output/'assets').mkdir()
         for filename in ['pls-logo.png','pls-logo-compact.jpg','site.css','site.js']:
             shutil.copy2(ROOT/'assets'/filename,output/'assets'/filename)
+        for filename, asset_url in self.asset_urls.items():
+            shutil.copy2(ROOT/'assets'/filename, output/asset_url.lstrip('/'))
         pages={'index.html':self.home(),'ahmad-helwani/index.html':self.profile(),'articles/index.html':self.article_index(),'404.html':self.not_found(),
                'services/corporate-tax-dubai/index.html':self.corporate_tax_service(),
                'services/vat-reviews-dubai/index.html':self.vat_review_service(),
