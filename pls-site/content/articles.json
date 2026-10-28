@@ -34,17 +34,19 @@
       "sourceImageBytes": 1770848,
       "sourceHtml": "output/pls-redesign/articles/uae-einvoicing-readiness-draft.html",
       "sourceHtmlSha256": "50ee13d2ce49445673c4d8762b216c7dfbef0699d6f198e67fef37740184db08",
-      "bodyFragmentSha256": "0473b8221c8466e89beee3c13e1c26b75e05c06c554dc9fc50adb89d1948cd9e",
+      "bodyFragmentSha256": "5ca5283fed682b827fadfac742e18b63034d5caeea1caf218368d7b66d9119e6",
       "coverImageSha256": "293806a95f50acce271433fade67a6aa68eaecf02911086e430f33da4b857d83",
       "sourceLinks": [
         "https://mof.gov.ae/wp-content/uploads/2026/05/Ministerial-Resolution-No.-66-of-2026-Amending-Certain-Provisions-of-Ministerial-Resolution-No.-244-of-2025-Regarding-the-Implementation-of-the-Electronic-Invoicing-System-En-20260514.pdf",
         "https://mof.gov.ae/en/about-us/initiatives/einvoicing/",
         "https://mof.gov.ae/wp-content/uploads/2025/09/Ministerial-Decision-no.-243-of-2025-on-the-Electronic-Invoicing-System.pdf",
         "https://mof.gov.ae/wp-content/uploads/2025/09/Ministerial-Decision-No.-244-of-2025-on-the-Implementation-of-the-Electronic-Invoicing-System.pdf",
-        "https://mof.gov.ae/en/news/ministry-of-finance-hosts-awareness-event-in-ras-al-khaimah-on-latest-einvoicing-updates/"
+        "https://mof.gov.ae/en/news/ministry-of-finance-hosts-awareness-event-in-ras-al-khaimah-on-latest-einvoicing-updates/",
+        "https://mof.gov.ae/wp-content/uploads/2026/10/Ministerial-Decision-No.-197-of-2026-%E2%80%93-Amending-Certain-Provisions-of-Ministerial-Decision-No.-243-of-2025-on-the-Electronic-Invoicing-System_En.pdf"
       ],
       "sourceLinkInstances": 9,
-      "wordCountApprox": 713
+      "wordCountApprox": 748,
+      "dateModified": "2026-10-27T15:01:10+04:00"
     },
     {
       "id": "tax-planning-vs-tax-evasion",
@@ -112,6 +114,40 @@
       ],
       "sourceLinkInstances": 4,
       "wordCountApprox": 770
+    },
+    {
+      "id": "uae-einvoicing-are-you-ready",
+      "title": "UAE E-Invoicing: Are You Ready?",
+      "slug": "uae-e-invoicing-are-you-ready",
+      "date": "2026-10-28",
+      "dateText": "28 October 2026",
+      "publicationAt": "2026-10-27T15:01:10+04:00",
+      "actualPublicationAt": "2026-10-28T09:12:24+04:00",
+      "status": "published",
+      "includeInCurrentPublicBuild": true,
+      "description": "Prepare for UAE e-invoicing with the latest deadlines, October 2026 changes, a readiness checklist and Zoho accounting support from PLS.",
+      "imageAlt": "Conceptual illustration of digital invoicing on a laptop and tablet in a Dubai office.",
+      "author": "Dr. Ahmad Helwani",
+      "contactEmail": "ah@pls-uae.com",
+      "bodyFragment": "content/articles/uae-einvoicing-are-you-ready.html",
+      "coverImage": "assets/articles/uae-einvoicing-are-you-ready.png",
+      "imageCaption": "AI-generated conceptual illustration of UAE e-invoicing readiness.",
+      "imageWidth": 1672,
+      "imageHeight": 941,
+      "imageBytes": 1614927,
+      "sourceImageBytes": 1831804,
+      "sourceHtmlSha256": "1319a3346d061645475fedbf76136946dad059eed3a296d9ecf2b6af53079ea1",
+      "bodyFragmentSha256": "ae74d4f15856deaee1eb49f0eb1120348635a96a29d26160b23c45cd9c9b6a76",
+      "coverImageSha256": "3b266e46664d0da588db3394e99c2511af9a622e1020cc242c8e1f3003e5dff7",
+      "sourceLinks": [
+        "https://mof.gov.ae/wp-content/uploads/2026/05/Ministerial-Resolution-No.-66-of-2026-Amending-Certain-Provisions-of-Ministerial-Resolution-No.-244-of-2025-Regarding-the-Implementation-of-the-Electronic-Invoicing-System-En-20260514.pdf",
+        "https://mof.gov.ae/en/about-us/initiatives/einvoicing/",
+        "https://mof.gov.ae/wp-content/uploads/2025/09/Ministerial-Decision-no.-243-of-2025-on-the-Electronic-Invoicing-System.pdf",
+        "https://mof.gov.ae/wp-content/uploads/2025/09/Ministerial-Decision-No.-244-of-2025-on-the-Implementation-of-the-Electronic-Invoicing-System.pdf",
+        "https://mof.gov.ae/wp-content/uploads/2026/10/Ministerial-Decision-No.-197-of-2026-%E2%80%93-Amending-Certain-Provisions-of-Ministerial-Decision-No.-243-of-2025-on-the-Electronic-Invoicing-System_En.pdf"
+      ],
+      "sourceLinkInstances": 5,
+      "wordCountApprox": 844
     }
   ]
 }

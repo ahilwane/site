@@ -9,7 +9,7 @@ python3 build.py
 python3 -m http.server 8000 --directory public
 ```
 
-Open `http://localhost:8000`. The build command writes a complete deployable website into `public/`. The output includes the homepage, professional profile, article index, eligible article pages and images, a 404 page, sitemap, robots file, and Cloudflare response headers. Do not use the source root as the hosting output: `content/` includes the approved future article drafts.
+Open `http://localhost:8000`. The build command writes a complete deployable website into `public/`. The output includes the homepage, professional profile, dedicated service pages, article index, eligible article pages and images, a 404 page, sitemap, robots file, and Cloudflare response headers. Do not use the source root as the hosting output: `content/` includes article source material.
 
 ## Source files
 
@@ -35,15 +35,16 @@ Cloudflare’s Free Pages plan can host the static site with a custom domain. Ex
 
 ## Article publication and scheduling
 
-The source retains the following approved statuses and Dubai timestamps:
+The source retains approved release gates and actual first-publication timestamps where recorded. As at 27 October 2026:
 
-| Article | Source status | Eligible from |
+| Article | Publication state | Date |
 |---|---|---|
-| UAE E-Invoicing: What Businesses Need to Do Before 2027 | Published | 4 October 2026, 16:23 Dubai |
-| Tax Planning vs Tax Evasion in the UAE: Where Is the Line? | Scheduled | 11 October 2026, 12:00 Dubai |
-| AI and Tax Services: What the Future Means for UAE Businesses | Scheduled | 18 October 2026, 12:00 Dubai |
+| UAE E-Invoicing: What Businesses Need to Do Before 2027 | Published; storage-guidance correction prepared | First published 4 October 2026 |
+| Tax Planning vs Tax Evasion in the UAE: Where Is the Line? | Published | Actual first publication 17 October 2026 |
+| AI and Tax Services: What the Future Means for UAE Businesses | Public; source release gate retained | 18 October 2026 |
+| UAE E-Invoicing: Are You Ready? | Prepared for publication; not yet verified live | Approved 27 October 2026 |
 
-At build time, `published` and `scheduled` articles are eligible only when their timezone-aware `publicationAt` timestamp has passed. A `draft` status excludes an article regardless of its date. Filtering happens before HTML, navigation cards, structured data, sitemap entries or images are emitted. Neither scheduled article appears in today’s public website output. Browser-side hiding is not used. Source statuses are never silently rewritten. In a public GitHub repository, the source drafts are viewable on GitHub even before the website release date; use a private repository if source confidentiality is required.
+At build time, `published` and `scheduled` articles are eligible only when their timezone-aware `publicationAt` timestamp has passed. A `draft` status excludes an article regardless of its date. Filtering happens before HTML, navigation cards, structured data, sitemap entries or images are emitted. Browser-side hiding is not used. Source statuses are never silently rewritten. A `published` source status makes an approved article eligible for the build; it does not independently verify that deployment has occurred. In a public GitHub repository, the source drafts are viewable on GitHub even before the website release date; use a private repository if source confidentiality is required.
 
 A static host does not release articles merely because time passes: **a new build and deployment are required**. A push to the production branch or a Cloudflare Pages deploy hook can trigger that build. To automate the two approved releases, create a Pages deploy hook, save its URL as the `CLOUDFLARE_PAGES_DEPLOY_HOOK` GitHub Actions secret, and review the inactive example before copying it into the GitHub repository root’s `.github/workflows/` directory. Scheduled workflows run only from the repository’s default branch: putting an active workflow solely on the rebuild branch will not schedule it. Do not expose the hook URL in public source. The example is not activated in this package.
 
@@ -60,6 +61,10 @@ Do not set `--at` in the production build command. `build-report.json` is local 
 
 ## Search metadata and contact
 
-Production canonical URLs use `https://pls-uae.com`; change `baseUrl` in `content/site.json` only if the production domain changes. The build supplies topic-specific article descriptions, `AccountingService`, `Person`, `ProfilePage`, `CollectionPage` and `BlogPosting` structured data. The company address and phone are omitted because they were not confirmed. Public contact is `ah@pls-uae.com` only.
+Production canonical URLs use `https://pls-uae.com`; change `baseUrl` in `content/site.json` only if the production domain changes. The build supplies topic-specific descriptions and structured data for the company, adviser, services and articles. A precise company street address and phone are omitted because they were not confirmed. Public contact is `ah@pls-uae.com` only.
+
+The three dedicated service routes are `/services/corporate-tax-dubai/`, `/services/vat-reviews-dubai/` and `/services/zoho-books-e-invoicing-uae/`. Copy attributes Dr. Ahmad Helwani’s personal VAT/Corporate Tax Tax Agent role to Bonnard Lawson Dubai and does not claim that PLS is an FTA-registered agency or an Accredited Service Provider. The user-confirmed Zoho partner wording carries no unverified tier, certification or logo.
+
+Before publishing a previously unpublished article on a later day, update its first-publication metadata truthfully. After authenticated deployment, verify the public service pages, new article, corrected older article, sitemap and mobile navigation. Public search or ChatGPT visibility must be measured separately from deployment success.
 
 The robots file allows crawling, including OAI-SearchBot. Search indexing and inclusion in ChatGPT results depend on external discovery and ranking systems; metadata alone does not guarantee either outcome. The sitemap includes only published eligible pages.
