@@ -179,9 +179,9 @@
     },
     {
       "name": "ABOULKHER Trading",
-      "logo": "assets/clients/aboulkher.png",
-      "logoWidth": 394,
-      "logoHeight": 125
+      "logo": "assets/clients/aboulkher.jpg",
+      "logoWidth": 2048,
+      "logoHeight": 444
     },
     {
       "name": "United Arab Agencies (UAA)",
@@ -198,11 +198,96 @@
     {
       "name": "Shorooq Medical",
       "logo": "assets/clients/shorooq-medical.png",
-      "logoWidth": 172,
-      "logoHeight": 83
+      "logoWidth": 775,
+      "logoHeight": 374
     },
     {
       "name": "Dar Mesk Restaurant & Café"
+    },
+    {
+      "name": "Al Merkaz General Trading",
+      "logo": "assets/clients/al-merkaz.png",
+      "logoWidth": 300,
+      "logoHeight": 300
+    },
+    {
+      "name": "Nuga Café"
+    },
+    {
+      "name": "Art & Interior Design"
+    },
+    {
+      "name": "Mamma Sicilia Restaurant & Café",
+      "logo": "assets/clients/mamma-sicilia.png",
+      "logoWidth": 200,
+      "logoHeight": 200
+    },
+    {
+      "name": "The Jewel Teller Factory",
+      "logo": "assets/clients/jewel-teller.png",
+      "logoWidth": 344,
+      "logoHeight": 241
+    },
+    {
+      "name": "Baniyas Oasis Building Maintenance"
+    },
+    {
+      "name": "Rowad Almahara Security Equipment"
+    },
+    {
+      "name": "Pizzeria Napoli"
+    },
+    {
+      "name": "ESSMI Jewellery Trading",
+      "logo": "assets/clients/essmi.png",
+      "logoWidth": 1937,
+      "logoHeight": 1430
+    },
+    {
+      "name": "Let’s Organic Market",
+      "logo": "assets/clients/lets-organic.png",
+      "logoWidth": 360,
+      "logoHeight": 178
+    },
+    {
+      "name": "Mamma Siciliana Restaurant & Café",
+      "logo": "assets/clients/mamma-siciliana.png",
+      "logoWidth": 1114,
+      "logoHeight": 996
+    },
+    {
+      "name": "Mamzar Fashion Center"
+    },
+    {
+      "name": "Baniyas Oasis Electronics",
+      "logo": "assets/clients/baniyas-oasis-electronics.png",
+      "logoWidth": 512,
+      "logoHeight": 208,
+      "logoBackground": "dark"
+    },
+    {
+      "name": "Akasya Security Services"
+    },
+    {
+      "name": "Pure & Organic General Trading",
+      "logo": "assets/clients/pure-and-organic.png",
+      "logoWidth": 495,
+      "logoHeight": 504
+    },
+    {
+      "name": "Al Merkaz Profab"
+    },
+    {
+      "name": "D E R I Goods Wholesalers"
+    },
+    {
+      "name": "Innovation Vision"
+    },
+    {
+      "name": "Al Tarabichi Medical Center"
+    },
+    {
+      "name": "ABAAD Elect. Devices Trading"
     }
   ]
 }
