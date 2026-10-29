@@ -61,9 +61,9 @@ Do not set `--at` in the production build command. `build-report.json` is local 
 
 ## Search metadata and contact
 
-Production canonical URLs use `https://pls-uae.com`; change `baseUrl` in `content/site.json` only if the production domain changes. The build supplies topic-specific descriptions and structured data for the company, adviser, services and articles. A precise company street address and phone are omitted because they were not confirmed. Public contact is `ah@pls-uae.com` only.
+Production canonical URLs use `https://pls-uae.com`; change `baseUrl` in `content/site.json` only if the production domain changes. The build supplies topic-specific descriptions and structured data for the company, adviser, services and articles. Confirmed PLS business details are held in `content/site.json`: telephone `+971 58 595 1040`, Al Musalla Tower, Dubai, UAE, and Monday–Friday 08:00–17:00 Dubai time. These appear in the homepage contact section, global footer and company structured data. No unconfirmed street, office unit or geographic coordinates are added. Public email is `ah@pls-uae.com`.
 
-The three dedicated service routes are `/services/corporate-tax-dubai/`, `/services/vat-reviews-dubai/` and `/services/zoho-books-e-invoicing-uae/`. Copy attributes Dr. Ahmad Helwani’s personal VAT/Corporate Tax Tax Agent role to Bonnard Lawson Dubai and does not claim that PLS is an FTA-registered agency or an Accredited Service Provider. The user-confirmed Zoho partner wording carries no unverified tier, certification or logo.
+The four dedicated service routes are `/services/accounting-bookkeeping-dubai/`, `/services/corporate-tax-dubai/`, `/services/vat-reviews-dubai/` and `/services/zoho-books-e-invoicing-uae/`. Copy attributes Dr. Ahmad Helwani’s personal VAT/Corporate Tax Tax Agent role to Bonnard Lawson Dubai and does not claim that PLS is an FTA-registered agency or an Accredited Service Provider. The user-confirmed Zoho partner wording carries no unverified tier, certification or logo.
 
 Before publishing a previously unpublished article on a later day, update its first-publication metadata truthfully. After authenticated deployment, verify the public service pages, new article, corrected older article, sitemap and mobile navigation. Public search or ChatGPT visibility must be measured separately from deployment success.
 
