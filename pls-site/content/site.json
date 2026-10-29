@@ -191,9 +191,9 @@
     },
     {
       "name": "Via-Tonic",
-      "logo": "assets/clients/via-tonic.webp",
-      "logoWidth": 605,
-      "logoHeight": 127
+      "logo": "assets/clients/via-tonic.svg",
+      "logoWidth": 333,
+      "logoHeight": 71
     },
     {
       "name": "Shorooq Medical",

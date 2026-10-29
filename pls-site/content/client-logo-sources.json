@@ -74,13 +74,16 @@
     },
     {
       "name": "Via-Tonic",
-      "file": "assets/clients/via-tonic.webp",
-      "sourcePage": "https://via-tonic.com/",
-      "sourceAsset": "https://via-tonic.com/wp-content/uploads/2023/08/logo.webp",
-      "retrievedOn": "2026-10-29",
-      "width": 605,
-      "height": 127,
-      "sha256": "947cbbfbc32b5d429bb5a848eaec636ea2d1c9d7bc35a2da41f1f7559d5ff967"
+      "file": "assets/clients/via-tonic.svg",
+      "sourceType": "client-supplied PDF",
+      "sourceAttachment": "Via Tonic Logo.pdf",
+      "sourcePageNumber": 2,
+      "suppliedOn": "2026-10-29",
+      "width": 333,
+      "height": 71,
+      "sha256": "746a2ed3a1c9e3d5803aa060f50faa6c4960bab4be88165a78dd064ffcc02919",
+      "sourceSha256": "ef54dc4490589e8bd727c7644b0a59ac199f67356fc4c3f9005cffdf2a910b9f",
+      "note": "Horizontal logo on page 2 converted directly from original PDF vector paths with Poppler; SVG viewport removes empty PDF page margins only. Artwork geometry, colours, wordmark and proportions unchanged. No embedded fonts, raster content, external references or scripts."
     },
     {
       "name": "Shorooq Medical",
