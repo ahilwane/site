@@ -15,3 +15,6 @@
 @media(max-width:1000px){.service-layout{grid-template-columns:minmax(0,1fr) 255px;gap:38px}.service-enquiry{padding:24px}}
 @media(max-width:800px){.service-nav{width:100%}.service-nav summary{padding:13px 0;font-size:14px;border-bottom:1px solid var(--line);justify-content:space-between}.service-nav-menu{position:static;min-width:0;max-width:none;width:auto;border:0;border-radius:0;box-shadow:none;padding:3px 0 7px 15px}.js .nav .service-nav-menu a{font-size:13px;padding:11px 0}.service-layout{grid-template-columns:1fr;gap:38px}.service-detail-section{padding-top:40px}.service-copy{max-width:none}.service-enquiry{position:static;max-width:600px;padding:27px}.service-copy h2{font-size:27px}.service-hero h1{max-width:740px}}
 @media(max-width:550px){.service-copy{font-size:14px}.service-copy h2{font-size:25px}.service-section{margin-bottom:35px}.service-copy li{padding-left:0}.service-enquiry{padding:24px}.service-hero .button-row{align-items:stretch}.service-hero .button{flex:1 1 auto}.service-faq summary{font-size:14px}}
+
+/* Confirmed PLS business contact */
+.contact-phone a{color:#fff;font-size:18px;font-weight:600}.footer-contact{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px 25px;padding:0 0 22px;font-size:12px;color:var(--muted)}.footer-contact p{margin:0}.footer-contact a{color:var(--blue)}
