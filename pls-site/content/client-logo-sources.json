@@ -186,31 +186,89 @@
       "name": "ESSMI Jewellery Trading",
       "file": "assets/clients/essmi.png",
       "retrievedOn": "2026-10-29"
-    }
-  ],
-  "nameOnlyClients": [
+    },
     {
-      "sourcePage": "https://yalqa.com/p/dar-mesk-resturant-and-cafe-e4cc4a34",
-      "corroboratingSource": "https://www.linkedin.com/pulse/dubai-prod-appointed-official-social-media-pr-agency-dar-mesk-is6ef",
-      "officialWebsite": "https://www.darmesk.ae/",
-      "verifiedOn": "2026-10-29",
-      "note": "Dubai restaurant in Port Saeed, Deira. Added by owner request. No usable original logo was obtainable from public sources; display name only until an original logo is supplied.",
+      "sourcePage": "https://www.instagram.com/darmesk.restaurant/",
+      "retrievedOn": "2026-10-29",
+      "width": 150,
+      "height": 150,
+      "sha256": "88a9c2808c82915d0516bb980b97e19af457dcbd0e67007203ba049fa5f0168f",
+      "note": "Original public Instagram profile picture from user-supplied official restaurant profile, downloaded unchanged through browser media download and visually inspected. Black background with gold Arabic Dar Mesk arch and leaf logo. Profile phone +971585341980 matches Dubai Port Saeed listing; profile caption Dar Mesk Restaurant. No transformation, cropping, re-encoding or upscaling applied.",
       "name": "Dar Mesk Restaurant & Café",
-      "sourceType": "owner-provided client name"
+      "file": "assets/clients/dar-mesk.jpg",
+      "sourceType": "public Instagram profile image"
+    },
+    {
+      "sourceType": "client-supplied PDF",
+      "sourceAttachment": "Innovation Vision Logo.pdf",
+      "sourcePageNumber": 1,
+      "suppliedOn": "2026-10-29",
+      "width": 170,
+      "height": 37,
+      "sha256": "7b3ca0304598c9667d924eed2aa603fcfd1dd69c90ba7eff6076dd8826821bf7",
+      "sourceSha256": "58ebd9488d6e339907284c9ab65dcde233a0fc0cba47c16547f0f5be1e784d5a",
+      "note": "Original Innovation Vision company wordmark converted directly from supplied PDF vector paths with Poppler; SVG viewport removes empty page margins only. Original blue/orange colours, geometry and proportions retained. No raster content, external references, scripts, PDF metadata or other company details included.",
+      "name": "Innovation Vision",
+      "file": "assets/clients/innovation-vision.svg"
+    },
+    {
+      "name": "Art & Interior Design",
+      "file": "assets/clients/art-interior-design.jpg",
+      "width": 150,
+      "height": 150,
+      "sha256": "7bc577c3a22377e516aa776699de63d4139a6d1dcc72298d79899d889390d6b9",
+      "retrievedOn": "2026-10-29",
+      "sourcePage": "https://www.instagram.com/art_and_interior_design/",
+      "sourceType": "public Instagram profile image supplied by owner",
+      "note": "Original public profile image copied unchanged from the owner-confirmed business account."
+    },
+    {
+      "name": "ABAAD Elect. Devices Trading",
+      "file": "assets/clients/abaad.png",
+      "width": 379,
+      "height": 246,
+      "sha256": "ea0299d7db2c59a48cfea9e0eccbe4a02c1f21487a4e7b84a9c57edfaff79ea2",
+      "retrievedOn": "2026-10-29",
+      "sourcePage": "https://www.abad.ca",
+      "sourceType": "owner-confirmed official website logo",
+      "sourceAsset": "https://www.abad.ca/images/new.png",
+      "note": "Original public header logo copied unchanged from the website identified by the owner."
+    },
+    {
+      "name": "Al Tarabichi Medical Center",
+      "file": "assets/clients/tarabichi-user-supplied.png",
+      "width": 366,
+      "height": 240,
+      "sha256": "54b767969867c0b9393ba952e470d2030b203036a589e3a4178e90196e1454f3",
+      "retrievedOn": "2026-10-29",
+      "sourceType": "owner-supplied logo screenshot",
+      "sourceAttachment": "Screenshot 2026-10-29 at 2.04.08 PM.png",
+      "note": "Owner supplied the Tarabichi Joint Care artwork to identify the client brand. Screenshot bytes retained unchanged, including its original checkerboard backdrop."
     },
     {
       "name": "Nuga Café",
-      "verifiedOn": "2026-10-29",
-      "sourceType": "owner-provided client name",
-      "note": "Dubai Mamzar identity confirmed but no isolated authentic original logo retrieved."
+      "file": "assets/clients/nuga-cafe.jpg",
+      "width": 150,
+      "height": 150,
+      "sha256": "62d3e787e2186478ed4cfeb8df2519d49bef0980a10d414bc21a24732e3e62c1",
+      "retrievedOn": "2026-10-29",
+      "sourcePage": "https://www.instagram.com/nugacafedxb/",
+      "sourceType": "public Instagram profile image supplied by owner",
+      "note": "Original public profile image copied unchanged from the owner-confirmed business account."
     },
     {
-      "sourcePage": "https://www.bizmideast.com/AE/art-interior-design-llc-04-336-4425",
-      "note": "Exact Oud Metha Dubai company, phone 04 3364425 and alkazart@emirates.net.ae. No original logo. Avoid unrelated The Art Interior Design by Bijan Laufer.",
-      "name": "Art & Interior Design",
-      "verifiedOn": "2026-10-29",
-      "sourceType": "owner-provided client name"
-    },
+      "name": "Pizzeria Napoli",
+      "file": "assets/clients/napoli.jpg",
+      "width": 150,
+      "height": 150,
+      "sha256": "beb812dec5f9318d5740db314e78ded2f59badb51538373f6edd0ecac2cb3552",
+      "retrievedOn": "2026-10-29",
+      "sourcePage": "https://www.instagram.com/napolidxb/",
+      "sourceType": "public Instagram profile image supplied by owner",
+      "note": "Original public profile image copied unchanged from the owner-confirmed business account."
+    }
+  ],
+  "nameOnlyClients": [
     {
       "sourcePage": "https://b2bhint.com/en/company/ae-du/baniyas-oasis-building-maintenance-llc--1205478",
       "note": "Exact Dubai business identity verified. No original logo found. Do not use department-store or electronics brand without client confirmation.",
@@ -224,12 +282,6 @@
       "name": "Rowad Almahara Security Equipment",
       "verifiedOn": "2026-10-29",
       "sourceType": "owner-provided client name"
-    },
-    {
-      "name": "Pizzeria Napoli",
-      "verifiedOn": "2026-10-29",
-      "sourceType": "owner-provided client name",
-      "note": "Dubai Mamzar identity confirmed but no isolated authentic original logo retrieved; avoid unrelated Napoli brands."
     },
     {
       "sourcePage": "https://www.b2bhint.com/en/company/ae-du/mamzar-fashion-centre-llc--384443",
@@ -256,27 +308,6 @@
       "sourcePage": "https://www.counterscope.ae/score/bc543acc-60a9-4382-b1fc-f302fbbcd8b7",
       "note": "Exact Dubai legal entity found; no original logo or official website verified.",
       "name": "D E R I Goods Wholesalers",
-      "verifiedOn": "2026-10-29",
-      "sourceType": "owner-provided client name"
-    },
-    {
-      "sourcePage": "https://innovationvisionuae.com/",
-      "note": "Exact official header asset identified, native HTML dimensions 842x186, but download timed out twice. No asset retained for use. IMPORTANT: /wp-content/uploads/2024/03/logo.png is b-one Ortho partner mark, NOT Innovation Vision logo.",
-      "name": "Innovation Vision",
-      "verifiedOn": "2026-10-29",
-      "sourceType": "owner-provided client name"
-    },
-    {
-      "sourcePage": "https://www.practo.com/dubai/clinic/altarabichi-medical-center-al-safa",
-      "note": "Exact clinic found. drtarabichi.com appears related to individual surgeon/hospital, not enough evidence to use that brand logo for exact clinic.",
-      "name": "Al Tarabichi Medical Center",
-      "verifiedOn": "2026-10-29",
-      "sourceType": "owner-provided client name"
-    },
-    {
-      "sourcePage": "https://maps.yango.com/en-ae/org/23217272731/",
-      "note": "Close name match in Sharjah; no exact legal-entity match or original logo verified. Use user-supplied caption only.",
-      "name": "ABAAD Elect. Devices Trading",
       "verifiedOn": "2026-10-29",
       "sourceType": "owner-provided client name"
     }

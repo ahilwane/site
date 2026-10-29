@@ -202,7 +202,10 @@
       "logoHeight": 374
     },
     {
-      "name": "Dar Mesk Restaurant & Café"
+      "name": "Dar Mesk Restaurant & Café",
+      "logo": "assets/clients/dar-mesk.jpg",
+      "logoWidth": 150,
+      "logoHeight": 150
     },
     {
       "name": "Al Merkaz General Trading",
@@ -211,10 +214,16 @@
       "logoHeight": 300
     },
     {
-      "name": "Nuga Café"
+      "name": "Nuga Café",
+      "logo": "assets/clients/nuga-cafe.jpg",
+      "logoWidth": 150,
+      "logoHeight": 150
     },
     {
-      "name": "Art & Interior Design"
+      "name": "Art & Interior Design",
+      "logo": "assets/clients/art-interior-design.jpg",
+      "logoWidth": 150,
+      "logoHeight": 150
     },
     {
       "name": "Mamma Sicilia Restaurant & Café",
@@ -235,7 +244,10 @@
       "name": "Rowad Almahara Security Equipment"
     },
     {
-      "name": "Pizzeria Napoli"
+      "name": "Pizzeria Napoli",
+      "logo": "assets/clients/napoli.jpg",
+      "logoWidth": 150,
+      "logoHeight": 150
     },
     {
       "name": "ESSMI Jewellery Trading",
@@ -281,13 +293,22 @@
       "name": "D E R I Goods Wholesalers"
     },
     {
-      "name": "Innovation Vision"
+      "name": "Innovation Vision",
+      "logo": "assets/clients/innovation-vision.svg",
+      "logoWidth": 170,
+      "logoHeight": 37
     },
     {
-      "name": "Al Tarabichi Medical Center"
+      "name": "Al Tarabichi Medical Center",
+      "logo": "assets/clients/tarabichi-user-supplied.png",
+      "logoWidth": 366,
+      "logoHeight": 240
     },
     {
-      "name": "ABAAD Elect. Devices Trading"
+      "name": "ABAAD Elect. Devices Trading",
+      "logo": "assets/clients/abaad.png",
+      "logoWidth": 379,
+      "logoHeight": 246
     }
   ]
 }
