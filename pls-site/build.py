@@ -136,7 +136,39 @@ class Builder:
 </div></header>'''
 
     def footer(self):
-        return f'''<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="footer-brand"><a href="/" aria-label="PLS Accounting home"><img src="/assets/pls-logo.png" width="570" height="183" alt="PLS Accounting — Prime Ledger Solution for Accounting Services" loading="lazy"></a></div><nav class="footer-links" aria-label="Footer navigation"><a href="/#services">Services</a><a href="/ahmad-helwani/">Dr. Ahmad Helwani</a><a href="/articles/">Articles</a><a href="{h(self.site['links']['taxes'])}">UAE Taxes</a><a href="mailto:{h(self.site['email'])}">Email PLS</a></nav></div><div class="footer-contact"><p>{h(self.site['address']['building'])}, {h(self.site['address']['city'])}, UAE</p><p><a href="tel:{h(self.site['telephone'])}">{h(self.site['phoneDisplay'])}</a></p><p>{h(self.site['businessHours']['display'])}</p></div><div class="footer-base"><p>© {self.at.year} PLS Accounting. All rights reserved.</p><p>Prime Ledger Solution for Accounting Services</p></div></div></footer>'''
+        clients_link = '<a href="/#clients">Clients</a>' if self.site.get('clients') else ''
+        return f'''<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="footer-brand"><a href="/" aria-label="PLS Accounting home"><img src="/assets/pls-logo.png" width="570" height="183" alt="PLS Accounting — Prime Ledger Solution for Accounting Services" loading="lazy"></a></div><nav class="footer-links" aria-label="Footer navigation"><a href="/#services">Services</a>{clients_link}<a href="/ahmad-helwani/">Dr. Ahmad Helwani</a><a href="/articles/">Articles</a><a href="{h(self.site['links']['taxes'])}">UAE Taxes</a><a href="mailto:{h(self.site['email'])}">Email PLS</a></nav></div><div class="footer-contact"><p>{h(self.site['address']['building'])}, {h(self.site['address']['city'])}, UAE</p><p><a href="tel:{h(self.site['telephone'])}">{h(self.site['phoneDisplay'])}</a></p><p>{h(self.site['businessHours']['display'])}</p></div><div class="footer-base"><p>© {self.at.year} PLS Accounting. All rights reserved.</p><p>Prime Ledger Solution for Accounting Services</p></div></div></footer>'''
+
+    def client_logo_path(self, client):
+        logo = client.get('logo')
+        if not logo:
+            return None
+        path = Path(logo)
+        if path.is_absolute() or '..' in path.parts or path.parts[:2] != ('assets', 'clients') or path.suffix.lower() not in {'.png', '.jpg', '.jpeg', '.webp', '.svg'}:
+            raise ValueError('Client logos must use local image paths under assets/clients/.')
+        source = (ROOT / path).resolve()
+        client_root = (ROOT / 'assets' / 'clients').resolve()
+        if ROOT not in source.parents or client_root not in source.parents or not source.is_file():
+            raise ValueError(f'Client logo is missing or outside assets/clients/: {logo}')
+        return path
+
+    def clients_section(self):
+        clients = self.site.get('clients', [])
+        if not clients:
+            return ''
+        cards = []
+        for client in clients:
+            name = client['name']
+            logo = self.client_logo_path(client)
+            if logo:
+                width, height = int(client.get('logoWidth', 320)), int(client.get('logoHeight', 160))
+                if width <= 0 or height <= 0:
+                    raise ValueError('Client logo dimensions must be positive.')
+                image = f'<div class="client-logo"><img src="/{h(logo.as_posix())}" alt="{h(name)} logo" width="{width}" height="{height}" loading="lazy" decoding="async"></div>'
+                cards.append(f'<figure class="client-card">{image}<figcaption>{h(name)}</figcaption></figure>')
+            else:
+                cards.append(f'<figure class="client-card client-card-name-only"><figcaption>{h(name)}</figcaption></figure>')
+        return '<section class="section clients-section" id="clients" aria-labelledby="clients-title"><div class="wrap"><div class="section-header"><div><h2 id="clients-title">Selected clients</h2></div></div><div class="clients-grid">' + ''.join(cards) + '</div></div></section>'
 
     def page(self, title, description, path, content, graph=None, active="", image=None, image_alt="PLS Accounting logo", article=False, noindex=False):
         url = self.base + path
@@ -179,6 +211,7 @@ class Builder:
         content = f'''<section class="hero" aria-labelledby="hero-title"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">Prime Ledger Solution for Accounting Services</p><h1 id="hero-title">{h(s['heroTitle'])}</h1><p class="hero-intro">{h(s['heroIntro'])}</p><div class="button-row">{link('/#services','Explore our services','button')}{link('/ahmad-helwani/','Meet Dr. Ahmad','button secondary')}</div><p class="hero-note">{icon('globe')}UAE business support · English &amp; Arabic enquiries</p></div><div class="hero-art"><p class="art-label">A considered approach</p><div class="document"><div class="document-heading"><span class="document-symbol">{icon('ledger')}</span><p class="eyebrow">From records to decisions</p><h2>Bring the details together.</h2></div><div class="document-row"><span>01</span><div><strong>Understand your records</strong><small>Accounts, invoices &amp; supporting documents</small></div></div><div class="document-row"><span>02</span><div><strong>Clarify the question</strong><small>Business context &amp; information gaps</small></div></div><div class="document-row"><span>03</span><div><strong>Identify the next step</strong><small>A scope shaped around your needs</small></div></div><div class="document-footer">PLS Accounting <span>Records → context → decisions</span></div></div></div></div></section>
 <div class="intro-band"><div class="wrap intro-grid"><div>{icon('ledger')}<span><strong>Accounting &amp; bookkeeping</strong><small>Organised records and useful information</small></span></div><div>{icon('document')}<span><strong>VAT &amp; Corporate Tax</strong><small>Registration, filing and advisory</small></span></div><div>{icon('globe')}<span><strong>English &amp; Arabic</strong><small>Enquiries in either language</small></span></div></div></div>
 <section class="section" id="services" aria-labelledby="services-title"><div class="wrap"><div class="section-header"><div><p class="eyebrow">How we can help</p><h2 id="services-title">Accounting, Zoho Books and tax support</h2></div><p>Choose the service you need, then agree the scope, records and deliverables for your business.</p></div><div class="services-grid">{services}</div><p class="services-note">Start with our <a href="/services/accounting-bookkeeping-dubai/">accounting and bookkeeping services</a> or <a href="/services/zoho-books-e-invoicing-uae/">Zoho Books implementation</a>. For specialist tax advice, explore Dr. Ahmad Helwani’s <a href="{h(urls['taxes'])}">UAE Taxes website</a>.</p></div></section>
+{self.clients_section()}
 <section class="section profile-section" aria-labelledby="profile-title"><div class="wrap profile-grid"><div class="profile-panel"><img src="/assets/pls-logo.png" width="570" height="183" alt="PLS Accounting — Prime Ledger Solution for Accounting Services" loading="lazy"><div><p class="eyebrow">Managing Partner</p><h3>Dr. Ahmad Helwani</h3><p>UAE accounting, finance &amp; tax</p><span class="language">{icon('globe')} English &amp; Arabic</span></div></div><div class="profile-copy"><p class="eyebrow">Meet Dr. Ahmad Helwani</p><h2 id="profile-title">Experience with the details that matter.</h2><p>{h(s['biography'])}</p><p>His experience includes healthcare, real estate and industrial businesses. His Bonnard Lawson biography sets out his professional background and VAT and Corporate Tax tax-agent memberships.</p>{link('/ahmad-helwani/','Explore his professional profile')}<div class="profile-links">{link(urls['biography'],'Professional biography',glyph='external')}{link(urls['linkedin'],'LinkedIn profile',glyph='external')}</div></div></div></section>
 <section class="section" id="approach" aria-labelledby="approach-title"><div class="wrap"><div class="section-header"><div><p class="eyebrow">Start with your business question</p><h2 id="approach-title">Context first. Then the detail.</h2></div><p>A useful first discussion starts with your business, the question you are facing and the records available.</p></div><div class="process-grid"><article class="process-step"><span class="step-number">01</span><h3>Describe the question</h3><p>Share a short business overview, the relevant period and the issue you want to discuss.</p></article><article class="process-step"><span class="step-number">02</span><h3>Identify the records</h3><p>Explain which accounts, invoices or supporting documents are available and what information is still missing.</p></article><article class="process-step"><span class="step-number">03</span><h3>Discuss the scope</h3><p>Agree what needs to be reviewed and the next information to gather before an engagement begins.</p></article></div></div></section>
 <section class="section tax-section" aria-labelledby="tax-title"><div class="wrap tax-grid"><div class="tax-copy"><p class="eyebrow">Specialist tax advice</p><h2 id="tax-title">Connect your accounts with the tax question.</h2><p>PLS coordinates accounting records and tax-return preparation. Dr. Ahmad Helwani’s UAE Taxes website explains his specialist VAT and Corporate Tax advisory services.</p><div class="button-row">{link(urls['vat'],'VAT advisory on UAE Taxes','button secondary')}{link(urls['corporateTax'],'Corporate Tax advisory on UAE Taxes','text-link')}</div></div><div class="deliverable"><p class="eyebrow">What you receive from a VAT review</p><h3>A written explanation and next steps.</h3><p>{h(s['vatDeliverable'])}</p><ul><li>{icon('check')}The issue and information reviewed</li><li>{icon('check')}Any unresolved information gaps</li><li>{icon('check')}Recommended next steps</li></ul></div></div></section>
@@ -285,6 +318,12 @@ class Builder:
             shutil.copy2(ROOT/'assets'/filename,output/'assets'/filename)
         for filename, asset_url in self.asset_urls.items():
             shutil.copy2(ROOT/'assets'/filename, output/asset_url.lstrip('/'))
+        for client in self.site.get('clients', []):
+            logo = self.client_logo_path(client)
+            if logo:
+                target = output / logo
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(ROOT / logo, target)
         pages={'index.html':self.home(),'ahmad-helwani/index.html':self.profile(),'articles/index.html':self.article_index(),'404.html':self.not_found(),
                'services/accounting-bookkeeping-dubai/index.html':self.accounting_service(),
                'services/corporate-tax-dubai/index.html':self.corporate_tax_service(),
