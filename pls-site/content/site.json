@@ -145,5 +145,61 @@
     "opens": "08:00",
     "closes": "17:00",
     "display": "Monday–Friday, 8 AM–5 PM (Dubai time)"
-  }
+  },
+  "clients": [
+    {
+      "name": "Rosmetic Medical Center",
+      "logo": "assets/clients/rosmetic.png",
+      "logoWidth": 192,
+      "logoHeight": 119
+    },
+    {
+      "name": "Stella Medical Center",
+      "logo": "assets/clients/stella.png",
+      "logoWidth": 1600,
+      "logoHeight": 650
+    },
+    {
+      "name": "TEC Performance",
+      "logo": "assets/clients/tec-performance.jpg",
+      "logoWidth": 954,
+      "logoHeight": 254
+    },
+    {
+      "name": "PRO Performance Car Rental",
+      "logo": "assets/clients/pro-performance-car-rental.jpg",
+      "logoWidth": 551,
+      "logoHeight": 150
+    },
+    {
+      "name": "Sharq Virginia Used Cars",
+      "logo": "assets/clients/sharq-virginia.jpg",
+      "logoWidth": 232,
+      "logoHeight": 90
+    },
+    {
+      "name": "ABOULKHER Trading",
+      "logo": "assets/clients/aboulkher.png",
+      "logoWidth": 394,
+      "logoHeight": 125
+    },
+    {
+      "name": "United Arab Agencies (UAA)",
+      "logo": "assets/clients/uaa.webp",
+      "logoWidth": 822,
+      "logoHeight": 488
+    },
+    {
+      "name": "Via-Tonic",
+      "logo": "assets/clients/via-tonic.webp",
+      "logoWidth": 605,
+      "logoHeight": 127
+    },
+    {
+      "name": "Shorooq Medical",
+      "logo": "assets/clients/shorooq-medical.png",
+      "logoWidth": 172,
+      "logoHeight": 83
+    }
+  ]
 }
