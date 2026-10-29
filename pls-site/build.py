@@ -164,7 +164,8 @@ class Builder:
                 width, height = int(client.get('logoWidth', 320)), int(client.get('logoHeight', 160))
                 if width <= 0 or height <= 0:
                     raise ValueError('Client logo dimensions must be positive.')
-                image = f'<div class="client-logo"><img src="/{h(logo.as_posix())}" alt="{h(name)} logo" width="{width}" height="{height}" loading="lazy" decoding="async"></div>'
+                logo_class = 'client-logo client-logo-dark' if client.get('logoBackground') == 'dark' else 'client-logo'
+                image = f'<div class="{logo_class}"><img src="/{h(logo.as_posix())}" alt="{h(name)} logo" width="{width}" height="{height}" loading="lazy" decoding="async"></div>'
                 cards.append(f'<figure class="client-card">{image}<figcaption>{h(name)}</figcaption></figure>')
             else:
                 cards.append(f'<figure class="client-card client-card-name-only"><figcaption>{h(name)}</figcaption></figure>')

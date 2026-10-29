@@ -53,13 +53,14 @@
     },
     {
       "name": "ABOULKHER Trading",
-      "file": "assets/clients/aboulkher.png",
-      "sourcePage": "https://aboulkher.com/",
-      "sourceAsset": "https://aboulkher.com/wp-content/uploads/2021/04/black-logo-1.png",
-      "retrievedOn": "2026-10-29",
-      "width": 394,
-      "height": 125,
-      "sha256": "eb3fddf04225aa9b330c0be24a2fd1ace7fe966fee35f005ff8456d68e175e9b"
+      "file": "assets/clients/aboulkher.jpg",
+      "sourceType": "client-supplied",
+      "sourceAttachment": "Final LOGO-Model3 - big letter.jpg",
+      "suppliedOn": "2026-10-29",
+      "width": 2048,
+      "height": 444,
+      "sha256": "abd03b8f09afc549abbfd86c6ddff26c24fd72dbf4d4cc0dccceec388b8198d4",
+      "note": "Original logo supplied by the client through the PLS owner; file bytes retained unchanged."
     },
     {
       "name": "United Arab Agencies (UAA)",
@@ -73,24 +74,211 @@
     },
     {
       "name": "Via-Tonic",
-      "file": "assets/clients/via-tonic.webp",
-      "sourcePage": "https://via-tonic.com/",
-      "sourceAsset": "https://via-tonic.com/wp-content/uploads/2023/08/logo.webp",
-      "retrievedOn": "2026-10-29",
-      "width": 605,
-      "height": 127,
-      "sha256": "947cbbfbc32b5d429bb5a848eaec636ea2d1c9d7bc35a2da41f1f7559d5ff967"
+      "file": "assets/clients/via-tonic.svg",
+      "sourceType": "client-supplied PDF",
+      "sourceAttachment": "Via Tonic Logo.pdf",
+      "sourcePageNumber": 2,
+      "suppliedOn": "2026-10-29",
+      "width": 333,
+      "height": 71,
+      "sha256": "746a2ed3a1c9e3d5803aa060f50faa6c4960bab4be88165a78dd064ffcc02919",
+      "sourceSha256": "ef54dc4490589e8bd727c7644b0a59ac199f67356fc4c3f9005cffdf2a910b9f",
+      "note": "Horizontal logo on page 2 converted directly from original PDF vector paths with Poppler; SVG viewport removes empty PDF page margins only. Artwork geometry, colours, wordmark and proportions unchanged. No embedded fonts, raster content, external references or scripts."
     },
     {
       "name": "Shorooq Medical",
       "file": "assets/clients/shorooq-medical.png",
-      "sourcePage": "https://icjrmiddleeast.com/report/ICJR-Event-report%202025.pdf",
-      "sourceAsset": "https://icjrmiddleeast.com/report/ICJR-Event-report%202025.pdf",
+      "sourceType": "client-supplied",
+      "sourceAttachment": "New logo .png",
+      "suppliedOn": "2026-10-29",
+      "width": 775,
+      "height": 374,
+      "sha256": "f3e6ad0ee276cd98147b76af2148b7016b9286bb6d682dbcb4b6c3a98adbb813",
+      "note": "Original logo supplied by the client through the PLS owner; file bytes retained unchanged."
+    },
+    {
+      "sourcePage": "https://mammasicilia.ae/",
+      "sourceAsset": "https://mammasicilia.ae/wp-content/uploads/2023/02/logo-200x200-1.png",
       "retrievedOn": "2026-10-29",
-      "width": 172,
-      "height": 83,
-      "sha256": "96a5fa8cde6d4e20305d4d052f2854cad1ca541a7f5ceb85421bb40f38406357",
-      "note": "Original embedded PNG extracted unchanged from official ICJR Middle East 2025 event report, page 41. Company identity corroborated by Symbios distributor directory. Display at native size; company domain currently parked."
+      "width": 200,
+      "height": 200,
+      "sha256": "882675477b4612542622b6392e2d08e1d25e7049bb11b39723c83efcf104b147",
+      "note": "Official site header and OG image; Al Wasl Road Jumeirah3 Dubai.",
+      "name": "Mamma Sicilia Restaurant & Café",
+      "file": "assets/clients/mamma-sicilia.png"
+    },
+    {
+      "sourcePage": "https://www.letsorganic.com/",
+      "sourceAsset": "https://cdn.shopify.com/s/files/1/0623/9138/6275/files/logo-360x178.png?v=1786691795",
+      "retrievedOn": "2026-10-29",
+      "width": 360,
+      "height": 178,
+      "sha256": "25992907e0c8c63feca258f81dd5aad4ed3c9540412692194722f3856b81b343",
+      "note": "Official site OG image; contact and about confirm Let’s Organic Market LLC, Garhoud Dubai.",
+      "name": "Let’s Organic Market",
+      "file": "assets/clients/lets-organic.png"
+    },
+    {
+      "sourcePage": "https://mammasiciliana.com/",
+      "sourceAsset": "https://mammasiciliana.com/wp-content/uploads/2026/01/mamma-siciliana-logo.png",
+      "retrievedOn": "2026-10-29",
+      "width": 1114,
+      "height": 996,
+      "sha256": "d4c9ab8d8acd88a374be627bbb4cf80274fe35e37586da6dc6bface1a1917804",
+      "note": "Official site header; Shop2 Dana Building Garhoud Dubai. Separate address and brand mark from Mamma Sicilia.",
+      "name": "Mamma Siciliana Restaurant & Café",
+      "file": "assets/clients/mamma-siciliana.png"
+    },
+    {
+      "sourcePage": "https://pureandorganic.ae/",
+      "sourceAsset": "https://pureandorganic.ae/wp-content/uploads/2025/01/Pure-and-organic-2.png",
+      "retrievedOn": "2026-10-29",
+      "width": 495,
+      "height": 504,
+      "sha256": "421157fa46e329671e7483ba826c0d69ebdc85ab4428e32d71901722f0e697d1",
+      "note": "Official site header and footer; footer logo links organicfarmsuae.com. Same Dana Al Garhoud address as public Pure & Organic General Trading LLC listing; separate brand from Let’s Organic despite group affiliation.",
+      "name": "Pure & Organic General Trading",
+      "file": "assets/clients/pure-and-organic.png"
+    },
+    {
+      "sourcePage": "https://almerkazuae.com/",
+      "sourceAsset": "https://almerkazuae.com/wp-content/uploads/2025/10/300x300png.png",
+      "identitySources": [
+        "https://www.linkedin.com/company/almerkaz-general-trading",
+        "https://www.yellowpages-uae.com/al-merkaz-general-trading-llc-197469"
+      ],
+      "width": 300,
+      "height": 300,
+      "sha256": "0af9e36ac69f2a0ad39bbf5b278a0da56488cc1b543709192d213f7f5f63bfce",
+      "note": "Original header mark. Red/gold square logo with General Trading text; unchanged.",
+      "name": "Al Merkaz General Trading",
+      "file": "assets/clients/al-merkaz.png",
+      "retrievedOn": "2026-10-29"
+    },
+    {
+      "publicBrand": "Baniyas Oasis Electronics",
+      "sourcePage": "https://baniyasoasiselectronics.com/",
+      "sourceAsset": "https://baniyasoasiselectronics.com/wp-content/uploads/2026/07/cropped-cropped-BOE-POPINS-FONT-copy-1-scaled-1.png",
+      "retrievedOn": "2026-10-29",
+      "width": 512,
+      "height": 208,
+      "sha256": "d8b626eefbb8ffddbf1953c0be86cb799c2ae1277df93387996d33c32c21118e",
+      "note": "Original transparent PNG has white letters and blue mark; requires dark backing to remain visible. Official site header/footer labels Baniyas Oasis Electronics and identifies Dubai, UAE.",
+      "name": "Baniyas Oasis Electronics",
+      "file": "assets/clients/baniyas-oasis-electronics.png"
+    },
+    {
+      "sourcePage": "https://thejewelteller.com/",
+      "sourceAsset": "https://thejewelteller.com/cdn/shop/files/The-Jewel-Teller-Factory-Logo-1-1.png?v=1730721026",
+      "width": 344,
+      "height": 241,
+      "sha256": "a30d333ab7c9ea933f53ed69816742fe11b5b69a1b4c6b1bd3b8a285b75ea493",
+      "name": "The Jewel Teller Factory",
+      "file": "assets/clients/jewel-teller.png",
+      "retrievedOn": "2026-10-29"
+    },
+    {
+      "sourcePage": "https://www.essmi.ae/",
+      "sourceAsset": "https://www.essmi.ae/wp-content/uploads/2023/10/original-logo-for-render-1-e1735211154515.png",
+      "width": 1937,
+      "height": 1430,
+      "sha256": "f1ec413d725c37998c38fc6adece54813bc03b0cf06f25db492eaa77e12db544",
+      "name": "ESSMI Jewellery Trading",
+      "file": "assets/clients/essmi.png",
+      "retrievedOn": "2026-10-29"
+    }
+  ],
+  "nameOnlyClients": [
+    {
+      "sourcePage": "https://yalqa.com/p/dar-mesk-resturant-and-cafe-e4cc4a34",
+      "corroboratingSource": "https://www.linkedin.com/pulse/dubai-prod-appointed-official-social-media-pr-agency-dar-mesk-is6ef",
+      "officialWebsite": "https://www.darmesk.ae/",
+      "verifiedOn": "2026-10-29",
+      "note": "Dubai restaurant in Port Saeed, Deira. Added by owner request. No usable original logo was obtainable from public sources; display name only until an original logo is supplied.",
+      "name": "Dar Mesk Restaurant & Café",
+      "sourceType": "owner-provided client name"
+    },
+    {
+      "name": "Nuga Café",
+      "verifiedOn": "2026-10-29",
+      "sourceType": "owner-provided client name",
+      "note": "Dubai Mamzar identity confirmed but no isolated authentic original logo retrieved."
+    },
+    {
+      "sourcePage": "https://www.bizmideast.com/AE/art-interior-design-llc-04-336-4425",
+      "note": "Exact Oud Metha Dubai company, phone 04 3364425 and alkazart@emirates.net.ae. No original logo. Avoid unrelated The Art Interior Design by Bijan Laufer.",
+      "name": "Art & Interior Design",
+      "verifiedOn": "2026-10-29",
+      "sourceType": "owner-provided client name"
+    },
+    {
+      "sourcePage": "https://b2bhint.com/en/company/ae-du/baniyas-oasis-building-maintenance-llc--1205478",
+      "note": "Exact Dubai business identity verified. No original logo found. Do not use department-store or electronics brand without client confirmation.",
+      "name": "Baniyas Oasis Building Maintenance",
+      "verifiedOn": "2026-10-29",
+      "sourceType": "owner-provided client name"
+    },
+    {
+      "sourcePage": "https://www.linkedin.com/pub/dir/Rakib/Hasan",
+      "note": "Search result shows Dubai employee affiliation Rowad Almahara Security Equipment Installation & Maintenance. No reliable standalone logo or primary company website identified.",
+      "name": "Rowad Almahara Security Equipment",
+      "verifiedOn": "2026-10-29",
+      "sourceType": "owner-provided client name"
+    },
+    {
+      "name": "Pizzeria Napoli",
+      "verifiedOn": "2026-10-29",
+      "sourceType": "owner-provided client name",
+      "note": "Dubai Mamzar identity confirmed but no isolated authentic original logo retrieved; avoid unrelated Napoli brands."
+    },
+    {
+      "sourcePage": "https://www.b2bhint.com/en/company/ae-du/mamzar-fashion-centre-llc--384443",
+      "note": "Exact legal entity found, but no verified original brand logo.",
+      "name": "Mamzar Fashion Center",
+      "verifiedOn": "2026-10-29",
+      "sourceType": "owner-provided client name"
+    },
+    {
+      "sourcePage": "https://www.dnb.com/business-directory/company-profiles.akasya_security_services_llc.b29ea172d5cb1e6b688528d4d9557c32.html",
+      "note": "Exact Dubai security-guard company identity found, no authentic logo. Apple App Store developer is Akasya for UAA app, but UAA app icon must not be reused as Akasya logo.",
+      "name": "Akasya Security Services",
+      "verifiedOn": "2026-10-29",
+      "sourceType": "owner-provided client name"
+    },
+    {
+      "sourcePage": "https://www.counterscope.ae/ar/score/07ac1d6b-7725-4b1d-9fc1-81cf05e0b047",
+      "note": "Exact Dubai company found; no verified original logo. Do not reuse Al Merkaz General Trading mark without explicit confirmation.",
+      "name": "Al Merkaz Profab",
+      "verifiedOn": "2026-10-29",
+      "sourceType": "owner-provided client name"
+    },
+    {
+      "sourcePage": "https://www.counterscope.ae/score/bc543acc-60a9-4382-b1fc-f302fbbcd8b7",
+      "note": "Exact Dubai legal entity found; no original logo or official website verified.",
+      "name": "D E R I Goods Wholesalers",
+      "verifiedOn": "2026-10-29",
+      "sourceType": "owner-provided client name"
+    },
+    {
+      "sourcePage": "https://innovationvisionuae.com/",
+      "note": "Exact official header asset identified, native HTML dimensions 842x186, but download timed out twice. No asset retained for use. IMPORTANT: /wp-content/uploads/2024/03/logo.png is b-one Ortho partner mark, NOT Innovation Vision logo.",
+      "name": "Innovation Vision",
+      "verifiedOn": "2026-10-29",
+      "sourceType": "owner-provided client name"
+    },
+    {
+      "sourcePage": "https://www.practo.com/dubai/clinic/altarabichi-medical-center-al-safa",
+      "note": "Exact clinic found. drtarabichi.com appears related to individual surgeon/hospital, not enough evidence to use that brand logo for exact clinic.",
+      "name": "Al Tarabichi Medical Center",
+      "verifiedOn": "2026-10-29",
+      "sourceType": "owner-provided client name"
+    },
+    {
+      "sourcePage": "https://maps.yango.com/en-ae/org/23217272731/",
+      "note": "Close name match in Sharjah; no exact legal-entity match or original logo verified. Use user-supplied caption only.",
+      "name": "ABAAD Elect. Devices Trading",
+      "verifiedOn": "2026-10-29",
+      "sourceType": "owner-provided client name"
     }
   ]
 }
