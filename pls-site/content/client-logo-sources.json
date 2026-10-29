@@ -1,0 +1,96 @@
+{
+  "permission": "Name and logo use approved by clients, as confirmed by PLS owner on 29 October 2026.",
+  "logos": [
+    {
+      "name": "Rosmetic Medical Center",
+      "file": "assets/clients/rosmetic.png",
+      "sourcePage": "https://rosmetic.com/",
+      "sourceAsset": "https://rosmetic.com/wp-content/uploads/2019/09/image001-removebg-preview-1.png",
+      "retrievedOn": "2026-10-29",
+      "width": 192,
+      "height": 119,
+      "sha256": "d088fb55a85c97e101060c90b080a0e45d892c862cf0b50980c477b476497d5a"
+    },
+    {
+      "name": "Stella Medical Center",
+      "file": "assets/clients/stella.png",
+      "sourcePage": "https://stella-clinic.com/",
+      "sourceAsset": "https://stella-clinic.com/wp-content/uploads/2025/11/logo-stella-scaled.png",
+      "retrievedOn": "2026-10-29",
+      "width": 1600,
+      "height": 650,
+      "sha256": "81c5f0bb9c1e231fdf952ce25875ea89e13ff6c16f7cd6cd30fba15484e390a3"
+    },
+    {
+      "name": "TEC Performance",
+      "file": "assets/clients/tec-performance.jpg",
+      "sourcePage": "https://www.tecperformance.ae/",
+      "sourceAsset": "https://static.wixstatic.com/media/3f203e_85c088999df24eab9a1a70218222df1f~mv2.jpg",
+      "retrievedOn": "2026-10-29",
+      "width": 954,
+      "height": 254,
+      "sha256": "173299f2987d6ddb24683156076cd745368bbe3c690df9ce8d6f132cedc8e659"
+    },
+    {
+      "name": "PRO Performance Car Rental",
+      "file": "assets/clients/pro-performance-car-rental.jpg",
+      "sourcePage": "https://ppcarrental.com/",
+      "sourceAsset": "https://ppcarrental.com/wp-content/uploads/2026/06/Logo.jpg",
+      "retrievedOn": "2026-10-29",
+      "width": 551,
+      "height": 150,
+      "sha256": "8c2a8f504a3df4c9dfbcf6f21a345006399390992212cceef3f3bdc38bf4ce54"
+    },
+    {
+      "name": "Sharq Virginia Used Cars",
+      "file": "assets/clients/sharq-virginia.jpg",
+      "sourcePage": "https://www.sharqvirginiausedcars.com/",
+      "sourceAsset": "https://www.sharqvirginiausedcars.com/wp-content/themes/templatefour/css/gfx/sharq-logo.jpg",
+      "retrievedOn": "2026-10-29",
+      "width": 232,
+      "height": 90,
+      "sha256": "8d655a7067d73922cf634fc06be72fd238f4ba71ebb958dea72872f93a4d76ea"
+    },
+    {
+      "name": "ABOULKHER Trading",
+      "file": "assets/clients/aboulkher.png",
+      "sourcePage": "https://aboulkher.com/",
+      "sourceAsset": "https://aboulkher.com/wp-content/uploads/2021/04/black-logo-1.png",
+      "retrievedOn": "2026-10-29",
+      "width": 394,
+      "height": 125,
+      "sha256": "eb3fddf04225aa9b330c0be24a2fd1ace7fe966fee35f005ff8456d68e175e9b"
+    },
+    {
+      "name": "United Arab Agencies (UAA)",
+      "file": "assets/clients/uaa.webp",
+      "sourcePage": "https://uaa.ae/",
+      "sourceAsset": "https://uaa.ae/assets/logo.webp?v=20261005",
+      "retrievedOn": "2026-10-29",
+      "width": 822,
+      "height": 488,
+      "sha256": "f513464f71f799095e583c99c997c22aeabaae5d22da492b4d6ed2edaecf4907"
+    },
+    {
+      "name": "Via-Tonic",
+      "file": "assets/clients/via-tonic.webp",
+      "sourcePage": "https://via-tonic.com/",
+      "sourceAsset": "https://via-tonic.com/wp-content/uploads/2023/08/logo.webp",
+      "retrievedOn": "2026-10-29",
+      "width": 605,
+      "height": 127,
+      "sha256": "947cbbfbc32b5d429bb5a848eaec636ea2d1c9d7bc35a2da41f1f7559d5ff967"
+    },
+    {
+      "name": "Shorooq Medical",
+      "file": "assets/clients/shorooq-medical.png",
+      "sourcePage": "https://icjrmiddleeast.com/report/ICJR-Event-report%202025.pdf",
+      "sourceAsset": "https://icjrmiddleeast.com/report/ICJR-Event-report%202025.pdf",
+      "retrievedOn": "2026-10-29",
+      "width": 172,
+      "height": 83,
+      "sha256": "96a5fa8cde6d4e20305d4d052f2854cad1ca541a7f5ceb85421bb40f38406357",
+      "note": "Original embedded PNG extracted unchanged from official ICJR Middle East 2025 event report, page 41. Company identity corroborated by Symbios distributor directory. Display at native size; company domain currently parked."
+    }
+  ]
+}
