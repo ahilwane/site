@@ -4,10 +4,10 @@
   "legalName": "Prime Ledger Solution for Accounting Services",
   "email": "ah@pls-uae.com",
   "themeColor": "#303e9d",
-  "homeTitle": "VAT, Corporate Tax & Accounting in Dubai | PLS Accounting",
-  "homeDescription": "Dubai accounting and bookkeeping, VAT and Corporate Tax support, and Zoho Books implementation. Discuss your requirements with Dr. Ahmad Helwani in English or Arabic.",
-  "heroTitle": "VAT, Corporate Tax and accounting support in Dubai",
-  "heroIntro": "PLS Accounting helps UAE businesses with bookkeeping, VAT and Corporate Tax registration and filing, transaction reviews, and Zoho Books implementation. Dr. Ahmad Helwani brings over fifteen years of UAE accounting, finance and tax experience. Enquiries are welcome in English and Arabic.",
+  "homeTitle": "Accounting & Bookkeeping Services in Dubai | PLS",
+  "homeDescription": "Accounting and bookkeeping services in Dubai, including bank reconciliations, financial reporting and Zoho Books support. Enquiries in English and Arabic.",
+  "heroTitle": "Accounting and bookkeeping services in Dubai",
+  "heroIntro": "PLS Accounting supports UAE businesses with bookkeeping, bank reconciliations, financial reporting and Zoho Books. We coordinate VAT and Corporate Tax preparation with your accounting records. Speak with Dr. Ahmad Helwani in English or Arabic.",
   "biography": "Dr. Ahmad Helwani is Managing Partner at PLS Accounting in Dubai and an FTA Tax Agent for VAT and Corporate Tax with Bonnard Lawson Dubai. He has over fifteen years of UAE accounting, finance and tax experience, holds a DBA from SBS Swiss Business School (2023), and works in English and Arabic.",
   "vatDeliverable": "You receive a written explanation of the issue reviewed, any unresolved information gaps and the recommended next steps.",
   "links": {
@@ -27,17 +27,18 @@
         "Business records",
         "Financial reporting"
       ],
-      "icon": "ledger"
+      "icon": "ledger",
+      "url": "/services/accounting-bookkeeping-dubai/"
     },
     {
-      "title": "Corporate Tax advisory & filing",
-      "text": "Corporate Tax registration, review of accounting records and tax adjustments, return preparation and filing support, with advice on your business’s specific questions.",
+      "title": "Zoho Books & e-invoicing readiness",
+      "text": "As a Zoho partner, PLS supports accounting setup, data migration, invoicing workflows and UAE e-invoicing readiness, including coordination with an Accredited Service Provider where required.",
       "tags": [
-        "Registration & filing",
-        "Tax reviews"
+        "Zoho partner",
+        "Implementation support"
       ],
-      "icon": "document",
-      "url": "/services/corporate-tax-dubai/"
+      "icon": "ledger",
+      "url": "/services/zoho-books-e-invoicing-uae/"
     },
     {
       "title": "VAT advisory & compliance",
@@ -50,14 +51,14 @@
       "url": "/services/vat-reviews-dubai/"
     },
     {
-      "title": "Zoho Books & e-invoicing readiness",
-      "text": "As a Zoho partner, PLS supports accounting setup, data migration, invoicing workflows and UAE e-invoicing readiness, including coordination with an Accredited Service Provider where required.",
+      "title": "Corporate Tax advisory & filing",
+      "text": "Corporate Tax registration, review of accounting records and tax adjustments, return preparation and filing support, with advice on your business’s specific questions.",
       "tags": [
-        "Zoho partner",
-        "Implementation support"
+        "Registration & filing",
+        "Tax reviews"
       ],
-      "icon": "ledger",
-      "url": "/services/zoho-books-e-invoicing-uae/"
+      "icon": "document",
+      "url": "/services/corporate-tax-dubai/"
     },
     {
       "title": "Financial advisory",
@@ -81,7 +82,7 @@
   "faq": [
     {
       "question": "Where is PLS Accounting based?",
-      "answer": "PLS Accounting is based in Dubai, United Arab Emirates. For accounting, bookkeeping, VAT or Corporate Tax enquiries, email ah@pls-uae.com in English or Arabic."
+      "answer": "PLS Accounting is based at Al Musalla Tower, Dubai, United Arab Emirates. Business hours are Monday–Friday, 8 AM–5 PM, Dubai time. Enquiries are welcome in English or Arabic."
     },
     {
       "question": "What services does PLS Accounting provide?",
@@ -93,7 +94,7 @@
     },
     {
       "question": "Who provides specialist tax advice?",
-      "answer": "Dr. Ahmad Helwani is Managing Partner at PLS Accounting and an FTA Tax Agent for VAT and Corporate Tax with Bonnard Lawson Dubai. His professional biography is linked on his profile. Formal representation before the FTA is confirmed separately in the engagement and appointment arrangements."
+      "answer": "Dr. Ahmad Helwani provides specialist VAT and Corporate Tax advice. His UAE Taxes website explains these services. He is an FTA Tax Agent with Bonnard Lawson Dubai; formal representation is confirmed in the engagement and appointment arrangements."
     },
     {
       "question": "What should I prepare before making an enquiry?",
@@ -105,7 +106,7 @@
     },
     {
       "question": "How can I contact PLS Accounting?",
-      "answer": "Email ah@pls-uae.com with a short description of your business question. Enquiries can be made in English or Arabic."
+      "answer": "Call +971 58 595 1040 or email ah@pls-uae.com with a short description of your business question. Our business hours are Monday–Friday, 8 AM–5 PM, Dubai time. Enquiries can be made in English or Arabic."
     }
   ],
   "externalArticles": [
@@ -124,5 +125,25 @@
       "url": "https://uae-taxes.com/tax-insights/f/how-to-choose-the-best-tax-agent-in-dubai-and-the-uae",
       "description": "What to check when comparing tax advisers, including professional status, relevant experience, scope and fees."
     }
-  ]
+  ],
+  "telephone": "+971585951040",
+  "phoneDisplay": "+971 58 595 1040",
+  "address": {
+    "building": "Al Musalla Tower",
+    "city": "Dubai",
+    "country": "United Arab Emirates",
+    "countryCode": "AE"
+  },
+  "businessHours": {
+    "days": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday"
+    ],
+    "opens": "08:00",
+    "closes": "17:00",
+    "display": "Monday–Friday, 8 AM–5 PM (Dubai time)"
+  }
 }
