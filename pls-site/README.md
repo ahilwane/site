@@ -63,7 +63,9 @@ Do not set `--at` in the production build command. `build-report.json` is local 
 
 ### Selected clients
 
-The homepage displays the owner-approved client names and original logos listed in `content/site.json`. `content/client-logo-sources.json` records each original source, dimensions and file hash. Files under `assets/clients/` retain their original colours and proportions; only referenced images are copied into the public build. The client section does not publish testimonials or descriptions of individual engagements.
+The homepage displays a single looping client-logo row directly below its main introduction. Company names are provided through image alternative text; no separate captions appear. The row pauses on hover or keyboard focus and includes a pause/play control. Reduced-motion preferences receive a static, horizontally scrollable row. JavaScript duplicates the visual row for a seamless loop while keeping that copy hidden from assistive technology.
+
+`content/site.json` lists 24 original client logos and six owner-requested neutral typographic name marks for businesses without supplied artwork. `content/client-logo-sources.json` records sources, dimensions and hashes and distinguishes those name marks from official branding. Original artwork retains its colours and proportions. The build copies only referenced client images and does not publish source records, testimonials or individual engagement descriptions.
 
 Production canonical URLs use `https://pls-uae.com`; change `baseUrl` in `content/site.json` only if the production domain changes. The build supplies topic-specific descriptions and structured data for the company, adviser, services and articles. Confirmed PLS business details are held in `content/site.json`: telephone `+971 58 595 1040`, Al Musalla Tower, Dubai, UAE, and Monday–Friday 08:00–17:00 Dubai time. These appear in the homepage contact section, global footer and company structured data. No unconfirmed street, office unit or geographic coordinates are added. Public email is `ah@pls-uae.com`.
 

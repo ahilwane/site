@@ -238,10 +238,16 @@
       "logoHeight": 241
     },
     {
-      "name": "Baniyas Oasis Building Maintenance"
+      "name": "Baniyas Oasis Building Maintenance",
+      "logo": "assets/clients/baniyas-oasis-building-maintenance.svg",
+      "logoWidth": 360,
+      "logoHeight": 140
     },
     {
-      "name": "Rowad Almahara Security Equipment"
+      "name": "Rowad Almahara Security Equipment",
+      "logo": "assets/clients/rowad-almahara-security-equipment.svg",
+      "logoWidth": 360,
+      "logoHeight": 140
     },
     {
       "name": "Pizzeria Napoli",
@@ -268,7 +274,10 @@
       "logoHeight": 996
     },
     {
-      "name": "Mamzar Fashion Center"
+      "name": "Mamzar Fashion Center",
+      "logo": "assets/clients/mamzar-fashion-center.svg",
+      "logoWidth": 360,
+      "logoHeight": 140
     },
     {
       "name": "Baniyas Oasis Electronics",
@@ -278,7 +287,10 @@
       "logoBackground": "dark"
     },
     {
-      "name": "Akasya Security Services"
+      "name": "Akasya Security Services",
+      "logo": "assets/clients/akasya-security-services.svg",
+      "logoWidth": 360,
+      "logoHeight": 140
     },
     {
       "name": "Pure & Organic General Trading",
@@ -287,10 +299,16 @@
       "logoHeight": 504
     },
     {
-      "name": "Al Merkaz Profab"
+      "name": "Al Merkaz Profab",
+      "logo": "assets/clients/al-merkaz-profab.svg",
+      "logoWidth": 360,
+      "logoHeight": 140
     },
     {
-      "name": "D E R I Goods Wholesalers"
+      "name": "D E R I Goods Wholesalers",
+      "logo": "assets/clients/deri-goods-wholesalers.svg",
+      "logoWidth": 360,
+      "logoHeight": 140
     },
     {
       "name": "Innovation Vision",
