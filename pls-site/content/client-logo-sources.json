@@ -92,5 +92,15 @@
       "sha256": "96a5fa8cde6d4e20305d4d052f2854cad1ca541a7f5ceb85421bb40f38406357",
       "note": "Original embedded PNG extracted unchanged from official ICJR Middle East 2025 event report, page 41. Company identity corroborated by Symbios distributor directory. Display at native size; company domain currently parked."
     }
+  ],
+  "nameOnlyClients": [
+    {
+      "name": "Dar Mesk Restaurant & Café",
+      "sourcePage": "https://yalqa.com/p/dar-mesk-resturant-and-cafe-e4cc4a34",
+      "corroboratingSource": "https://www.linkedin.com/pulse/dubai-prod-appointed-official-social-media-pr-agency-dar-mesk-is6ef",
+      "officialWebsite": "https://www.darmesk.ae/",
+      "verifiedOn": "2026-10-29",
+      "note": "Dubai restaurant in Port Saeed, Deira. Added by owner request. No usable original logo was obtainable from public sources; display name only until an original logo is supplied."
+    }
   ]
 }
