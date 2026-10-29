@@ -266,50 +266,68 @@
       "sourcePage": "https://www.instagram.com/napolidxb/",
       "sourceType": "public Instagram profile image supplied by owner",
       "note": "Original public profile image copied unchanged from the owner-confirmed business account."
+    },
+    {
+      "name": "Baniyas Oasis Building Maintenance",
+      "file": "assets/clients/baniyas-oasis-building-maintenance.svg",
+      "width": 360,
+      "height": 140,
+      "sourceType": "owner-requested typographic wordmark",
+      "createdOn": "2026-10-29",
+      "sha256": "15deeb5c7a7982a4661dc9c7376dc5929d6102b4188da7ccf684c0527db8df02",
+      "note": "Simple name-based SVG artwork created at the PLS owner’s request. No official brand mark, emblem, certification or third-party logo is asserted."
+    },
+    {
+      "name": "Rowad Almahara Security Equipment",
+      "file": "assets/clients/rowad-almahara-security-equipment.svg",
+      "width": 360,
+      "height": 140,
+      "sourceType": "owner-requested typographic wordmark",
+      "createdOn": "2026-10-29",
+      "sha256": "560b1cc904715fdcb26b87c29cd0ecdaf94d81a86628de4c1d7ba332cee6b81e",
+      "note": "Simple name-based SVG artwork created at the PLS owner’s request. No official brand mark, emblem, certification or third-party logo is asserted."
+    },
+    {
+      "name": "Mamzar Fashion Center",
+      "file": "assets/clients/mamzar-fashion-center.svg",
+      "width": 360,
+      "height": 140,
+      "sourceType": "owner-requested typographic wordmark",
+      "createdOn": "2026-10-29",
+      "sha256": "46f299741928ccb9af636133249eac2c4777c128cc9d2ad2878db853f08b34b2",
+      "note": "Simple name-based SVG artwork created at the PLS owner’s request. No official brand mark, emblem, certification or third-party logo is asserted."
+    },
+    {
+      "name": "Akasya Security Services",
+      "file": "assets/clients/akasya-security-services.svg",
+      "width": 360,
+      "height": 140,
+      "sourceType": "owner-requested typographic wordmark",
+      "createdOn": "2026-10-29",
+      "sha256": "f6d18c1712cbf12264b94440a7e1ee5ee1c1ac764b1fc7b6aa9856d050d0bd62",
+      "note": "Simple name-based SVG artwork created at the PLS owner’s request. No official brand mark, emblem, certification or third-party logo is asserted."
+    },
+    {
+      "name": "Al Merkaz Profab",
+      "file": "assets/clients/al-merkaz-profab.svg",
+      "width": 360,
+      "height": 140,
+      "sourceType": "owner-requested typographic wordmark",
+      "createdOn": "2026-10-29",
+      "sha256": "4ecd788c9ef1018b8918140be82923b21b9e4f59416b59a5d4bfe1f5f6d06059",
+      "note": "Simple name-based SVG artwork created at the PLS owner’s request. No official brand mark, emblem, certification or third-party logo is asserted."
+    },
+    {
+      "name": "D E R I Goods Wholesalers",
+      "file": "assets/clients/deri-goods-wholesalers.svg",
+      "width": 360,
+      "height": 140,
+      "sourceType": "owner-requested typographic wordmark",
+      "createdOn": "2026-10-29",
+      "sha256": "ef19c9a779458f25c4bea43e6c30268d76e3e80f7cc9dd3ac7e1cf506d4077af",
+      "note": "Simple name-based SVG artwork created at the PLS owner’s request. No official brand mark, emblem, certification or third-party logo is asserted."
     }
   ],
-  "nameOnlyClients": [
-    {
-      "sourcePage": "https://b2bhint.com/en/company/ae-du/baniyas-oasis-building-maintenance-llc--1205478",
-      "note": "Exact Dubai business identity verified. No original logo found. Do not use department-store or electronics brand without client confirmation.",
-      "name": "Baniyas Oasis Building Maintenance",
-      "verifiedOn": "2026-10-29",
-      "sourceType": "owner-provided client name"
-    },
-    {
-      "sourcePage": "https://www.linkedin.com/pub/dir/Rakib/Hasan",
-      "note": "Search result shows Dubai employee affiliation Rowad Almahara Security Equipment Installation & Maintenance. No reliable standalone logo or primary company website identified.",
-      "name": "Rowad Almahara Security Equipment",
-      "verifiedOn": "2026-10-29",
-      "sourceType": "owner-provided client name"
-    },
-    {
-      "sourcePage": "https://www.b2bhint.com/en/company/ae-du/mamzar-fashion-centre-llc--384443",
-      "note": "Exact legal entity found, but no verified original brand logo.",
-      "name": "Mamzar Fashion Center",
-      "verifiedOn": "2026-10-29",
-      "sourceType": "owner-provided client name"
-    },
-    {
-      "sourcePage": "https://www.dnb.com/business-directory/company-profiles.akasya_security_services_llc.b29ea172d5cb1e6b688528d4d9557c32.html",
-      "note": "Exact Dubai security-guard company identity found, no authentic logo. Apple App Store developer is Akasya for UAA app, but UAA app icon must not be reused as Akasya logo.",
-      "name": "Akasya Security Services",
-      "verifiedOn": "2026-10-29",
-      "sourceType": "owner-provided client name"
-    },
-    {
-      "sourcePage": "https://www.counterscope.ae/ar/score/07ac1d6b-7725-4b1d-9fc1-81cf05e0b047",
-      "note": "Exact Dubai company found; no verified original logo. Do not reuse Al Merkaz General Trading mark without explicit confirmation.",
-      "name": "Al Merkaz Profab",
-      "verifiedOn": "2026-10-29",
-      "sourceType": "owner-provided client name"
-    },
-    {
-      "sourcePage": "https://www.counterscope.ae/score/bc543acc-60a9-4382-b1fc-f302fbbcd8b7",
-      "note": "Exact Dubai legal entity found; no original logo or official website verified.",
-      "name": "D E R I Goods Wholesalers",
-      "verifiedOn": "2026-10-29",
-      "sourceType": "owner-provided client name"
-    }
-  ]
+  "nameOnlyClients": [],
+  "displayNote": "Twenty-four original supplied or retrieved client logos and six owner-requested neutral typographic name marks. Typographic marks are website representations of client names, not claims about official branding."
 }
