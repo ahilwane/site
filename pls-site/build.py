@@ -136,7 +136,7 @@ class Builder:
 </div></header>'''
 
     def footer(self):
-        clients_link = '<a href="/#clients">Clients</a>' if self.site.get('clients') else ''
+        clients_link = '<a href="/clients/">Clients</a>' if self.site.get('clients') else ''
         return f'''<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="footer-brand"><a href="/" aria-label="PLS Accounting home"><img src="/assets/pls-logo.png" width="570" height="183" alt="PLS Accounting — Prime Ledger Solution for Accounting Services" loading="lazy"></a></div><nav class="footer-links" aria-label="Footer navigation"><a href="/#services">Services</a>{clients_link}<a href="/ahmad-helwani/">Dr. Ahmad Helwani</a><a href="/articles/">Articles</a><a href="{h(self.site['links']['taxes'])}">UAE Taxes</a><a href="mailto:{h(self.site['email'])}">Email PLS</a></nav></div><div class="footer-contact"><p>{h(self.site['address']['building'])}, {h(self.site['address']['city'])}, UAE</p><p><a href="tel:{h(self.site['telephone'])}">{h(self.site['phoneDisplay'])}</a></p><p>{h(self.site['businessHours']['display'])}</p></div><div class="footer-base"><p>© {self.at.year} PLS Accounting. All rights reserved.</p><p>Prime Ledger Solution for Accounting Services</p></div></div></footer>'''
 
     def client_logo_path(self, client):
@@ -152,7 +152,7 @@ class Builder:
             raise ValueError(f'Client logo is missing or outside assets/clients/: {logo}')
         return path
 
-    def clients_section(self):
+    def client_items(self, loading='eager'):
         clients = self.site.get('clients', [])
         if not clients:
             return ''
@@ -165,11 +165,23 @@ class Builder:
                 if width <= 0 or height <= 0:
                     raise ValueError('Client logo dimensions must be positive.')
                 logo_class = 'client-logo client-logo-dark' if client.get('logoBackground') == 'dark' else 'client-logo'
-                image = f'<span class="{logo_class}"><img src="/{h(logo.as_posix())}" alt="{h(name)}" width="{width}" height="{height}" loading="eager" decoding="async"></span>'
+                image = f'<span class="{logo_class}"><img src="/{h(logo.as_posix())}" alt="{h(name)} — PLS Accounting client" width="{width}" height="{height}" loading="{h(loading)}" decoding="async"></span>'
             else:
                 image = f'<span class="client-wordmark">{h(name)}</span>'
             items.append(f'<li class="client-item">{image}</li>')
-        return '''<section class="clients-section" id="clients" aria-labelledby="clients-title"><div class="wrap"><div class="clients-header"><h2 id="clients-title">Our clients</h2><button class="clients-toggle" type="button" hidden aria-label="Pause client logos"><svg class="clients-pause-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M5 4h3v12H5zM12 4h3v12h-3z"/></svg><svg class="clients-play-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="m6 3 11 7-11 7z"/></svg><span class="clients-toggle-label">Pause</span></button></div><p id="clients-instructions" class="clients-instructions">Browse our clients in the logo row. Swipe or use the left and right arrow keys to move through the logos.</p><div class="clients-viewport" tabindex="0" role="region" aria-label="Client logos" aria-describedby="clients-instructions"><div class="clients-track"><ul class="client-list">''' + ''.join(items) + '</ul></div></div></div></section>'
+        return ''.join(items)
+
+    def clients_section(self):
+        if not self.site.get('clients'):
+            return ''
+        return '''<section class="clients-section" id="clients" aria-labelledby="clients-title"><div class="wrap"><div class="clients-header"><h2 id="clients-title"><a href="/clients/">Our clients''' + icon('arrow') + '''</a></h2></div><p id="clients-instructions" class="clients-instructions">The logos move automatically. Click or tap the row, or press Space or Escape, to stop the motion. Swipe or use the left and right arrow keys to browse. Follow Our clients to view the full gallery.</p><div class="clients-viewport" tabindex="0" role="region" aria-label="Client logos" aria-describedby="clients-instructions"><div class="clients-track"><ul class="client-list">''' + self.client_items() + '</ul></div></div></div></section>'
+
+    def clients_page(self):
+        path = '/clients/'
+        description = 'Explore businesses that work with PLS Accounting in Dubai and across the UAE, with our client logo gallery.'
+        content = '''<section class="page-hero"><div class="wrap"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">PLS Accounting</a><span aria-hidden="true">/</span><span aria-current="page">Our clients</span></nav><h1>Our clients</h1><p class="page-lead">A selection of businesses that work with PLS Accounting in Dubai and across the UAE.</p></div></section><section class="section clients-gallery" aria-label="PLS Accounting client gallery"><div class="wrap"><ul class="client-gallery-list">''' + self.client_items('lazy') + '</ul></div></section>'
+        collection = {'@type': 'CollectionPage', '@id': self.base + path + '#page', 'url': self.base + path, 'name': 'Our clients | PLS Accounting', 'description': description, 'about': {'@id': self.base + '/#company'}}
+        return self.page('Our Clients | PLS Accounting', description, path, content, [self.company(), collection])
 
     def page(self, title, description, path, content, graph=None, active="", image=None, image_alt="PLS Accounting logo", article=False, noindex=False):
         url = self.base + path
@@ -330,6 +342,8 @@ class Builder:
                'services/corporate-tax-dubai/index.html':self.corporate_tax_service(),
                'services/vat-reviews-dubai/index.html':self.vat_review_service(),
                'services/zoho-books-e-invoicing-uae/index.html':self.zoho_readiness_service()}
+        if self.site.get('clients'):
+            pages['clients/index.html'] = self.clients_page()
         for article in self.articles:
             for filename,hash_key in [('bodyFragment','bodyFragmentSha256'),('coverImage','coverImageSha256')]:
                 source=(ROOT/article[filename]).resolve()
@@ -346,6 +360,8 @@ class Builder:
             destination.parent.mkdir(parents=True,exist_ok=True)
             destination.write_text(html,encoding='utf-8')
         locations=[('/',None),('/ahmad-helwani/',None),('/articles/',None)]+[(path,SERVICE_MODIFIED[path]) for path,_,_ in SERVICE_LINKS]+[(f'/articles/{a["slug"]}/',parse_time(a.get('dateModified',published_time(a).isoformat())).date().isoformat()) for a in self.articles]
+        if self.site.get('clients'):
+            locations.append(('/clients/', '2026-10-30'))
         sitemap='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'<url><loc>{h(self.base+path)}</loc>{"<lastmod>"+date+"</lastmod>" if date else ""}</url>\n' for path,date in locations)+'</urlset>\n'
         (output/'sitemap.xml').write_text(sitemap,encoding='utf-8')
         (output/'robots.txt').write_text(f'User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nSitemap: {self.base}/sitemap.xml\n',encoding='utf-8')

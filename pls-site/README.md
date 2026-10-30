@@ -63,7 +63,7 @@ Do not set `--at` in the production build command. `build-report.json` is local 
 
 ### Selected clients
 
-The homepage displays a single looping client-logo row directly below its main introduction. Company names are provided through image alternative text; no separate captions appear. The row pauses on hover or keyboard focus and includes a pause/play control. Reduced-motion preferences receive a static, horizontally scrollable row. JavaScript duplicates the visual row for a seamless loop while keeping that copy hidden from assistive technology.
+The homepage displays a single looping client-logo row directly below its main introduction. “Our clients” links to the static `/clients/` gallery, also linked from the footer and included in the sitemap. Company names and their client relationship are provided through image alternative text; no separate captions or company website links appear. There is no visible pause/play button. The row pauses on hover or keyboard focus; click/tap, Space, Escape or manual browsing stops it for the current page visit. Reduced-motion preferences receive a static, horizontally scrollable row. JavaScript duplicates the visual row for a seamless loop while keeping that copy hidden from assistive technology.
 
 `content/site.json` lists 24 original client logos and six owner-requested neutral typographic name marks for businesses without supplied artwork. `content/client-logo-sources.json` records sources, dimensions and hashes and distinguishes those name marks from official branding. Original artwork retains its colours and proportions. The build copies only referenced client images and does not publish source records, testimonials or individual engagement descriptions.
 
