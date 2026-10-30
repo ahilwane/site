@@ -40,9 +40,7 @@ if (clients) {
   const viewport = clients.querySelector('.clients-viewport');
   const track = clients.querySelector('.clients-track');
   const list = clients.querySelector('.client-list');
-  const control = clients.querySelector('.clients-toggle');
-  const label = clients.querySelector('.clients-toggle-label');
-  if (viewport && track && list && control && label) {
+  if (viewport && track && list) {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const copy = list.cloneNode(true);
     copy.classList.add('client-list-copy');
@@ -86,10 +84,7 @@ if (clients) {
     };
 
     const sync = () => {
-      control.hidden = reducedMotion.matches;
       clients.classList.toggle('is-paused', manualPause || reducedMotion.matches);
-      label.textContent = manualPause ? 'Play' : 'Pause';
-      control.setAttribute('aria-label', manualPause ? 'Play client logos' : 'Pause client logos');
       if (canRun()) {
         if (!frame) {
           position = viewport.scrollLeft % cycleWidth;
@@ -119,7 +114,6 @@ if (clients) {
       measure();
     };
 
-    control.addEventListener('click', () => { manualPause = !manualPause; sync(); });
     viewport.addEventListener('pointerenter', (event) => {
       if (event.pointerType === 'touch') return;
       hovering = true;
@@ -137,11 +131,16 @@ if (clients) {
     });
     const pauseForBrowsing = () => { manualPause = true; sync(); };
     viewport.addEventListener('pointerdown', pauseForBrowsing, { passive: true });
+    viewport.addEventListener('click', pauseForBrowsing);
     viewport.addEventListener('wheel', (event) => {
       if (Math.abs(event.deltaX) > 0.5 || event.shiftKey) pauseForBrowsing();
     }, { passive: true });
     viewport.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') pauseForBrowsing();
+      if (event.key === ' ' || event.key === 'Escape') {
+        event.preventDefault();
+        pauseForBrowsing();
+      }
     });
     document.addEventListener('visibilitychange', sync);
     reducedMotion.addEventListener('change', applyMotionPreference);
