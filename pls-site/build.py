@@ -28,6 +28,12 @@ SERVICE_MODIFIED = {
     '/services/zoho-books-e-invoicing-uae/': '2026-10-27',
 }
 
+HOME_PORTRAIT_SIZES = '(max-width: 380px) calc(100vw - 40px), (max-width: 800px) 340px, 360px'
+PROFILE_PORTRAIT_SIZES = '(max-width: 550px) 260px, (max-width: 1000px) 280px, 300px'
+ARTICLE_CARD_SIZES = '(max-width: 800px) calc(100vw - 40px), 374px'
+ARTICLE_FEATURED_SIZES = '(max-width: 800px) calc(100vw - 40px), 600px'
+ARTICLE_COVER_SIZES = '(max-width: 800px) calc(100vw - 40px), (max-width: 1034px) calc(100vw - 64px), 970px'
+
 
 def h(value):
     return escape(str(value), quote=True)
@@ -75,6 +81,9 @@ class Builder:
         self.at = at
         self.site = json.loads((ROOT / "content/site.json").read_text(encoding="utf-8"))
         self.manifest = json.loads((ROOT / "content/articles.json").read_text(encoding="utf-8"))
+        variants_file = ROOT / 'content/image-variants.json'
+        self.image_variants = self.validate_image_variants(json.loads(variants_file.read_text(encoding='utf-8')) if variants_file.is_file() else {})
+        self.used_image_variants = set()
         self.base = self.site["baseUrl"].rstrip("/")
         # A new asset URL prevents returning visitors from mixing old styles/scripts with new HTML.
         self.asset_urls = {
@@ -94,6 +103,64 @@ class Builder:
             else:
                 self.excluded.append(article["id"])
         self.articles.sort(key=published_time, reverse=True)
+
+    def optimized_image_path(self, value):
+        if not isinstance(value, str):
+            raise ValueError('Optimized image paths must be strings.')
+        path = Path(value)
+        if path.is_absolute() or '..' in path.parts or path.parts[:2] != ('assets', 'optimized') or path.suffix.lower() != '.webp':
+            raise ValueError('Optimized images must use local WebP paths under assets/optimized/.')
+        source = (ROOT / path).resolve()
+        if ROOT not in source.parents or (ROOT / 'assets/optimized').resolve() not in source.parents or not source.is_file():
+            raise ValueError(f'Optimized image is missing or outside assets/optimized/: {value}')
+        return path
+
+    def validate_image_variants(self, manifest):
+        if not isinstance(manifest, dict):
+            raise ValueError('The image variants manifest must map original image paths to variant lists.')
+        validated = {}
+        for original, variants in manifest.items():
+            if not isinstance(original, str):
+                raise ValueError('Original image paths must be strings.')
+            original_path = Path(original)
+            source = (ROOT / original_path).resolve()
+            if original_path.is_absolute() or '..' in original_path.parts or original_path.parts[:1] != ('assets',) or ROOT not in source.parents or (ROOT / 'assets').resolve() not in source.parents or not source.is_file():
+                raise ValueError(f'Original image is missing or outside assets/: {original}')
+            if not isinstance(variants, list) or not variants:
+                raise ValueError(f'Image variants must be a non-empty list: {original}')
+            previous_width = previous_height = 0
+            seen_paths = set()
+            validated[original] = []
+            for variant in variants:
+                if not isinstance(variant, dict):
+                    raise ValueError(f'Image variant metadata must be an object: {original}')
+                path = self.optimized_image_path(variant.get('path'))
+                width, height, size = (variant.get(key) for key in ('width', 'height', 'bytes'))
+                if any(not isinstance(value, int) or isinstance(value, bool) or value <= 0 for value in (width, height, size)):
+                    raise ValueError(f'Image variant dimensions and bytes must be positive integers: {path}')
+                if width <= previous_width or height <= previous_height or path in seen_paths:
+                    raise ValueError(f'Image variants must have distinct paths and ascending dimensions: {original}')
+                if (ROOT / path).stat().st_size != size:
+                    raise ValueError(f'Image variant byte count does not match its file: {path}')
+                previous_width, previous_height = width, height
+                seen_paths.add(path)
+                validated[original].append({'path': path.as_posix(), 'width': width, 'height': height, 'bytes': size})
+        return validated
+
+    def responsive_image(self, original, width, height, alt, *, sizes, css='', loading=None, decoding=None, fetchpriority=None):
+        variants = self.image_variants.get(original, [])
+        attributes = {'src': '/' + (variants[0]['path'] if variants else original)}
+        if variants:
+            attributes['srcset'] = ', '.join(f'/{variant["path"]} {variant["width"]}w' for variant in variants)
+            attributes['sizes'] = sizes
+            self.used_image_variants.update(variant['path'] for variant in variants)
+        if css:
+            attributes['class'] = css
+        attributes.update({'width': width, 'height': height, 'alt': alt})
+        for name, value in (('loading', loading), ('decoding', decoding), ('fetchpriority', fetchpriority)):
+            if value is not None:
+                attributes[name] = value
+        return '<img ' + ' '.join(f'{name}="{h(value)}"' for name, value in attributes.items()) + '>'
 
     def company(self):
         return {
@@ -115,6 +182,7 @@ class Builder:
         return {
             "@type": "Person", "@id": self.base + "/ahmad-helwani/#person",
             "name": "Dr. Ahmad Helwani", "url": self.base + "/ahmad-helwani/",
+            "image": self.base + "/assets/ahmad-helwani-profile-approved.png",
             "jobTitle": "Managing Partner", "worksFor": {"@id": self.base + "/#company"},
             "email": self.site["email"], "description": self.site["biography"],
             "knowsLanguage": ["English", "Arabic"],
@@ -157,7 +225,7 @@ class Builder:
         if not clients:
             return ''
         items = []
-        for client in clients:
+        for index, client in enumerate(clients):
             name = client['name']
             logo = self.client_logo_path(client)
             if logo:
@@ -165,7 +233,8 @@ class Builder:
                 if width <= 0 or height <= 0:
                     raise ValueError('Client logo dimensions must be positive.')
                 logo_class = 'client-logo client-logo-dark' if client.get('logoBackground') == 'dark' else 'client-logo'
-                image = f'<span class="{logo_class}"><img src="/{h(logo.as_posix())}" alt="{h(name)} — PLS Accounting client" width="{width}" height="{height}" loading="{h(loading)}" decoding="async"></span>'
+                image_loading = 'eager' if loading == 'eager' and index < 6 else 'lazy'
+                image = f'<span class="{logo_class}"><img src="/{h(logo.as_posix())}" alt="{h(name)} — PLS Accounting client" width="{width}" height="{height}" loading="{image_loading}" decoding="async"></span>'
             else:
                 image = f'<span class="client-wordmark">{h(name)}</span>'
             items.append(f'<li class="client-item">{image}</li>')
@@ -179,17 +248,55 @@ class Builder:
     def clients_page(self):
         path = '/clients/'
         description = 'Explore businesses that work with PLS Accounting in Dubai and across the UAE, with our client logo gallery.'
-        content = '''<section class="page-hero"><div class="wrap"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">PLS Accounting</a><span aria-hidden="true">/</span><span aria-current="page">Our clients</span></nav><h1>Our clients</h1><p class="page-lead">A selection of businesses that work with PLS Accounting in Dubai and across the UAE.</p></div></section><section class="section clients-gallery" aria-label="PLS Accounting client gallery"><div class="wrap"><ul class="client-gallery-list">''' + self.client_items('lazy') + '</ul></div></section>'
+        content = f'''<section class="page-hero"><div class="wrap">{self.breadcrumbs(path, 'Our clients')}<h1>Our clients</h1><p class="page-lead">A selection of businesses that work with PLS Accounting in Dubai and across the UAE.</p></div></section><section class="section clients-gallery" aria-label="PLS Accounting client gallery"><div class="wrap"><ul class="client-gallery-list">''' + self.client_items('lazy') + '</ul></div></section>'
         collection = {'@type': 'CollectionPage', '@id': self.base + path + '#page', 'url': self.base + path, 'name': 'Our clients | PLS Accounting', 'description': description, 'about': {'@id': self.base + '/#company'}}
         return self.page('Our Clients | PLS Accounting', description, path, content, [self.company(), collection])
+
+    def breadcrumb_items(self, path, title):
+        if path in {'/', '/404.html'}:
+            return []
+        items = [('/', self.site['name'])]
+        service_titles = {route: heading for route, _, heading in SERVICE_LINKS}
+        if path in service_titles:
+            items.append(('/#services', 'Services'))
+            current = service_titles[path]
+        elif path == '/ahmad-helwani/':
+            current = 'Dr. Ahmad Helwani'
+        elif path == '/clients/':
+            current = 'Our clients'
+        elif path == '/articles/':
+            current = 'Articles'
+        elif path.startswith('/articles/'):
+            items.append(('/articles/', 'Articles'))
+            current = next((article['title'] for article in self.articles if path == f'/articles/{article["slug"]}/'), title)
+        else:
+            return []
+        return items + [(path, current)]
+
+    def breadcrumbs(self, path, title):
+        items = self.breadcrumb_items(path, title)
+        parts = [f'<a href="{h(route)}">{h(label)}</a>' if index < len(items) - 1 else f'<span aria-current="page">{h(label)}</span>' for index, (route, label) in enumerate(items)]
+        return '<nav class="breadcrumbs" aria-label="Breadcrumb">' + '<span aria-hidden="true">/</span>'.join(parts) + '</nav>'
+
+    def breadcrumb_graph(self, path, title):
+        return {'@type': 'BreadcrumbList', '@id': self.base + path + '#breadcrumb', 'itemListElement': [
+            {'@type': 'ListItem', 'position': index, 'name': label, 'item': self.base + route}
+            for index, (route, label) in enumerate(self.breadcrumb_items(path, title), 1)
+        ]}
 
     def page(self, title, description, path, content, graph=None, active="", image=None, image_alt="PLS Accounting logo", article=False, noindex=False):
         url = self.base + path
         image = image or self.base + "/assets/pls-logo.png"
         canonical = "" if noindex else f'<link rel="canonical" href="{h(url)}">'
-        robots = '<meta name="robots" content="noindex, follow">' if noindex else ""
+        robots = '<meta name="robots" content="noindex, follow">' if noindex else '<meta name="robots" content="max-image-preview:large">'
         verification = '<meta name="google-site-verification" content="zUTLfmqYzChhmWgAQjYGrYNKUWl5BHOes7OxhkO8JHI"><meta name="msvalidate.01" content="5369E22398CA740655C138DAD554D86F">' if path == "/" else ""
-        graph = graph or [self.company()]
+        graph = [dict(item) for item in (graph or [self.company()])]
+        if not noindex and self.breadcrumb_items(path, title):
+            breadcrumb = self.breadcrumb_graph(path, title)
+            for item in graph:
+                if item.get('@type') in {'WebPage', 'ProfilePage', 'CollectionPage'} and item.get('url') == url:
+                    item['breadcrumb'] = {'@id': breadcrumb['@id']}
+            graph.append(breadcrumb)
         structured = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("<", "\\u003c")
         return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -203,8 +310,8 @@ class Builder:
 
     def article_card(self, article, featured=False):
         path = f'/articles/{article["slug"]}/'
-        image_path = "/" + article["coverImage"]
-        return f'''<article class="article-card{' featured' if featured else ''}"><a class="article-image" href="{h(path)}" tabindex="-1" aria-hidden="true"><img src="{h(image_path)}" width="{article['imageWidth']}" height="{article['imageHeight']}" alt="{h(article['imageAlt'])}" loading="lazy"></a><div class="article-card-copy"><p class="article-meta"><time datetime="{published_time(article).date().isoformat()}">{h(publication_label(article))}</time><span>By Dr. Ahmad Helwani</span></p><h3><a href="{h(path)}">{h(article['title'])}</a></h3><p>{h(article['description'])}</p>{link(path,'Read article')}</div></article>'''
+        image = self.responsive_image(article['coverImage'], article['imageWidth'], article['imageHeight'], article['imageAlt'], sizes=ARTICLE_FEATURED_SIZES if featured else ARTICLE_CARD_SIZES, loading='lazy')
+        return f'''<article class="article-card{' featured' if featured else ''}"><a class="article-image" href="{h(path)}" tabindex="-1" aria-hidden="true">{image}</a><div class="article-card-copy"><p class="article-meta"><time datetime="{published_time(article).date().isoformat()}">{h(publication_label(article))}</time><span>By Dr. Ahmad Helwani</span></p><h3><a href="{h(path)}">{h(article['title'])}</a></h3><p>{h(article['description'])}</p>{link(path,'Read article')}</div></article>'''
 
     def external_articles(self):
         cards = "".join(f'''<article class="external-card"><p class="eyebrow">UAE Taxes</p><h3><a href="{h(item['url'])}">{h(item['title'])}</a></h3><p>{h(item['description'])}</p><p class="byline">By Dr. Ahmad Helwani</p>{link(item['url'],'Read article',glyph='external')}</article>''' for item in self.site['externalArticles'])
@@ -215,7 +322,8 @@ class Builder:
         def service_card(item):
             action = ''
             if item.get('url'):
-                action = f'<a class="text-link service-action" href="{h(item["url"])}" aria-label="Explore {h(item["title"])}">Explore service{icon("arrow")}</a>'
+                action_labels = {'/services/accounting-bookkeeping-dubai/': 'Accounting and bookkeeping', '/services/zoho-books-e-invoicing-uae/': 'Zoho Books & e-invoicing', '/services/vat-reviews-dubai/': 'VAT services', '/services/corporate-tax-dubai/': 'Corporate Tax services'}
+                action = f'<a class="text-link service-action" href="{h(item["url"])}" aria-label="Explore {h(item["title"])}">{h(action_labels.get(item["url"], item["title"]))}{icon("arrow")}</a>'
             return f'''<article class="service-card"><div class="service-top"><span class="service-icon">{icon(item['icon'])}</span></div><h3>{h(item['title'])}</h3><p>{h(item['text'])}</p><ul class="service-tags">{''.join(f'<li>{h(tag)}</li>' for tag in item['tags'])}</ul>{action}</article>'''
         services = ''.join(service_card(item) for item in s['services'])
         cards = "".join(self.article_card(a,len(self.articles)==1) for a in self.articles)
@@ -225,7 +333,7 @@ class Builder:
 {self.clients_section()}
 <div class="intro-band"><div class="wrap intro-grid"><div>{icon('ledger')}<span><strong>Accounting &amp; bookkeeping</strong><small>Organised records and useful information</small></span></div><div>{icon('document')}<span><strong>VAT &amp; Corporate Tax</strong><small>Registration, filing and advisory</small></span></div><div>{icon('globe')}<span><strong>English &amp; Arabic</strong><small>Enquiries in either language</small></span></div></div></div>
 <section class="section" id="services" aria-labelledby="services-title"><div class="wrap"><div class="section-header"><div><p class="eyebrow">How we can help</p><h2 id="services-title">Accounting, Zoho Books and tax support</h2></div><p>Choose the service you need, then agree the scope, records and deliverables for your business.</p></div><div class="services-grid">{services}</div><p class="services-note">Start with our <a href="/services/accounting-bookkeeping-dubai/">accounting and bookkeeping services</a> or <a href="/services/zoho-books-e-invoicing-uae/">Zoho Books implementation</a>. For specialist tax advice, explore Dr. Ahmad Helwani’s <a href="{h(urls['taxes'])}">UAE Taxes website</a>.</p></div></section>
-<section class="section profile-section" id="meet-dr-ahmad" aria-labelledby="profile-title"><div class="wrap profile-grid"><div class="profile-panel"><a class="profile-portrait-link" href="/ahmad-helwani/" aria-label="View Dr. Ahmad Helwani’s professional profile"><img class="profile-portrait adviser-portrait" src="/assets/ahmad-helwani-home-approved.png" width="1122" height="1402" alt="Dr. Ahmad Helwani, Managing Partner of PLS Accounting" loading="lazy" decoding="async"></a><div class="profile-panel-caption"><p class="eyebrow">Managing Partner</p><h3>Dr. Ahmad Helwani</h3><p>UAE accounting, finance &amp; tax</p><span class="language">{icon('globe')} English &amp; Arabic</span></div></div><div class="profile-copy"><p class="eyebrow">Meet Dr. Ahmad Helwani</p><h2 id="profile-title">Experience with the details that matter.</h2><p>{h(s['biography'])}</p><p>His experience includes healthcare, real estate and industrial businesses. His Bonnard Lawson biography sets out his professional background and VAT and Corporate Tax tax-agent memberships.</p>{link('/ahmad-helwani/','Explore his professional profile')}<div class="profile-links">{link(urls['biography'],'Professional biography',glyph='external')}{link(urls['linkedin'],'LinkedIn profile',glyph='external')}</div></div></div></section>
+<section class="section profile-section" id="meet-dr-ahmad" aria-labelledby="profile-title"><div class="wrap profile-grid"><div class="profile-panel"><a class="profile-portrait-link" href="/ahmad-helwani/" aria-label="View Dr. Ahmad Helwani’s professional profile">{self.responsive_image('assets/ahmad-helwani-home-approved.png', 1122, 1402, 'Dr. Ahmad Helwani, Managing Partner of PLS Accounting', sizes=HOME_PORTRAIT_SIZES, css='profile-portrait adviser-portrait', loading='lazy', decoding='async')}</a><div class="profile-panel-caption"><p class="eyebrow">Managing Partner</p><h3>Dr. Ahmad Helwani</h3><p>UAE accounting, finance &amp; tax</p><span class="language">{icon('globe')} English &amp; Arabic</span></div></div><div class="profile-copy"><p class="eyebrow">Meet Dr. Ahmad Helwani</p><h2 id="profile-title">Experience with the details that matter.</h2><p>{h(s['biography'])}</p><p>His experience includes healthcare, real estate and industrial businesses. His Bonnard Lawson biography sets out his professional background and VAT and Corporate Tax tax-agent memberships.</p>{link('/ahmad-helwani/','Explore his professional profile')}<div class="profile-links">{link(urls['biography'],'Professional biography',glyph='external')}{link(urls['linkedin'],'LinkedIn profile',glyph='external')}</div></div></div></section>
 <section class="section" id="approach" aria-labelledby="approach-title"><div class="wrap"><div class="section-header"><div><p class="eyebrow">Start with your business question</p><h2 id="approach-title">Context first. Then the detail.</h2></div><p>A useful first discussion starts with your business, the question you are facing and the records available.</p></div><div class="process-grid"><article class="process-step"><h3>Describe the question</h3><p>Share a short business overview, the relevant period and the issue you want to discuss.</p></article><article class="process-step"><h3>Identify the records</h3><p>Explain which accounts, invoices or supporting documents are available and what information is still missing.</p></article><article class="process-step"><h3>Discuss the scope</h3><p>Agree what needs to be reviewed and the next information to gather before an engagement begins.</p></article></div></div></section>
 <section class="section tax-section" aria-labelledby="tax-title"><div class="wrap tax-grid"><div class="tax-copy"><p class="eyebrow">Specialist tax advice</p><h2 id="tax-title">Connect your accounts with the tax question.</h2><p>PLS coordinates accounting records and tax-return preparation. Dr. Ahmad Helwani’s UAE Taxes website explains his specialist VAT and Corporate Tax advisory services.</p><div class="button-row">{link(urls['vat'],'VAT advisory on UAE Taxes','button secondary')}{link(urls['corporateTax'],'Corporate Tax advisory on UAE Taxes','text-link')}</div></div><div class="deliverable"><p class="eyebrow">What you receive from a VAT review</p><h3>A written explanation and next steps.</h3><p>{h(s['vatDeliverable'])}</p><ul><li>{icon('check')}The issue and information reviewed</li><li>{icon('check')}Any unresolved information gaps</li><li>{icon('check')}Recommended next steps</li></ul></div></div></section>
 <section class="section" id="articles" aria-labelledby="articles-title"><div class="wrap"><div class="section-header"><div><p class="eyebrow">PLS insights</p><h2 id="articles-title">Accounting and tax articles</h2></div><p>Practical guidance by Dr. Ahmad Helwani, with references to the sources behind each topic.</p></div><div class="articles-grid{' single-article' if len(self.articles)==1 else ''}">{cards}</div><div class="section-action">{link('/articles/','View all PLS articles','button secondary')}</div></div></section>
@@ -236,17 +344,13 @@ class Builder:
 
     def service_page(self, path, title, description, lead, body, enquiry_hint, service_types):
         related = ''.join(f'<li>{link(other_path, other_title)}</li>' for other_path, _, other_title in SERVICE_LINKS if other_path != path)
-        content = f'''<section class="page-hero service-hero"><div class="wrap"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">PLS Accounting</a><span aria-hidden="true">/</span><a href="/#services">Services</a></nav><p class="eyebrow">Dubai and the UAE</p><h1>{h(title)}</h1><p class="page-lead">{h(lead)}</p><div class="button-row">{link('mailto:'+self.site['email'],'Discuss your requirements','button','mail')}{link('/ahmad-helwani/','Meet Dr. Ahmad','button secondary')}</div></div></section>
+        content = f'''<section class="page-hero service-hero"><div class="wrap">{self.breadcrumbs(path, title)}<p class="eyebrow">Dubai and the UAE</p><h1>{h(title)}</h1><p class="page-lead">{h(lead)}</p><div class="button-row">{link('mailto:'+self.site['email'],'Discuss your requirements','button','mail')}{link('/ahmad-helwani/','Meet Dr. Ahmad','button secondary')}</div></div></section>
 <section class="section service-detail-section"><div class="wrap service-layout"><div class="service-copy">{body}<section class="service-section service-professional"><h2>Your adviser</h2><p>Dr. Ahmad Helwani is Managing Partner at PLS Accounting and an FTA Tax Agent for VAT and Corporate Tax with Bonnard Lawson Dubai. Read his <a href="{h(self.site['links']['biography'])}">professional biography</a> for his background and check the <a href="https://tax.gov.ae/en/tax.support/tax.agents/registered.tax.agents.aspx">FTA registered tax-agent directory</a> to verify current registered tax-agent details.</p><p>Enquiries are welcome in English or Arabic. The work, responsibilities and written deliverables are agreed around your business and the records available.</p></section></div><aside class="service-enquiry" aria-labelledby="service-enquiry-title"><p class="eyebrow">Start an enquiry</p><h2 id="service-enquiry-title">Tell us what you need.</h2><p>{h(enquiry_hint)}</p>{link('mailto:'+self.site['email'],self.site['email'],'text-link','mail')}<p class="service-language">English and Arabic enquiries</p><nav class="service-related" aria-label="Other services"><h3>Explore other services</h3><ul>{related}</ul></nav></aside></div></section>'''
         service_id = self.base+path+'#service'
         service = {'@type':'Service','@id':service_id,'name':title,'serviceType':service_types,'description':description,'url':self.base+path,'provider':{'@id':self.base+'/#company'},'areaServed':{'@type':'Country','name':'United Arab Emirates'},'availableLanguage':['English','Arabic']}
         breadcrumb_id = self.base+path+'#breadcrumb'
-        breadcrumb = {'@type':'BreadcrumbList','@id':breadcrumb_id,'itemListElement':[
-            {'@type':'ListItem','position':1,'name':self.site['name'],'item':self.base+'/'},
-            {'@type':'ListItem','position':2,'name':title,'item':self.base+path},
-        ]}
         webpage = {'@type':'WebPage','@id':self.base+path+'#page','url':self.base+path,'name':title,'description':description,'mainEntity':{'@id':service_id},'author':{'@id':self.base+'/ahmad-helwani/#person'},'dateModified':SERVICE_MODIFIED[path],'inLanguage':'en','breadcrumb':{'@id':breadcrumb_id}}
-        return self.page(title+' | PLS Accounting',description,path,content,[self.company(),self.person(),service,webpage,breadcrumb],active='services')
+        return self.page(title+' | PLS Accounting',description,path,content,[self.company(),self.person(),service,webpage],active='services')
 
     def accounting_service(self):
         body = '''<section class="service-section"><h2>Keep your records ready for decisions</h2><p>PLS provides accounting and bookkeeping support for businesses in Dubai and across the UAE. We agree the records, reporting period, transaction volumes and responsibilities before work begins.</p><ul><li><strong>Bookkeeping.</strong> Organise sales, purchases, expenses and supporting documents in the agreed accounting system.</li><li><strong>Reconciliations.</strong> Review bank balances, customer and supplier accounts, and identify missing records or differences.</li><li><strong>Reporting.</strong> Prepare agreed financial reports and explain balances that need management review.</li></ul></section>
@@ -284,30 +388,44 @@ class Builder:
 
     def profile(self):
         s, urls = self.site, self.site['links']
-        content = f'''<section class="page-hero profile-page-hero"><div class="wrap"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">PLS Accounting</a><span aria-hidden="true">/</span><span>Professional profile</span></nav><div class="profile-hero-grid"><div class="profile-hero-copy"><p class="eyebrow">Managing Partner, PLS Accounting · Tax Agent, Bonnard Lawson Dubai</p><h1>Dr. Ahmad Helwani</h1><p class="page-lead">{h(s['biography'])}</p><div class="button-row">{link('mailto:'+s['email'],'Discuss your requirements','button','mail')}{link(urls['taxes'],'Explore UAE Taxes','button secondary','external')}</div></div><figure class="profile-hero-portrait"><img class="adviser-portrait" src="/assets/ahmad-helwani-profile-approved.png" width="1122" height="1402" alt="Dr. Ahmad Helwani, Managing Partner of PLS Accounting, in a modern office" decoding="async" fetchpriority="high"></figure></div></div></section>
-<section class="section"><div class="wrap profile-detail"><div class="profile-main"><section class="detail-block"><h2>Professional roles and background</h2><p>At PLS Accounting, Ahmad supports businesses with accounting, bookkeeping, financial reporting and Zoho-based processes. PLS is a Zoho partner, providing Zoho Books setup and UAE e-invoicing readiness support.</p><p>His VAT and Corporate Tax tax-agent role is with Bonnard Lawson Dubai. The engagement identifies the relevant service provider, responsibilities and any required FTA appointment arrangements.</p><p>His <a href="{h(urls['biography'])}">Bonnard Lawson professional biography</a> describes his education, professional memberships and experience across healthcare, real estate and industrial businesses. Current registered tax-agent details can be checked through the <a href="{h(urls['ftaDirectory'])}">FTA directory</a>.</p></section><section class="detail-block"><h2>Tax and accounting support</h2><div class="profile-services"><article><h3>Corporate Tax advisory and filing</h3><p>Registration, review of accounting-to-tax adjustments, annual computations, return preparation and filing support.</p>{link('/services/corporate-tax-dubai/','Explore Corporate Tax services')}</article><article><h3>VAT returns and transaction reviews</h3><p>Registration and return support, with invoice and transaction reviews explaining the records, proposed treatment and next steps.</p>{link('/services/vat-reviews-dubai/','Explore VAT services')}</article><article><h3>Zoho Books and e-invoicing</h3><p>Accounting setup, migration, invoicing workflows, reconciliations and preparation for coordination with an Accredited Service Provider.</p>{link('/services/zoho-books-e-invoicing-uae/','Explore Zoho and e-invoicing support')}</article></div></section><section class="detail-block"><h2>Education and working languages</h2><ul><li>Doctor of Business Administration, SBS Swiss Business School (2023).</li><li>Master of Applied Business Research, SBS Swiss Business School.</li><li>Master of Business Administration, major in Banking and Finance, Geneva Business School.</li><li>English and Arabic.</li></ul></section><section class="detail-block"><h2>Prepare for a discussion</h2><p>Describe your business activity, the service you need, the relevant period and any approaching deadline. Explain which accounts, invoices, contracts or other supporting records are available. You can enquire before every document has been gathered.</p>{link('mailto:'+s['email'],s['email'],'button','mail')}</section></div><aside class="profile-sidebar" aria-labelledby="references-title"><p class="eyebrow">Professional references</p><h2 id="references-title">Work and background</h2><p>Explore the professional biography, registered-agent verification route and practical guidance.</p><ul><li>{link(urls['biography'],'Bonnard Lawson biography',glyph='external')}</li><li>{link(urls['ftaDirectory'],'FTA tax-agent directory',glyph='external')}</li><li>{link(urls['linkedin'],'LinkedIn profile',glyph='external')}</li><li>{link(urls['taxes'],'UAE Taxes',glyph='external')}</li><li>{link('/articles/','PLS articles')}</li></ul><p class="sidebar-note">English &amp; Arabic enquiries<br><a href="mailto:{h(s['email'])}">{h(s['email'])}</a></p></aside></div></section>'''
-        profile = {"@type":"ProfilePage","@id":self.base+'/ahmad-helwani/#profile',"url":self.base+'/ahmad-helwani/',"name":"Dr. Ahmad Helwani | PLS Accounting","mainEntity":{"@id":self.base+'/ahmad-helwani/#person'}}
-        return self.page('Dr. Ahmad Helwani | UAE Tax Agent & PLS Accounting','Dr. Ahmad Helwani, FTA Tax Agent for VAT and Corporate Tax with Bonnard Lawson Dubai and Managing Partner of PLS Accounting. English and Arabic enquiries.','/ahmad-helwani/',content,[self.company(),self.person(),profile],active='profile')
+        accounting = next(service for service in s['services'] if service.get('url') == '/services/accounting-bookkeeping-dubai/')
+        content = f'''<section class="page-hero profile-page-hero"><div class="wrap">{self.breadcrumbs('/ahmad-helwani/', 'Dr. Ahmad Helwani')}<div class="profile-hero-grid"><div class="profile-hero-copy"><p class="eyebrow">Managing Partner, PLS Accounting · Tax Agent, Bonnard Lawson Dubai</p><h1>Dr. Ahmad Helwani</h1><p class="page-lead">{h(s['biography'])}</p><div class="button-row">{link('mailto:'+s['email'],'Discuss your requirements','button','mail')}{link(urls['taxes'],'Explore UAE Taxes','button secondary','external')}</div></div><figure class="profile-hero-portrait">{self.responsive_image('assets/ahmad-helwani-profile-approved.png', 1122, 1402, 'Dr. Ahmad Helwani, Managing Partner of PLS Accounting, in a modern office', sizes=PROFILE_PORTRAIT_SIZES, css='adviser-portrait', decoding='async', fetchpriority='high')}</figure></div></div></section>
+<section class="section"><div class="wrap profile-detail"><div class="profile-main"><section class="detail-block"><h2>Professional roles and background</h2><p>At PLS Accounting, Ahmad supports businesses with accounting, bookkeeping, financial reporting and Zoho-based processes. PLS is a Zoho partner, providing Zoho Books setup and UAE e-invoicing readiness support.</p><p>His VAT and Corporate Tax tax-agent role is with Bonnard Lawson Dubai. The engagement identifies the relevant service provider, responsibilities and any required FTA appointment arrangements.</p><p>His <a href="{h(urls['biography'])}">Bonnard Lawson professional biography</a> describes his education, professional memberships and experience across healthcare, real estate and industrial businesses. Current registered tax-agent details can be checked through the <a href="{h(urls['ftaDirectory'])}">FTA directory</a>.</p></section><section class="detail-block"><h2>Tax and accounting support</h2><div class="profile-services"><article><h3>Accounting and bookkeeping</h3><p>{h(accounting['text'])}</p>{link('/services/accounting-bookkeeping-dubai/','Explore accounting and bookkeeping')}</article><article><h3>Corporate Tax advisory and filing</h3><p>Registration, review of accounting-to-tax adjustments, annual computations, return preparation and filing support.</p>{link('/services/corporate-tax-dubai/','Explore Corporate Tax services')}</article><article><h3>VAT returns and transaction reviews</h3><p>Registration and return support, with invoice and transaction reviews explaining the records, proposed treatment and next steps.</p>{link('/services/vat-reviews-dubai/','Explore VAT services')}</article><article><h3>Zoho Books and e-invoicing</h3><p>Accounting setup, migration, invoicing workflows, reconciliations and preparation for coordination with an Accredited Service Provider.</p>{link('/services/zoho-books-e-invoicing-uae/','Explore Zoho and e-invoicing support')}</article></div></section><section class="detail-block"><h2>Education and working languages</h2><ul><li>Doctor of Business Administration, SBS Swiss Business School (2023).</li><li>Master of Applied Business Research, SBS Swiss Business School.</li><li>Master of Business Administration, major in Banking and Finance, Geneva Business School.</li><li>English and Arabic.</li></ul></section><section class="detail-block"><h2>Prepare for a discussion</h2><p>Describe your business activity, the service you need, the relevant period and any approaching deadline. Explain which accounts, invoices, contracts or other supporting records are available. You can enquire before every document has been gathered.</p>{link('mailto:'+s['email'],s['email'],'button','mail')}</section></div><aside class="profile-sidebar" aria-labelledby="references-title"><p class="eyebrow">Professional references</p><h2 id="references-title">Work and background</h2><p>Explore the professional biography, registered-agent verification route and practical guidance.</p><ul><li>{link(urls['biography'],'Bonnard Lawson biography',glyph='external')}</li><li>{link(urls['ftaDirectory'],'FTA tax-agent directory',glyph='external')}</li><li>{link(urls['linkedin'],'LinkedIn profile',glyph='external')}</li><li>{link(urls['taxes'],'UAE Taxes',glyph='external')}</li><li>{link('/articles/','PLS articles')}</li></ul><p class="sidebar-note">English &amp; Arabic enquiries<br><a href="mailto:{h(s['email'])}">{h(s['email'])}</a></p></aside></div></section>'''
+        profile = {"@type":"ProfilePage","@id":self.base+'/ahmad-helwani/#profile',"url":self.base+'/ahmad-helwani/',"name":"Dr. Ahmad Helwani | PLS Accounting","mainEntity":{"@id":self.base+'/ahmad-helwani/#person'},"primaryImageOfPage":self.base+'/assets/ahmad-helwani-profile-approved.png'}
+        return self.page('Dr. Ahmad Helwani | UAE Tax Agent & PLS Accounting','Dr. Ahmad Helwani, FTA Tax Agent for VAT and Corporate Tax with Bonnard Lawson Dubai and Managing Partner of PLS Accounting. English and Arabic enquiries.','/ahmad-helwani/',content,[self.company(),self.person(),profile],active='profile',image=self.base+'/assets/ahmad-helwani-profile-approved.png',image_alt='Dr. Ahmad Helwani, Managing Partner of PLS Accounting')
 
     def article_index(self):
         cards = ''.join(self.article_card(a,len(self.articles)==1) for a in self.articles)
         if not cards:
             cards='<p>Explore the existing articles on UAE Taxes below.</p>'
-        content=f'''<section class="page-hero"><div class="wrap"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">PLS Accounting</a><span aria-hidden="true">/</span><span>Articles</span></nav><p class="eyebrow">PLS insights</p><h1>Accounting and tax articles</h1><p class="page-lead">Practical UAE guidance by Dr. Ahmad Helwani, with clear authorship and references to primary sources.</p></div></section><section class="section"><div class="wrap"><div class="articles-grid{' single-article' if len(self.articles)==1 else ''}">{cards}</div></div></section>{self.external_articles()}'''
+        content=f'''<section class="page-hero"><div class="wrap">{self.breadcrumbs('/articles/', 'Articles')}<p class="eyebrow">PLS insights</p><h1>Accounting and tax articles</h1><p class="page-lead">Practical UAE guidance by Dr. Ahmad Helwani, with clear authorship and references to primary sources.</p></div></section><section class="section"><div class="wrap"><div class="articles-grid{' single-article' if len(self.articles)==1 else ''}">{cards}</div></div></section>{self.external_articles()}'''
         collection={"@type":"CollectionPage","@id":self.base+'/articles/#page',"url":self.base+'/articles/',"name":"Accounting and tax articles","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","position":i,"url":self.base+'/articles/'+a['slug']+'/','name':a['title']} for i,a in enumerate(self.articles,1)]}}
         return self.page('Accounting & Tax Articles | PLS Accounting','Read practical UAE accounting and tax articles by Dr. Ahmad Helwani, including e-invoicing readiness and referenced guidance for businesses.','/articles/',content,[self.company(),self.person(),collection],active='articles')
+
+    def article_service_link(self, article):
+        services = {
+            'uae-e-invoicing-what-businesses-need-to-do-before-2027': ('/services/zoho-books-e-invoicing-uae/', 'Explore Zoho Books and e-invoicing support'),
+            'uae-e-invoicing-are-you-ready': ('/services/zoho-books-e-invoicing-uae/', 'Explore Zoho Books and e-invoicing support'),
+            'tax-planning-vs-tax-evasion-in-the-uae-where-is-the-line': ('/services/corporate-tax-dubai/', 'Explore Corporate Tax advisory and filing'),
+            'ai-and-tax-services-what-the-future-means-for-uae-businesses': ('/services/accounting-bookkeeping-dubai/', 'Explore accounting and bookkeeping support'),
+        }
+        service = services.get(article['slug'])
+        if not service:
+            return ''
+        return '<p class="eyebrow">Related PLS service</p><p>' + link(*service) + '</p>'
 
     def article_page(self, article):
         path=f'/articles/{article["slug"]}/'
         body=(ROOT/article['bodyFragment']).read_text(encoding='utf-8')
         actual=published_time(article)
         image=self.base+'/'+article['coverImage']
+        cover = self.responsive_image(article['coverImage'], article['imageWidth'], article['imageHeight'], article['imageAlt'], sizes=ARTICLE_COVER_SIZES, fetchpriority='high')
         updated = ''
         if article.get('dateModified') and parse_time(article['dateModified']) > actual:
             modified = parse_time(article['dateModified'])
             modified_label = f"{modified.day} {modified.strftime('%B %Y')}"
             updated = f'<small class="article-updated">Updated <time datetime="{h(modified.isoformat())}">{h(modified_label)}</time></small>'
-        content=f'''<article class="article-page"><header class="article-header"><div class="reading-wrap"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">PLS Accounting</a><span aria-hidden="true">/</span><a href="/articles/">Articles</a></nav><p class="eyebrow">UAE accounting &amp; tax insights</p><h1>{h(article['title'])}</h1><p class="article-deck">{h(article['description'])}</p><div class="article-byline"><span>By <a href="/ahmad-helwani/">Dr. Ahmad Helwani</a><small>Managing Partner, PLS Accounting</small></span><span>Published <time datetime="{h(actual.isoformat())}">{h(publication_label(article))}</time>{updated}</span></div></div></header><figure class="article-cover reading-wide"><img src="/{h(article['coverImage'])}" width="{article['imageWidth']}" height="{article['imageHeight']}" alt="{h(article['imageAlt'])}" fetchpriority="high"><figcaption>{h(article['imageCaption'])}</figcaption></figure><div class="article-body reading-wrap">{body}</div><footer class="article-end reading-wrap"><p class="eyebrow">About the author</p><h2>Dr. Ahmad Helwani</h2><p>{h(self.site['biography'])}</p>{link('/ahmad-helwani/','View professional profile')}<div class="article-return">{link('/articles/','More PLS articles')}{link(self.site['links']['taxArticles'],'Read more articles on UAE Taxes',glyph='external')}</div></footer></article>'''
+        content=f'''<article class="article-page"><header class="article-header"><div class="reading-wrap">{self.breadcrumbs(path, article['title'])}<p class="eyebrow">UAE accounting &amp; tax insights</p><h1>{h(article['title'])}</h1><p class="article-deck">{h(article['description'])}</p><div class="article-byline"><span>By <a href="/ahmad-helwani/">Dr. Ahmad Helwani</a><small>Managing Partner, PLS Accounting</small></span><span>Published <time datetime="{h(actual.isoformat())}">{h(publication_label(article))}</time>{updated}</span></div></div></header><figure class="article-cover reading-wide">{cover}<figcaption>{h(article['imageCaption'])}</figcaption></figure><div class="article-body reading-wrap">{body}</div><footer class="article-end reading-wrap">{self.article_service_link(article)}<p class="eyebrow">About the author</p><h2>Dr. Ahmad Helwani</h2><p>{h(self.site['biography'])}</p>{link('/ahmad-helwani/','View professional profile')}<div class="article-return">{link('/articles/','More PLS articles')}{link(self.site['links']['taxArticles'],'Read more articles on UAE Taxes',glyph='external')}</div></footer></article>'''
         posting={"@type":"BlogPosting","@id":self.base+path+'#article',"headline":article['title'],"description":article['description'],"url":self.base+path,"mainEntityOfPage":{"@type":"WebPage","@id":self.base+path},"datePublished":actual.isoformat(),"dateModified":article.get('dateModified',actual.isoformat()),"author":{"@id":self.base+'/ahmad-helwani/#person'},"publisher":{"@id":self.base+'/#company'},"image":{"@type":"ImageObject","url":image,"width":article['imageWidth'],"height":article['imageHeight']},"inLanguage":"en","isAccessibleForFree":True,"citation":article['sourceLinks']}
         page_title = article['title'] + ' | PLS Accounting'
         if len(page_title) > 70:
@@ -326,6 +444,7 @@ class Builder:
         if output.exists():
             shutil.rmtree(output)
         output.mkdir(parents=True)
+        self.used_image_variants.clear()
         (output/'assets').mkdir()
         for filename in ['pls-logo.png','pls-logo-compact.jpg','ahmad-helwani-home-approved.png','ahmad-helwani-profile-approved.png','site.css','site.js']:
             shutil.copy2(ROOT/'assets'/filename,output/'assets'/filename)
@@ -355,6 +474,12 @@ class Builder:
             target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copy2(ROOT/article['coverImage'],target)
             pages[f'articles/{article["slug"]}/index.html']=self.article_page(article)
+        # Rendering records responsive variants only for eligible, published pages.
+        for image in sorted(self.used_image_variants):
+            path = self.optimized_image_path(image)
+            target = output / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(ROOT / path, target)
         for filename,html in pages.items():
             destination=output/filename
             destination.parent.mkdir(parents=True,exist_ok=True)
@@ -362,7 +487,19 @@ class Builder:
         locations=[('/',None),('/ahmad-helwani/',None),('/articles/',None)]+[(path,SERVICE_MODIFIED[path]) for path,_,_ in SERVICE_LINKS]+[(f'/articles/{a["slug"]}/',parse_time(a.get('dateModified',published_time(a).isoformat())).date().isoformat()) for a in self.articles]
         if self.site.get('clients'):
             locations.append(('/clients/', '2026-10-30'))
-        sitemap='<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'<url><loc>{h(self.base+path)}</loc>{"<lastmod>"+date+"</lastmod>" if date else ""}</url>\n' for path,date in locations)+'</urlset>\n'
+        page_images = {
+            '/': ['assets/ahmad-helwani-home-approved.png'],
+            '/ahmad-helwani/': ['assets/ahmad-helwani-profile-approved.png'],
+            **{f'/articles/{article["slug"]}/': [article['coverImage']] for article in self.articles},
+        }
+        if self.site.get('clients'):
+            page_images['/clients/'] = list(dict.fromkeys(logo.as_posix() for client in self.site['clients'] if (logo := self.client_logo_path(client))))
+        sitemap_entries = []
+        for path, date in locations:
+            images = ''.join(f'<image:image><image:loc>{h(self.base + "/" + image)}</image:loc></image:image>' for image in page_images.get(path, []))
+            modified = f'<lastmod>{h(date)}</lastmod>' if date else ''
+            sitemap_entries.append(f'<url><loc>{h(self.base + path)}</loc>{modified}{images}</url>\n')
+        sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' + ''.join(sitemap_entries) + '</urlset>\n'
         (output/'sitemap.xml').write_text(sitemap,encoding='utf-8')
         (output/'robots.txt').write_text(f'User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\nSitemap: {self.base}/sitemap.xml\n',encoding='utf-8')
         (output/'_headers').write_text('/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  X-Frame-Options: SAMEORIGIN\n\n/assets/*\n  Cache-Control: public, max-age=86400\n',encoding='utf-8')
