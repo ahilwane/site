@@ -63,7 +63,7 @@ Do not set `--at` in the production build command. `build-report.json` is local 
 
 ### Selected clients
 
-The homepage displays a single looping client-logo row directly below its main introduction. “Our clients” links to the static `/clients/` gallery, also linked from the footer and included in the sitemap. Company names and their client relationship are provided through image alternative text; no separate captions or company website links appear. There is no visible pause/play button. The row pauses on hover or keyboard focus; click/tap, Space, Escape or manual browsing stops it for the current page visit. Reduced-motion preferences receive a static, horizontally scrollable row. JavaScript duplicates the visual row for a seamless loop while keeping that copy hidden from assistive technology.
+The homepage displays a single looping client-logo row directly below its main introduction. Its first six logos load eagerly; later logos and the complete `/clients/` gallery use native lazy loading. “Our clients” links to that gallery, also linked from the footer and included in the sitemap. Company names and their client relationship are provided through image alternative text; no separate captions or company website links appear. There is no visible pause/play button. The row pauses on hover or keyboard focus; click/tap, Space, Escape or manual browsing stops it for the current page visit. Reduced-motion preferences receive a static, horizontally scrollable row. JavaScript duplicates the visual row for a seamless loop while keeping that copy hidden from assistive technology.
 
 `content/site.json` lists 24 original client logos and six owner-requested neutral typographic name marks for businesses without supplied artwork. `content/client-logo-sources.json` records sources, dimensions and hashes and distinguishes those name marks from official branding. Original artwork retains its colours and proportions. The build copies only referenced client images and does not publish source records, testimonials or individual engagement descriptions.
 
@@ -75,8 +75,29 @@ Before publishing a previously unpublished article on a later day, update its fi
 
 The robots file allows crawling, including OAI-SearchBot. Search indexing and inclusion in ChatGPT results depend on external discovery and ranking systems; metadata alone does not guarantee either outcome. The sitemap includes only published eligible pages.
 
+Breadcrumb markup and its visible navigation are generated from the same page hierarchy on services, profile, articles and client pages; the homepage and 404 omit it. Indexable pages permit large image previews, while the 404 retains `noindex, follow`. Dr. Ahmad’s `Person` graph and profile-page preferred/sharing image use the approved profile portrait. The sitemap includes only standard image-location entries for published article covers, both approved website portraits and gallery logos, without future article assets.
+
+Homepage service links use descriptive visible text. The professional profile links to all four dedicated service pages, and each current article ends with a relevant accounting, Corporate Tax or Zoho/e-invoicing service link. These links sit outside the approved, hash-verified article body fragments.
+
 ### Homepage portrait and layout
 
-The homepage uses the owner-approved studio portrait with glasses (`assets/ahmad-helwani-home-approved.png`), and the professional profile uses the owner-approved modern-office portrait (`assets/ahmad-helwani-profile-approved.png`). These AI-assisted portraits were prepared from current user-supplied reference photos. Only the two approved final website images are copied into the public build; private reference photographs and unused variants are not published. The earlier unedited Bonnard Lawson portrait (`assets/ahmad-helwani-portrait.jpg`, originally from https://www.bonnard-lawson.com/wp-content/uploads/2022/10/Ahmad-Helwani-couleur-683x1024.jpg) remains in source for provenance and is excluded from the build.
+The homepage uses the owner-approved studio portrait with glasses (`assets/ahmad-helwani-home-approved.png`), and the professional profile uses the owner-approved modern-office portrait (`assets/ahmad-helwani-profile-approved.png`). These AI-assisted portraits were prepared from current user-supplied reference photos. Only these two approved portraits and their responsive variants are used in the public build; private reference photographs and unused portrait options are not published. The earlier unedited Bonnard Lawson portrait (`assets/ahmad-helwani-portrait.jpg`, originally from https://www.bonnard-lawson.com/wp-content/uploads/2022/10/Ahmad-Helwani-couleur-683x1024.jpg) remains in source for provenance and is excluded from the build.
 
 Both approved portraits retain their complete proportions without a face crop. CSS supplies a soft shadow and a fully black-and-white appearance at full opacity, changing to full colour on hover. The homepage portrait link and the professional-profile enquiry links also reveal colour on keyboard focus; the profile-page image itself adds no redundant link or keyboard stop. Touch devices show full colour, and reduced-motion preferences disable transitions. Decorative service/process numbering has been removed. The introduction is justified on larger screens and left-aligned on phones; service headings reserve matching space so descriptions align within each row.
+
+### Responsive image delivery
+
+`content/image-variants.json` optionally maps each original portrait or article-cover path to a list of WebP variants. Each list entry records its local `path`, positive integer `width`, `height` and `bytes`, with dimensions in ascending order. For example:
+
+```json
+{
+  "assets/ahmad-helwani-home-approved.png": [
+    {"path": "assets/optimized/ahmad-helwani-home-approved-400.webp", "width": 400, "height": 500, "bytes": 18246},
+    {"path": "assets/optimized/ahmad-helwani-home-approved-800.webp", "width": 800, "height": 1000, "bytes": 66376}
+  ]
+}
+```
+
+The standard-library-only builder validates every listed file beneath `assets/optimized/`, rejects missing files, traversal, outside paths, non-WebP variants, invalid dimensions and byte-count mismatches, and emits `src`, `srcset` and layout-specific `sizes` for portraits, article cards and full article covers. An image without a manifest entry uses its original URL. The smallest variant is the default `src`; the browser can select a larger one from `srcset` for its viewport and pixel density. Original dimensions, alternative text, loading priorities and portrait CSS classes are preserved.
+
+The approved full-resolution originals remain unchanged and are used in sharing metadata, structured data and the image sitemap. During page rendering the builder records which responsive variants are actually used, then copies only those files into `public/`. Future article images and their optimized variants remain excluded until the article passes its publication gate. Preparing derivatives is separate from the build; production does not require Pillow or any image-processing dependency.
