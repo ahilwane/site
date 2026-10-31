@@ -74,3 +74,7 @@ The four dedicated service routes are `/services/accounting-bookkeeping-dubai/`,
 Before publishing a previously unpublished article on a later day, update its first-publication metadata truthfully. After authenticated deployment, verify the public service pages, new article, corrected older article, sitemap and mobile navigation. Public search or ChatGPT visibility must be measured separately from deployment success.
 
 The robots file allows crawling, including OAI-SearchBot. Search indexing and inclusion in ChatGPT results depend on external discovery and ranking systems; metadata alone does not guarantee either outcome. The sitemap includes only published eligible pages.
+
+### Homepage portrait and layout
+
+The homepage uses Dr. Ahmad Helwani’s original professional portrait from his public Bonnard Lawson biography: https://www.bonnard-lawson.com/wp-content/uploads/2022/10/Ahmad-Helwani-couleur-683x1024.jpg. The local JPEG is unchanged; CSS provides its responsive crop, soft shadow and muted-to-full-colour hover/focus treatment. Touch devices show the photo fully, and reduced-motion preferences disable transitions. Decorative service/process numbering has been removed. The introduction is justified on larger screens and left-aligned on phones; service headings reserve matching space so descriptions align within each row.
