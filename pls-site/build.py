@@ -96,6 +96,9 @@ class Builder:
         self.excluded = []
         for article in self.manifest["articles"]:
             if article["status"] in {"published", "scheduled"} and parse_time(article["publicationAt"]) <= at:
+                if article.get("republishedAt") and parse_time(article["republishedAt"]) > at:
+                    self.excluded.append(article["id"])
+                    continue
                 if article.get("actualPublicationAt") and published_time(article) > at:
                     self.excluded.append(article["id"])
                     continue
@@ -326,7 +329,7 @@ class Builder:
                 action = f'<a class="text-link service-action" href="{h(item["url"])}" aria-label="Explore {h(item["title"])}">{h(action_labels.get(item["url"], item["title"]))}{icon("arrow")}</a>'
             return f'''<article class="service-card"><div class="service-top"><span class="service-icon">{icon(item['icon'])}</span></div><h3>{h(item['title'])}</h3><p>{h(item['text'])}</p><ul class="service-tags">{''.join(f'<li>{h(tag)}</li>' for tag in item['tags'])}</ul>{action}</article>'''
         services = ''.join(service_card(item) for item in s['services'])
-        cards = "".join(self.article_card(a,len(self.articles)==1) for a in self.articles)
+        cards = "".join(self.article_card(a,len(self.articles)==1) for a in self.articles[:4])
         if not cards:
             cards = '<p>Explore Dr. Ahmad Helwani’s existing articles on <a href="https://uae-taxes.com/tax-insights">UAE Taxes</a>.</p>'
         content = f'''<section class="hero" aria-labelledby="hero-title"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">Prime Ledger Solution for Accounting Services</p><h1 id="hero-title">{h(s['heroTitle'])}</h1><p class="hero-intro">{h(s['heroIntro'])}</p><div class="button-row">{link('/#services','Explore our services','button')}{link('/ahmad-helwani/','Meet Dr. Ahmad','button secondary')}</div><p class="hero-note">{icon('globe')}UAE business support · English &amp; Arabic enquiries</p></div><div class="hero-art"><p class="art-label">A considered approach</p><div class="document"><div class="document-heading"><span class="document-symbol">{icon('ledger')}</span><p class="eyebrow">From records to decisions</p><h2>Bring the details together.</h2></div><div class="document-row"><div><strong>Understand your records</strong><small>Accounts, invoices &amp; supporting documents</small></div></div><div class="document-row"><div><strong>Clarify the question</strong><small>Business context &amp; information gaps</small></div></div><div class="document-row"><div><strong>Identify the next step</strong><small>A scope shaped around your needs</small></div></div><div class="document-footer">PLS Accounting <span>Records → context → decisions</span></div></div></div></div></section>
@@ -410,6 +413,9 @@ class Builder:
             'ai-and-tax-services-what-the-future-means-for-uae-businesses': ('/services/accounting-bookkeeping-dubai/', 'Explore accounting and bookkeeping support'),
         }
         service = services.get(article['slug'])
+        if not service and article.get('servicePath'):
+            label = 'Explore accounting and reporting support' if article['servicePath'] == '/services/accounting-bookkeeping-dubai/' else 'Explore Corporate Tax advisory and filing'
+            service = (article['servicePath'], label)
         if not service:
             return ''
         return '<p class="eyebrow">Related PLS service</p><p>' + link(*service) + '</p>'
@@ -421,12 +427,16 @@ class Builder:
         image=self.base+'/'+article['coverImage']
         cover = self.responsive_image(article['coverImage'], article['imageWidth'], article['imageHeight'], article['imageAlt'], sizes=ARTICLE_COVER_SIZES, fetchpriority='high')
         updated = ''
+        publication_prefix = 'Originally published on LinkedIn' if article.get('originalSource') else 'Published'
+        publication_datetime = article.get('originalPublicationAt', actual.isoformat())
         if article.get('dateModified') and parse_time(article['dateModified']) > actual:
             modified = parse_time(article['dateModified'])
             modified_label = f"{modified.day} {modified.strftime('%B %Y')}"
             updated = f'<small class="article-updated">Updated <time datetime="{h(modified.isoformat())}">{h(modified_label)}</time></small>'
-        content=f'''<article class="article-page"><header class="article-header"><div class="reading-wrap">{self.breadcrumbs(path, article['title'])}<p class="eyebrow">UAE accounting &amp; tax insights</p><h1>{h(article['title'])}</h1><p class="article-deck">{h(article['description'])}</p><div class="article-byline"><span>By <a href="/ahmad-helwani/">Dr. Ahmad Helwani</a><small>Managing Partner, PLS Accounting</small></span><span>Published <time datetime="{h(actual.isoformat())}">{h(publication_label(article))}</time>{updated}</span></div></div></header><figure class="article-cover reading-wide">{cover}<figcaption>{h(article['imageCaption'])}</figcaption></figure><div class="article-body reading-wrap">{body}</div><footer class="article-end reading-wrap">{self.article_service_link(article)}<p class="eyebrow">About the author</p><h2>Dr. Ahmad Helwani</h2><p>{h(self.site['biography'])}</p>{link('/ahmad-helwani/','View professional profile')}<div class="article-return">{link('/articles/','More PLS articles')}{link(self.site['links']['taxArticles'],'Read more articles on UAE Taxes',glyph='external')}</div></footer></article>'''
-        posting={"@type":"BlogPosting","@id":self.base+path+'#article',"headline":article['title'],"description":article['description'],"url":self.base+path,"mainEntityOfPage":{"@type":"WebPage","@id":self.base+path},"datePublished":actual.isoformat(),"dateModified":article.get('dateModified',actual.isoformat()),"author":{"@id":self.base+'/ahmad-helwani/#person'},"publisher":{"@id":self.base+'/#company'},"image":{"@type":"ImageObject","url":image,"width":article['imageWidth'],"height":article['imageHeight']},"inLanguage":"en","isAccessibleForFree":True,"citation":article['sourceLinks']}
+        content=f'''<article class="article-page"><header class="article-header"><div class="reading-wrap">{self.breadcrumbs(path, article['title'])}<p class="eyebrow">UAE accounting &amp; tax insights</p><h1>{h(article['title'])}</h1><p class="article-deck">{h(article['description'])}</p><div class="article-byline"><span>By <a href="/ahmad-helwani/">Dr. Ahmad Helwani</a><small>Managing Partner, PLS Accounting</small></span><span>{publication_prefix} <time datetime="{h(publication_datetime)}">{h(publication_label(article))}</time>{updated}</span></div></div></header><figure class="article-cover reading-wide">{cover}<figcaption>{h(article['imageCaption'])}</figcaption></figure><div class="article-body reading-wrap">{body}</div><footer class="article-end reading-wrap">{self.article_service_link(article)}<p class="eyebrow">About the author</p><h2>Dr. Ahmad Helwani</h2><p>{h(self.site['biography'])}</p>{link('/ahmad-helwani/','View professional profile')}<div class="article-return">{link('/articles/','More PLS articles')}{link(self.site['links']['taxArticles'],'Read more articles on UAE Taxes',glyph='external')}</div></footer></article>'''
+        posting={"@type":"BlogPosting","@id":self.base+path+'#article',"headline":article['title'],"description":article['description'],"url":self.base+path,"mainEntityOfPage":{"@type":"WebPage","@id":self.base+path},"datePublished":publication_datetime,"dateModified":article.get('dateModified',actual.isoformat()),"author":{"@id":self.base+'/ahmad-helwani/#person'},"publisher":{"@id":self.base+'/#company'},"image":{"@type":"ImageObject","url":image,"width":article['imageWidth'],"height":article['imageHeight']},"inLanguage":"en","isAccessibleForFree":True,"citation":article['sourceLinks']}
+        if article.get('originalSource'):
+            posting['isBasedOn'] = article['originalSource']
         page_title = article['title'] + ' | PLS Accounting'
         if len(page_title) > 70:
             page_title = article['title']
