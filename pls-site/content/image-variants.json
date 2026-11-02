@@ -82,5 +82,145 @@
       "height": 720,
       "bytes": 93928
     }
+  ],
+  "assets/articles/us-gaap-vs-ifrs-archive.jpg": [
+    {
+      "path": "assets/optimized/us-gaap-vs-ifrs-archive-400.webp",
+      "width": 400,
+      "height": 267,
+      "bytes": 13688
+    },
+    {
+      "path": "assets/optimized/us-gaap-vs-ifrs-archive-800.webp",
+      "width": 800,
+      "height": 533,
+      "bytes": 29992
+    },
+    {
+      "path": "assets/optimized/us-gaap-vs-ifrs-archive-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 48112
+    }
+  ],
+  "assets/articles/ifrs18-readiness-archive.jpg": [
+    {
+      "path": "assets/optimized/ifrs18-readiness-archive-400.webp",
+      "width": 400,
+      "height": 267,
+      "bytes": 14044
+    },
+    {
+      "path": "assets/optimized/ifrs18-readiness-archive-800.webp",
+      "width": 800,
+      "height": 533,
+      "bytes": 32124
+    },
+    {
+      "path": "assets/optimized/ifrs18-readiness-archive-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 51186
+    }
+  ],
+  "assets/articles/transfer-pricing-archive.jpg": [
+    {
+      "path": "assets/optimized/transfer-pricing-archive-400.webp",
+      "width": 400,
+      "height": 267,
+      "bytes": 16514
+    },
+    {
+      "path": "assets/optimized/transfer-pricing-archive-800.webp",
+      "width": 800,
+      "height": 533,
+      "bytes": 39326
+    },
+    {
+      "path": "assets/optimized/transfer-pricing-archive-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 67564
+    }
+  ],
+  "assets/articles/corporate-tax-readiness-archive.jpg": [
+    {
+      "path": "assets/optimized/corporate-tax-readiness-archive-400.webp",
+      "width": 400,
+      "height": 267,
+      "bytes": 18456
+    },
+    {
+      "path": "assets/optimized/corporate-tax-readiness-archive-800.webp",
+      "width": 800,
+      "height": 533,
+      "bytes": 52528
+    },
+    {
+      "path": "assets/optimized/corporate-tax-readiness-archive-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 97118
+    }
+  ],
+  "assets/articles/remote-work-cross-border-tax-archive.jpg": [
+    {
+      "path": "assets/optimized/remote-work-cross-border-tax-archive-400.webp",
+      "width": 400,
+      "height": 267,
+      "bytes": 19600
+    },
+    {
+      "path": "assets/optimized/remote-work-cross-border-tax-archive-800.webp",
+      "width": 800,
+      "height": 533,
+      "bytes": 51862
+    },
+    {
+      "path": "assets/optimized/remote-work-cross-border-tax-archive-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 88738
+    }
+  ],
+  "assets/articles/family-foundation-transparency-archive.jpg": [
+    {
+      "path": "assets/optimized/family-foundation-transparency-archive-400.webp",
+      "width": 400,
+      "height": 267,
+      "bytes": 19886
+    },
+    {
+      "path": "assets/optimized/family-foundation-transparency-archive-800.webp",
+      "width": 800,
+      "height": 533,
+      "bytes": 55990
+    },
+    {
+      "path": "assets/optimized/family-foundation-transparency-archive-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 99306
+    }
+  ],
+  "assets/articles/free-zone-substance-archive.jpg": [
+    {
+      "path": "assets/optimized/free-zone-substance-archive-400.webp",
+      "width": 400,
+      "height": 267,
+      "bytes": 17704
+    },
+    {
+      "path": "assets/optimized/free-zone-substance-archive-800.webp",
+      "width": 800,
+      "height": 533,
+      "bytes": 42006
+    },
+    {
+      "path": "assets/optimized/free-zone-substance-archive-1200.webp",
+      "width": 1200,
+      "height": 800,
+      "bytes": 69640
+    }
   ]
 }
