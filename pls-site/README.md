@@ -126,3 +126,8 @@ Confirmed PLS company profiles are held separately in `content/site.json` under 
 Two new PLS articles explain VAT-refund bookkeeping preparation and practical accounting controls that reduce tax-penalty risk. They use current official FTA/Ministry of Finance references, a current publication gate and generic article metadata. They are new website articles, not LinkedIn archive republications. Their accounting workflow focus differs from the corresponding UAE Taxes editions.
 
 Each article uses an approved AI-generated illustrative cover, with an unchanged JPEG and a full-resolution WebP format variant. The body and original-cover hashes are validated by the normal builder. Both articles link to the existing accounting service; the refund checklist also links to VAT review support. The original eleven article bodies, dates and release metadata are preserved.
+
+
+### Professional identity verification — 5 November 2026
+
+The FTA’s public Registered Tax Agents directory was checked for “Helwani” on 5 November 2026. It lists Ahmad Abdulmomen Helwani, TAAN 20004461, with Bonnard Lawson (Dubai Branch), Dubai. The public profile explains how to find this record; the person graph records the full-name alias and professional TAAN. These fields describe Dr. Ahmad’s individual professional identity and do not identify PLS as a registered tax agency. No expiry or renewal date is asserted.
