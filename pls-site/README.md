@@ -112,3 +112,22 @@ These are expanded, technically reviewed website editions. Their bylines label t
 The owner excluded e-invoicing from this batch; CapEx/OpEx and VAT Profit Margin were also excluded because those topics already have articles. The seven new covers are AI-generated illustrative editorial photographs, individually generated for their subjects. Alt text and captions identify their illustrative purpose. Original photos were retained in the work package; the deployable site uses optimized JPEGs and responsive WebP variants.
 
 `content/archive-publication.json` records the reviewed copy, official references, original publication evidence and the corresponding UAE Taxes publishing edition. It is source-only and is never copied to the public output. All archive body files retain linked primary sources, hypothetical examples and the current review date. The homepage shows the four latest articles; the article index lists the complete archive.
+
+
+## Accounting service detail — 5 November 2026
+
+The existing accounting and bookkeeping service page now explains recurring deliverables, reporting frequency, onboarding and opening-balance review, adviser handover, catch-up work, quotation factors and practical FAQs. These are agreed-scope descriptions: no fixed prices, submission outcomes or response-time guarantees are implied. The homepage stays concise. Its legal-role wording, address, client logos and gallery behaviour remain unchanged.
+
+Confirmed PLS company profiles are held separately in `content/site.json` under `companyProfiles`, displayed in the global footer and included in the `AccountingService.sameAs` list. These are distinct from Dr. Ahmad Helwani’s personal biography/LinkedIn references. The verified company LinkedIn, Instagram and Facebook profiles are included; TikTok needs exact public profile confirmation before inclusion.
+
+
+## Current VAT refund and accounting-controls articles — 5 November 2026
+
+Two new PLS articles explain VAT-refund bookkeeping preparation and practical accounting controls that reduce tax-penalty risk. They use current official FTA/Ministry of Finance references, a current publication gate and generic article metadata. They are new website articles, not LinkedIn archive republications. Their accounting workflow focus differs from the corresponding UAE Taxes editions.
+
+Each article uses an approved AI-generated illustrative cover, with an unchanged JPEG and a full-resolution WebP format variant. The body and original-cover hashes are validated by the normal builder. Both articles link to the existing accounting service; the refund checklist also links to VAT review support. The original eleven article bodies, dates and release metadata are preserved.
+
+
+### Professional identity verification — 5 November 2026
+
+The FTA’s public Registered Tax Agents directory was checked for “Helwani” on 5 November 2026. It lists Ahmad Abdulmomen Helwani, TAAN 20004461, with Bonnard Lawson (Dubai Branch), Dubai. The public profile explains how to find this record; the person graph records the full-name alias and professional TAAN. These fields describe Dr. Ahmad’s individual professional identity and do not identify PLS as a registered tax agency. No expiry or renewal date is asserted.

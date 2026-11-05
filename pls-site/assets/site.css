@@ -55,3 +55,6 @@
 @media(max-width:1000px){.profile-hero-grid{grid-template-columns:minmax(0,1fr) 280px;gap:36px}}
 @media(max-width:800px){.profile-hero-grid{grid-template-columns:1fr;gap:30px}.profile-hero-portrait{max-width:280px;justify-self:start}}
 @media(max-width:550px){.profile-hero-portrait{max-width:260px}}
+
+/* Confirmed PLS company profiles, separate from the adviser biography. */
+.footer-social{display:flex;align-items:center;flex-wrap:wrap;gap:12px 20px;margin:0 0 25px;font-size:12px}.footer-social span{color:var(--muted)}.footer-social a{color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:3px}

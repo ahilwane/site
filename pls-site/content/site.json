@@ -328,5 +328,19 @@
       "logoWidth": 379,
       "logoHeight": 246
     }
+  ],
+  "companyProfiles": [
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/company/prime-ledger-solution-for-accounting-services/"
+    },
+    {
+      "label": "Instagram",
+      "url": "https://www.instagram.com/pls_accounting/"
+    },
+    {
+      "label": "Facebook",
+      "url": "https://www.facebook.com/profile.php?id=61595855833178"
+    }
   ]
 }
