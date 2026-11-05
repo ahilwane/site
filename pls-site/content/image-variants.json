@@ -222,5 +222,21 @@
       "height": 800,
       "bytes": 69640
     }
+  ],
+  "assets/articles/vat-refund-uae-2026.jpg": [
+    {
+      "path": "assets/optimized/vat-refund-uae-2026-1254.webp",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 128220
+    }
+  ],
+  "assets/articles/avoid-uae-tax-penalties-2026.jpg": [
+    {
+      "path": "assets/optimized/avoid-uae-tax-penalties-2026-1254.webp",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 116648
+    }
   ]
 }
