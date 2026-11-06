@@ -58,3 +58,53 @@
 
 /* Confirmed PLS company profiles, separate from the adviser biography. */
 .footer-social{display:flex;align-items:center;flex-wrap:wrap;gap:12px 20px;margin:0 0 25px;font-size:12px}.footer-social span{color:var(--muted)}.footer-social a{color:var(--blue);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
+/* FTA Tax Agent landing page: clear service scope and direct enquiries. */
+.fta-hero{padding:28px 0 64px;background:linear-gradient(125deg,#fff 24%,#f0f3fc)}
+.fta-hero .breadcrumbs{margin-bottom:32px}
+.fta-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:78px;align-items:center}
+.fta-hero-copy h1{font-size:clamp(44px,4.8vw,66px);line-height:1.08;color:var(--blue);letter-spacing:-.055em;margin-bottom:25px}
+.fta-hero-copy .eyebrow{margin-bottom:20px}
+.fta-lead{font-size:21px;line-height:1.5;max-width:600px;color:var(--ink);margin-bottom:21px}
+.fta-role{font-size:15px;line-height:1.8;color:var(--muted);max-width:600px;margin-bottom:28px}
+.fta-role strong{font-weight:600;color:var(--ink)}
+.fta-trust-list{display:flex;align-items:center;flex-wrap:wrap;gap:12px 22px;list-style:none;margin:27px 0 0;padding:0;color:var(--muted);font-size:11px}
+.fta-trust-list li{display:flex;align-items:center;gap:7px}.fta-trust-list svg{width:16px;height:16px;color:var(--blue)}
+.fta-adviser-card{width:100%;border:1px solid #d8dff2;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 18px 45px #25317c12}
+.fta-portrait{background:#edf0f5}.fta-portrait img{width:100%;height:auto}
+.fta-adviser-card:hover .adviser-portrait,.fta-adviser-card:focus-within .adviser-portrait{filter:none}
+.fta-adviser-caption{padding:22px 24px}.fta-adviser-caption h2{font-size:25px;letter-spacing:-.035em;margin:0 0 10px;color:var(--blue)}
+.fta-adviser-caption p{font-size:12px;line-height:1.8;color:var(--muted);margin-bottom:16px}
+.fta-adviser-caption .text-link{font-size:12px}
+.fta-section-nav{border-block:1px solid var(--line);background:#fff}.fta-section-nav .wrap{display:flex;justify-content:space-between;gap:20px;overflow-x:auto;padding-block:19px}
+.fta-section-nav a{white-space:nowrap;font-size:12px;font-weight:600;color:var(--ink)}.fta-section-nav a:last-child{color:var(--blue)}
+.fta-service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.fta-service-card{padding:30px 32px 25px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.fta-service-card .service-icon{display:inline-flex;margin-bottom:22px}
+.fta-service-card h3{font-size:25px;line-height:1.25;margin-bottom:13px;letter-spacing:-.035em}
+.fta-service-card>p{color:var(--muted);font-size:14px;line-height:1.8;max-width:400px;margin-bottom:21px}
+.fta-service-card ul{padding:20px 0 0 18px;margin:0;border-top:1px solid var(--line)}
+.fta-service-card li{font-size:13px;line-height:1.8;color:var(--muted);padding-left:3px;margin-bottom:10px}
+.fta-service-card li:last-child{margin-bottom:0}.fta-service-card li::marker{color:var(--blue)}
+.fta-scope-note{margin:25px 0 0;padding-left:18px;border-left:3px solid #cbd2eb;font-size:12px;line-height:1.9;color:var(--muted);max-width:1000px}
+.fta-deliverables{background:var(--paper);border-block:1px solid var(--line)}
+.fta-detail-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:85px;align-items:start}
+.fta-detail-grid>div>p:not(.eyebrow){font-size:15px;line-height:1.85;color:var(--muted);max-width:620px}
+.fta-checklist{list-style:none;padding:0;margin:25px 0 0}.fta-checklist li{position:relative;padding:0 0 0 24px;margin:0 0 14px;font-size:14px;line-height:1.8}
+.fta-checklist li::before{content:"";position:absolute;left:2px;top:7px;width:6px;height:11px;border-right:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(45deg)}
+.fta-records,.fta-verification{padding:32px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.fta-records .eyebrow,.fta-verification .eyebrow{margin-bottom:17px}.fta-records h3,.fta-verification h3{font-size:26px;line-height:1.2;margin-bottom:20px}
+.fta-records>p:not(.eyebrow),.fta-verification>p:not(.eyebrow){color:var(--muted);font-size:13px;line-height:1.85}
+.fta-records .text-link{margin-top:9px}.fta-process-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:29px}
+.fta-process-grid article{border-top:2px solid var(--line);padding-top:25px}.fta-process-grid h3{font-size:20px;line-height:1.25;margin-bottom:15px}.fta-process-grid p{font-size:13px;color:var(--muted);line-height:1.8}
+.fta-credentials{border-block:1px solid var(--line);background:linear-gradient(120deg,#fff,#f4f6fc)}
+.fta-verification dl{margin:0 0 20px}.fta-verification dl>div{padding:13px 0;border-bottom:1px solid var(--line)}
+.fta-verification dt{font-size:10px;text-transform:uppercase;letter-spacing:.09em;font-weight:600;color:var(--muted);margin-bottom:5px}
+.fta-verification dd{font-size:14px;line-height:1.6;margin:0;font-weight:600}
+.fta-verification .fta-verification-note{font-size:11px!important;margin:20px 0 0;padding-top:17px;border-top:1px solid var(--line)}
+.fta-faq summary{font-size:15px;line-height:1.5}.fta-faq details p{font-size:14px;line-height:1.85}
+.fta-contact .contact-box p{font-size:13px;line-height:1.9}.fta-contact .fta-contact-scope{font-size:12px;color:#dce2ff;margin-top:24px}
+@media(max-width:1000px){.fta-hero-grid{gap:45px;grid-template-columns:minmax(0,1fr) 280px}.fta-hero-copy h1{font-size:52px}.fta-detail-grid{gap:45px}.fta-process-grid{gap:20px}.fta-service-card{padding:28px}}
+@media(max-width:800px){.fta-hero{padding:26px 0 45px}.fta-hero-grid{grid-template-columns:minmax(0,1fr) 240px;gap:30px}.fta-hero-copy h1{font-size:43px}.fta-lead{font-size:18px}.fta-role{font-size:14px}.fta-trust-list{gap:10px 16px}.fta-adviser-caption{padding:20px}.fta-adviser-caption h2{font-size:22px}.fta-service-grid{gap:17px}.fta-service-card{padding:25px}.fta-service-card h3{font-size:23px}.fta-detail-grid{grid-template-columns:1fr;gap:30px}.fta-records,.fta-verification{max-width:650px}.fta-process-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}.fta-section-nav .wrap{gap:25px;justify-content:flex-start}.fta-detail-grid h2{font-size:34px}}
+@media(max-width:550px){.fta-hero .breadcrumbs{margin-bottom:27px}.fta-hero-grid{grid-template-columns:1fr;gap:30px}.fta-hero-copy h1{font-size:43px}.fta-lead{font-size:19px}.fta-role{font-size:14px}.fta-hero .button-row{align-items:stretch}.fta-hero .button-row .button{flex:1 1 auto}.fta-trust-list{font-size:10px;gap:10px 17px;margin-top:23px}.fta-adviser-card{display:grid;grid-template-columns:110px minmax(0,1fr);max-width:460px;border-radius:9px;align-items:center;box-shadow:0 9px 25px #25317c0c}.fta-portrait{align-self:stretch}.fta-portrait img{height:100%;object-fit:cover;object-position:center top}.fta-adviser-caption{padding:17px 18px}.fta-adviser-caption h2{font-size:21px;margin-bottom:9px}.fta-adviser-caption p{font-size:10px;line-height:1.7;margin-bottom:10px}.fta-adviser-caption .text-link{font-size:10px;gap:7px}.fta-adviser-caption svg{width:14px;height:14px}.fta-service-grid{grid-template-columns:1fr;gap:18px}.fta-service-card{padding:26px}.fta-service-card h3{font-size:24px}.fta-service-card li{font-size:14px}.fta-service-card>p{font-size:14px}.fta-service-card .service-icon{margin-bottom:20px}.fta-scope-note{font-size:11px;padding-left:14px;margin-top:24px}.fta-records,.fta-verification{padding:26px}.fta-process-grid{gap:27px 22px}.fta-process-grid h3{font-size:19px}.fta-process-grid p{font-size:13px}.fta-faq summary{font-size:14px}.fta-faq details p{font-size:13px}.fta-detail-grid h2{font-size:32px}.fta-contact .email-link{font-size:25px}.fta-contact .contact-box{padding-top:26px}}
+@media(max-width:370px){.fta-hero-copy h1{font-size:38px}.fta-adviser-card{grid-template-columns:94px minmax(0,1fr)}.fta-adviser-caption{padding:14px}.fta-adviser-caption h2{font-size:19px}.fta-process-grid{grid-template-columns:1fr}.fta-service-card{padding:24px}.fta-trust-list{gap:10px 13px}}
