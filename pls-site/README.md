@@ -131,3 +131,11 @@ Each article uses an approved AI-generated illustrative cover, with an unchanged
 ### Professional identity verification — 5 November 2026
 
 The FTA’s public Registered Tax Agents directory was checked for “Helwani” on 5 November 2026. It lists Ahmad Abdulmomen Helwani, TAAN 20004461, with Bonnard Lawson (Dubai Branch), Dubai. The public profile explains how to find this record; the person graph records the full-name alias and professional TAAN. These fields describe Dr. Ahmad’s individual professional identity and do not identify PLS as a registered tax agency. No expiry or renewal date is asserted.
+
+### FTA Tax Agent landing page — 6 November 2026
+
+`/fta-tax-agent/` is a dedicated tax-services landing page for search enquiries. It contains original service copy covering VAT, Corporate Tax, FTA correspondence and focused specialist advice, followed by deliverables, process, professional verification, FAQs and direct phone/email actions. The page uses the approved homepage portrait and its responsive WebP variants; it includes no client-logo carousel, new form backend or third-party advertising tag.
+
+Dr. Ahmad Helwani’s personal FTA tax-agent role is attributed to Bonnard Lawson Dubai in the hero and service scope. PLS accounting support is distinguished from formal tax-agent work. The service structured data identifies Dr. Ahmad as provider, with the existing professional affiliation; it does not identify PLS as a registered tax agency. Visible verification information matches the existing profile, including the 5 November directory-check date and TAAN 20004461.
+
+The page is linked from the Services menu, footer and homepage specialist-tax section and is included in the sitemap with its approved portrait. Its metadata, visible FAQs and schema are generated together. Existing service URLs, article publication gates, business contacts and location details remain unchanged. Page publication does not itself activate a paid advertising campaign or conversion tracking.
