@@ -23,7 +23,8 @@ SERVICE_LINKS = (
 
 # Record substantial page changes; shared navigation updates do not refresh dates.
 SERVICE_MODIFIED = {
-    '/fta-tax-agent/': '2026-11-06',
+    '/fta-tax-agent/': '2026-11-11',
+    '/ar/fta-tax-agent/': '2026-11-11',
     '/services/accounting-bookkeeping-dubai/': '2026-11-05',
     '/services/corporate-tax-dubai/': '2026-10-29',
     '/services/vat-reviews-dubai/': '2026-10-29',
@@ -32,6 +33,7 @@ SERVICE_MODIFIED = {
 
 HOME_PORTRAIT_SIZES = '(max-width: 380px) calc(100vw - 40px), (max-width: 800px) 340px, 360px'
 PROFILE_PORTRAIT_SIZES = '(max-width: 550px) 260px, (max-width: 1000px) 280px, 300px'
+TAX_AGENT_ALTERNATES = {'en': '/fta-tax-agent/', 'ar': '/ar/fta-tax-agent/', 'x-default': '/fta-tax-agent/'}
 ARTICLE_CARD_SIZES = '(max-width: 800px) calc(100vw - 40px), 374px'
 ARTICLE_FEATURED_SIZES = '(max-width: 800px) calc(100vw - 40px), 600px'
 ARTICLE_COVER_SIZES = '(max-width: 800px) calc(100vw - 40px), (max-width: 1034px) calc(100vw - 64px), 970px'
@@ -199,7 +201,21 @@ class Builder:
             "sameAs": [self.site["links"]["biography"], self.site["links"]["linkedin"]],
         }
 
-    def header(self, active):
+    def header(self, active, lang='en'):
+        if lang == 'ar':
+            service_menu = ''.join(f'<a href="{h(path)}" hreflang="en">{h(label)}</a>' for path, label in (
+                ('/ar/fta-tax-agent/', 'الوكيل الضريبي'),
+                ('/services/accounting-bookkeeping-dubai/', 'المحاسبة ومسك الدفاتر'),
+                ('/services/corporate-tax-dubai/', 'ضريبة الشركات'),
+                ('/services/vat-reviews-dubai/', 'ضريبة القيمة المضافة'),
+                ('/services/zoho-books-e-invoicing-uae/', 'زوهو والفوترة الإلكترونية')))
+            service_menu = service_menu.replace('href="/ar/fta-tax-agent/" hreflang="en"', 'href="/ar/fta-tax-agent/" aria-current="page"')
+            return f'''<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<header class="site-header"><div class="wrap nav-wrap">
+<a class="brand" href="/" aria-label="الصفحة الرئيسية لـ PLS Accounting"><img src="/assets/pls-logo-compact.jpg" width="569" height="154" alt="PLS Accounting"></a>
+<button class="nav-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="افتح قائمة التنقل">{icon('menu')}</button>
+<nav class="nav" id="site-navigation" aria-label="التنقل الرئيسي"><details class="service-nav service-nav-current"><summary>الخدمات</summary><div class="service-nav-menu"><a href="/#services" hreflang="en">جميع الخدمات</a>{service_menu}</div></details><a href="/ahmad-helwani/" hreflang="en">د. أحمد حلواني</a><a href="/articles/" hreflang="en">المقالات</a><a href="/fta-tax-agent/" lang="en" hreflang="en">English</a><a class="nav-contact" href="#tax-enquiry">تواصل معنا</a></nav>
+</div></header>'''
         profile_current = ' aria-current="page"' if active == "profile" else ""
         articles_current = ' aria-current="page"' if active == "articles" else ""
         service_menu = ''.join(f'<a href="{h(path)}">{h(label)}</a>' for path, label, _ in SERVICE_LINKS)
@@ -211,7 +227,13 @@ class Builder:
 <nav class="nav" id="site-navigation" aria-label="Main navigation"><details class="service-nav{services_class}"><summary>Services</summary><div class="service-nav-menu"><a href="/#services">All services</a>{service_menu}</div></details><a href="/ahmad-helwani/"{profile_current}>Dr. Ahmad Helwani</a><a href="/articles/"{articles_current}>Articles</a><a class="nav-contact" href="/#contact">Contact</a></nav>
 </div></header>'''
 
-    def footer(self):
+    def footer(self, lang='en'):
+        if lang == 'ar':
+            clients_link = '<a href="/clients/" hreflang="en">العملاء</a>' if self.site.get('clients') else ''
+            profile_labels = {'LinkedIn': 'لينكدإن', 'Instagram': 'إنستغرام', 'Facebook': 'فيسبوك'}
+            profiles = ''.join(f'<a href="{h(profile["url"])}">{h(profile_labels.get(profile["label"], profile["label"]))}</a>' for profile in self.site.get('companyProfiles', []))
+            social = f'<nav class="footer-social" aria-label="حسابات PLS الرسمية"><span>تابع PLS</span>{profiles}</nav>' if profiles else ''
+            return f'''<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div class="footer-brand"><a href="/" aria-label="الصفحة الرئيسية لـ PLS Accounting"><img src="/assets/pls-logo.png" width="570" height="183" alt="PLS Accounting — Prime Ledger Solution for Accounting Services" loading="lazy"></a></div><nav class="footer-links" aria-label="روابط تذييل الصفحة"><a href="/#services" hreflang="en">الخدمات</a><a href="/ar/fta-tax-agent/">الوكيل الضريبي</a>{clients_link}<a href="/ahmad-helwani/" hreflang="en">د. أحمد حلواني</a><a href="/articles/" hreflang="en">المقالات</a><a href="{h(self.site['links']['taxes'])}">UAE Taxes</a><a href="mailto:{h(self.site['email'])}">راسل PLS</a></nav></div><div class="footer-contact"><p><bdi lang="en">{h(self.site['address']['building'])}</bdi>، دبي، الإمارات العربية المتحدة</p><p><a href="tel:{h(self.site['telephone'])}"><bdi lang="en">{h(self.site['phoneDisplay'])}</bdi></a></p><p>الاثنين–الجمعة، 8 صباحاً–5 مساءً (بتوقيت دبي)</p></div>{social}<div class="footer-base"><p>© {self.at.year} PLS Accounting. جميع الحقوق محفوظة.</p><p lang="en" dir="ltr">Prime Ledger Solution for Accounting Services</p></div></div></footer>'''
         clients_link = '<a href="/clients/">Clients</a>' if self.site.get('clients') else ''
         profiles = ''.join(f'<a href="{h(profile["url"])}">{h(profile["label"])}</a>' for profile in self.site.get('companyProfiles', []))
         social = f'<nav class="footer-social" aria-label="PLS company social profiles"><span>Follow PLS</span>{profiles}</nav>' if profiles else ''
@@ -265,6 +287,8 @@ class Builder:
     def breadcrumb_items(self, path, title):
         if path in {'/', '/404.html'}:
             return []
+        if path == '/ar/fta-tax-agent/':
+            return [('/', 'الرئيسية'), ('/#services', 'الخدمات'), (path, 'وكيل ضريبي في دبي والإمارات')]
         items = [('/', self.site['name'])]
         service_titles = {route: heading for route, _, heading in SERVICE_LINKS}
         if path in service_titles:
@@ -286,7 +310,8 @@ class Builder:
     def breadcrumbs(self, path, title):
         items = self.breadcrumb_items(path, title)
         parts = [f'<a href="{h(route)}">{h(label)}</a>' if index < len(items) - 1 else f'<span aria-current="page">{h(label)}</span>' for index, (route, label) in enumerate(items)]
-        return '<nav class="breadcrumbs" aria-label="Breadcrumb">' + '<span aria-hidden="true">/</span>'.join(parts) + '</nav>'
+        label = 'مسار الصفحة' if path.startswith('/ar/') else 'Breadcrumb'
+        return f'<nav class="breadcrumbs" aria-label="{label}">' + '<span aria-hidden="true">/</span>'.join(parts) + '</nav>'
 
     def breadcrumb_graph(self, path, title):
         return {'@type': 'BreadcrumbList', '@id': self.base + path + '#breadcrumb', 'itemListElement': [
@@ -294,10 +319,12 @@ class Builder:
             for index, (route, label) in enumerate(self.breadcrumb_items(path, title), 1)
         ]}
 
-    def page(self, title, description, path, content, graph=None, active="", image=None, image_alt="PLS Accounting logo", article=False, noindex=False):
+    def page(self, title, description, path, content, graph=None, active="", image=None, image_alt="PLS Accounting logo", article=False, noindex=False, lang='en', alternates=None):
         url = self.base + path
         image = image or self.base + "/assets/pls-logo.png"
         canonical = "" if noindex else f'<link rel="canonical" href="{h(url)}">'
+        alternate_links = ''.join(f'<link rel="alternate" hreflang="{h(language)}" href="{h(self.base + route)}">' for language, route in (alternates or {}).items())
+        direction = ' dir="rtl"' if lang == 'ar' else ''
         robots = '<meta name="robots" content="noindex, follow">' if noindex else '<meta name="robots" content="max-image-preview:large">'
         verification = '<meta name="google-site-verification" content="zUTLfmqYzChhmWgAQjYGrYNKUWl5BHOes7OxhkO8JHI"><meta name="msvalidate.01" content="5369E22398CA740655C138DAD554D86F">' if path == "/" else ""
         graph = [dict(item) for item in (graph or [self.company()])]
@@ -309,11 +336,11 @@ class Builder:
             graph.append(breadcrumb)
         structured = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("<", "\\u003c")
         return f'''<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{h(title)}</title><meta name="description" content="{h(description)}"><meta name="theme-color" content="#303e9d">{canonical}{robots}{verification}
+<html lang="{h(lang)}"{direction}><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{h(title)}</title><meta name="description" content="{h(description)}"><meta name="theme-color" content="#303e9d">{canonical}{alternate_links}{robots}{verification}
 <meta property="og:type" content="{'article' if article else 'website'}"><meta property="og:title" content="{h(title)}"><meta property="og:description" content="{h(description)}"><meta property="og:url" content="{h(url)}"><meta property="og:image" content="{h(image)}"><meta property="og:image:alt" content="{h(image_alt)}"><meta property="og:site_name" content="PLS Accounting"><meta name="twitter:card" content="{'summary_large_image' if article else 'summary'}">
 <link rel="icon" href="/assets/pls-logo.png" type="image/png"><link rel="stylesheet" href="{h(self.asset_urls['site.css'])}"><script src="{h(self.asset_urls['site.js'])}" defer></script>
-<script type="application/ld+json">{structured}</script></head><body>{self.header(active)}<main id="main">{content}</main>{self.footer()}</body></html>\n'''
+<script type="application/ld+json">{structured}</script></head><body>{self.header(active, lang)}<main id="main">{content}</main>{self.footer(lang)}</body></html>\n'''
 
     def faq(self):
         return '<div class="faq">' + "".join(f'<details><summary>{h(item["question"])}</summary><p>{h(item["answer"])}</p></details>' for item in self.site["faq"]) + '</div>'
@@ -396,20 +423,48 @@ class Builder:
         ]
         faq_html = ''.join(f'<details><summary>{h(question)}</summary><p>{h(answer)}</p></details>' for question, answer in faqs)
         portrait = self.responsive_image('assets/ahmad-helwani-home-approved.png', 1122, 1402, 'Dr. Ahmad Helwani, FTA Tax Agent for VAT and Corporate Tax with Bonnard Lawson Dubai', sizes='(max-width: 550px) 240px, 320px', css='adviser-portrait', decoding='async', fetchpriority='high')
-        content = f'''<section class="fta-hero" aria-labelledby="fta-title"><div class="wrap">{self.breadcrumbs(path, 'FTA Tax Agent')}<div class="fta-hero-grid"><div class="fta-hero-copy"><p class="eyebrow">VAT · Corporate Tax · UAE advisory</p><h1 id="fta-title">FTA Tax Agent<br>in Dubai and UAE</h1><p class="fta-lead">Clear advice, organised records and practical next steps for your tax requirements.</p><p class="fta-role"><strong>Dr. Ahmad Helwani</strong> is an FTA Tax Agent for VAT and Corporate Tax with <strong>Bonnard Lawson Dubai</strong>.</p><div class="button-row">{link('tel:'+s['telephone'],'Call '+s['phoneDisplay'],'button')}{link('#tax-enquiry','Discuss your requirements','button secondary')}</div><ul class="fta-trust-list"><li>{icon('check')}TAAN 20004461</li><li>{icon('globe')}English &amp; Arabic</li><li>{icon('document')}Agreed written scope</li></ul></div><aside class="fta-adviser-card" aria-label="Your tax adviser"><div class="fta-portrait">{portrait}</div><div class="fta-adviser-caption"><h2>Dr. Ahmad Helwani</h2><p>FTA Tax Agent · VAT &amp; Corporate Tax<br>Bonnard Lawson Dubai</p><a class="text-link" href="/ahmad-helwani/">View professional profile{icon('arrow')}</a></div></aside></div></div></section>
+        content = f'''<section class="fta-hero" aria-labelledby="fta-title"><div class="wrap">{self.breadcrumbs(path, 'FTA Tax Agent')}<div class="fta-hero-grid"><div class="fta-hero-copy"><p class="eyebrow">VAT · Corporate Tax · UAE advisory</p><p class="language-switch"><a href="/ar/fta-tax-agent/" lang="ar" hreflang="ar" dir="rtl">العربية</a></p><h1 id="fta-title">FTA Tax Agent<br>in Dubai and UAE</h1><p class="fta-lead">Clear advice, organised records and practical next steps for your tax requirements.</p><p class="fta-role"><strong>Dr. Ahmad Helwani</strong> is an FTA Tax Agent for VAT and Corporate Tax with <strong>Bonnard Lawson Dubai</strong>.</p><div class="button-row">{link('tel:'+s['telephone'],'Call '+s['phoneDisplay'],'button')}{link('#tax-enquiry','Discuss your requirements','button secondary')}</div><ul class="fta-trust-list"><li>{icon('check')}TAAN 20004461</li><li>{icon('globe')}English &amp; Arabic</li><li>{icon('document')}Agreed written scope</li></ul></div><aside class="fta-adviser-card" aria-label="Your tax adviser"><div class="fta-portrait">{portrait}</div><div class="fta-adviser-caption"><h2>Dr. Ahmad Helwani</h2><p>FTA Tax Agent · VAT &amp; Corporate Tax<br>Bonnard Lawson Dubai</p><a class="text-link" href="/ahmad-helwani/">View professional profile{icon('arrow')}</a></div></aside></div></div></section>
 <nav class="fta-section-nav" aria-label="On this page"><div class="wrap"><a href="#tax-services">Services</a><a href="#tax-deliverables">What you receive</a><a href="#tax-credentials">Your adviser</a><a href="#tax-questions">Questions</a><a href="#tax-enquiry">Contact</a></div></nav>
 <section class="section" id="tax-services" aria-labelledby="fta-services-title"><div class="wrap"><div class="section-header"><div><p class="eyebrow">Support shaped around your business</p><h2 id="fta-services-title">From a single tax question<br>to ongoing compliance.</h2></div><p>Choose a defined review or discuss registration, return preparation and follow-up support. The work starts with the facts and records available.</p></div><div class="fta-service-grid">{service_cards}</div><p class="fta-scope-note">Tax-agent work and any formal FTA representation are arranged through Bonnard Lawson Dubai under the agreed engagement and required appointment. Accounting, bookkeeping and systems support are provided separately through PLS Accounting.</p></div></section>
 <section class="section fta-deliverables" id="tax-deliverables" aria-labelledby="fta-deliverables-title"><div class="wrap fta-detail-grid"><div><p class="eyebrow">Useful output</p><h2 id="fta-deliverables-title">Know what the work<br>will deliver.</h2><p>The engagement sets out what you receive. Depending on the scope, the completed file may include:</p><ul class="fta-checklist"><li>A written explanation of the issue and evidence reviewed.</li><li>Calculation and reconciliation workings.</li><li>A draft application, return or response for your review.</li><li>Outstanding records and recommended next steps.</li><li>Submission confirmation where filing is included.</li></ul></div><aside class="fta-records"><p class="eyebrow">Before the first discussion</p><h3>Start with the essentials.</h3><p>Business activity and entity details; relevant tax period; the decision or filing involved; and any deadline.</p><p>Useful records may include accounts, a trial balance, tax returns, invoices, contracts and FTA correspondence. Share a brief outline first so the relevant documents can be identified.</p><a class="text-link" href="#tax-enquiry">Discuss the records you have{icon('arrow')}</a></aside></div></section>
 <section class="section" aria-labelledby="fta-process-title"><div class="wrap"><div class="section-header"><div><p class="eyebrow">A clear process</p><h2 id="fta-process-title">From enquiry to an agreed next step.</h2></div></div><div class="fta-process-grid">{process}</div></div></section>
 <section class="section fta-credentials" id="tax-credentials" aria-labelledby="fta-credentials-title"><div class="wrap fta-detail-grid"><div><p class="eyebrow">Professional background</p><h2 id="fta-credentials-title">Experience behind<br>the advice.</h2><p>Dr. Ahmad Helwani has over fifteen years of UAE accounting, finance and tax experience, including healthcare, real estate and industrial businesses. He holds a DBA from SBS Swiss Business School and works in English and Arabic.</p><p>His tax-agent role is with Bonnard Lawson Dubai. As Managing Partner at PLS Accounting, he also supports accounting records, financial reporting and Zoho-based processes.</p><div class="profile-links">{link(s['links']['biography'],'Bonnard Lawson biography',glyph='external')}{link('/ahmad-helwani/','Full professional profile')}</div></div><aside class="fta-verification"><p class="eyebrow">Verify professional status</p><h3>FTA registered tax-agent directory</h3><dl><div><dt>Registered name</dt><dd>Ahmad Abdulmomen Helwani</dd></div><div><dt>TAAN</dt><dd>20004461</dd></div><div><dt>Listed firm</dt><dd>Bonnard Lawson (Dubai Branch)</dd></div></dl><p>Search “Helwani” in the official directory. Reference checked 5 November 2026.</p>{link(s['links']['ftaDirectory'],'Open the FTA directory','text-link','external')}<p class="fta-verification-note">Tax agents provide independent professional services; registration does not imply employment by or affiliation with the FTA.</p></aside></div></section>
 <section class="section faq-section" id="tax-questions" aria-labelledby="fta-faq-title"><div class="wrap faq-grid"><div><p class="eyebrow">Before you get in touch</p><h2 id="fta-faq-title">Your questions,<br>answered.</h2><p>A few practical details about starting an engagement.</p></div><div class="faq fta-faq">{faq_html}</div></div></section>
+<section class="section fta-resources" aria-labelledby="tax-guidance-title"><div class="wrap"><div class="section-header"><div><p class="eyebrow">Explore the issue</p><h2 id="tax-guidance-title">Tax guidance before your enquiry.</h2></div><p>PLS supports your accounting records and service enquiries. UAE Taxes brings together Dr. Ahmad Helwani’s detailed explanations of VAT and Corporate Tax questions.</p></div><div class="fta-resource-links">{link(s['links']['taxArticles'],'UAE Taxes articles and practical guides','button secondary','external')}{link(s['links']['vat'],'VAT guidance on UAE Taxes','text-link','external')}{link(s['links']['corporateTax'],'Corporate Tax guidance on UAE Taxes','text-link','external')}</div></div></section>
 <section class="contact-section fta-contact" id="tax-enquiry" aria-labelledby="fta-contact-title"><div class="wrap contact-grid"><div><p class="eyebrow">Start a conversation</p><h2 id="fta-contact-title">What do you need<br>to resolve?</h2><p>Tell us about your business, the tax question, relevant period and deadline. We will identify the information needed to discuss the scope.</p><p class="fta-contact-scope">Enquiries from Dubai, Abu Dhabi and across the UAE.<br>English and Arabic · Remote consultations available.</p></div><div class="contact-box">{link('mailto:'+s['email']+'?subject=Tax%20agent%20enquiry',s['email'],'email-link','mail')}<p class="contact-phone"><a href="tel:{h(s['telephone'])}">{h(s['phoneDisplay'])}</a></p><p>{h(s['businessHours']['display'])}</p><p>Tax-agent services: Bonnard Lawson Dubai.<br>Accounting and bookkeeping: PLS Accounting.</p></div></div></section>'''
         person_id = self.base + '/ahmad-helwani/#person'
         service_id = self.base + path + '#service'
         service = {'@type': 'Service', '@id': service_id, 'name': 'FTA Tax Agent services — Dr. Ahmad Helwani', 'description': description, 'url': self.base + path, 'provider': {'@id': person_id}, 'serviceType': ['UAE VAT', 'UAE Corporate Tax', 'FTA tax-agent support'], 'areaServed': {'@type': 'Country', 'name': 'United Arab Emirates'}, 'availableLanguage': ['English', 'Arabic']}
         webpage = {'@type': 'WebPage', '@id': self.base + path + '#page', 'name': title, 'url': self.base + path, 'description': description, 'mainEntity': {'@id': service_id}, 'author': {'@id': person_id}, 'dateModified': SERVICE_MODIFIED[path], 'inLanguage': 'en'}
         faq = {'@type': 'FAQPage', '@id': self.base + path + '#questions', 'mainEntity': [{'@type': 'Question', 'name': question, 'acceptedAnswer': {'@type': 'Answer', 'text': answer}} for question, answer in faqs]}
-        return self.page(title, description, path, content, [self.company(), self.person(), service, webpage, faq], active='services', image=self.base+'/assets/ahmad-helwani-home-approved.png', image_alt='Dr. Ahmad Helwani, FTA Tax Agent with Bonnard Lawson Dubai')
+        return self.page(title, description, path, content, [self.company(), self.person(), service, webpage, faq], active='services', image=self.base+'/assets/ahmad-helwani-home-approved.png', image_alt='Dr. Ahmad Helwani, FTA Tax Agent with Bonnard Lawson Dubai', alternates=TAX_AGENT_ALTERNATES)
+
+    def fta_tax_agent_ar_page(self):
+        path = '/ar/fta-tax-agent/'
+        a = json.loads((ROOT / 'content/fta-tax-agent-ar.json').read_text(encoding='utf-8'))
+        s = self.site
+        cards = ''.join(f'''<article class="fta-service-card"><span class="service-icon">{icon(item['icon'])}</span><h3>{h(item['title'])}</h3><p>{h(item['intro'])}</p><ul>{''.join(f'<li>{h(text)}</li>' for text in item['items'])}</ul></article>''' for item in a['services'])
+        process = ''.join(f'<article><h3>{h(item["title"])}</h3><p>{h(item["text"])}</p></article>' for item in a['steps'])
+        faq_html = ''.join(f'<details><summary>{h(item["question"])}</summary><p>{h(item["answer"])}</p></details>' for item in a['faqs'])
+        deliverables = ''.join(f'<li>{h(text)}</li>' for text in a['deliverables'])
+        portrait = self.responsive_image('assets/ahmad-helwani-home-approved.png', 1122, 1402, 'د. أحمد حلواني، وكيل ضريبي لدى بونارد لوسون دبي لضريبة القيمة المضافة وضريبة الشركات', sizes='(max-width: 550px) 240px, 320px', css='adviser-portrait', decoding='async', fetchpriority='high')
+        content = f'''<section class="fta-hero" aria-labelledby="fta-title"><div class="wrap">{self.breadcrumbs(path, a['title'])}<div class="fta-hero-grid"><div class="fta-hero-copy"><p class="eyebrow">ضريبة القيمة المضافة · ضريبة الشركات · العربية والإنجليزية</p><p class="language-switch"><a href="/fta-tax-agent/" lang="en" hreflang="en">English</a></p><h1 id="fta-title">وكيل ضريبي<br>في دبي والإمارات</h1><p class="fta-lead">{h(a['lead'])}</p><p class="fta-role">{h(a['introduction'])}</p><div class="button-row">{link('tel:'+s['telephone'],'اتصل بنا','button')}{link('#tax-enquiry','ناقش متطلبات شركتك','button secondary')}</div><ul class="fta-trust-list"><li>{icon('check')}<bdi lang="en">TAAN 20004461</bdi></li><li>{icon('globe')}العربية والإنجليزية</li><li>{icon('document')}نطاق عمل مكتوب</li></ul></div><aside class="fta-adviser-card" aria-label="مستشارك الضريبي"><div class="fta-portrait">{portrait}</div><div class="fta-adviser-caption"><h2>د. أحمد حلواني</h2><p>وكيل ضريبي · القيمة المضافة وضريبة الشركات<br>بونارد لوسون دبي</p>{link('/ahmad-helwani/','الملف المهني')}</div></aside></div></div></section>
+<nav class="fta-section-nav" aria-label="محتويات الصفحة"><div class="wrap"><a href="#tax-services">الخدمات</a><a href="#tax-deliverables">المخرجات</a><a href="#tax-credentials">الخلفية المهنية</a><a href="#tax-questions">أسئلة شائعة</a><a href="#tax-enquiry">التواصل</a></div></nav>
+<section class="section" id="tax-services" aria-labelledby="fta-services-title"><div class="wrap"><div class="section-header"><div><p class="eyebrow">دعم يناسب نشاطك</p><h2 id="fta-services-title">من سؤال ضريبي محدد<br>إلى دعم مستمر.</h2></div><p>نحدّد العمل المطلوب بعد فهم النشاط والفترة الضريبية والسجلات المتاحة، سواء كانت لديك مسألة محددة أو تحتاج إلى دعم في الإقرارات.</p></div><div class="fta-service-grid">{cards}</div><p class="fta-scope-note">تُرتّب خدمات الوكيل الضريبي وأي تمثيل رسمي أمام الهيئة من خلال بونارد لوسون دبي، وفق نطاق التكليف ومتطلبات التعيين. وتُقدّم خدمات المحاسبة ومسك الدفاتر ودعم الأنظمة بصورة منفصلة من خلال <bdi lang="en">PLS Accounting</bdi>.</p></div></section>
+<section class="section fta-deliverables" id="tax-deliverables" aria-labelledby="fta-deliverables-title"><div class="wrap fta-detail-grid"><div><p class="eyebrow">مخرجات عملية</p><h2 id="fta-deliverables-title">اعرف ما ستحصل عليه.</h2><p>يحدّد التكليف المخرجات المتفق عليها. وبحسب نطاق العمل، قد يشمل الملف:</p><ul class="fta-checklist">{deliverables}</ul></div><aside class="fta-records"><p class="eyebrow">قبل المناقشة الأولى</p><h3>ابدأ بالمعلومات الأساسية.</h3><p>النشاط وبيانات المنشأة، والفترة المعنية، والسؤال أو الإقرار المطلوب، وأي موعد قريب.</p><p>قد تشمل المستندات الحسابات وميزان المراجعة والإقرارات والفواتير والعقود ومراسلات الهيئة. أرسل ملخصاً أولاً لتحديد السجلات المطلوبة.</p>{link('#tax-enquiry','ناقش المستندات المتاحة')}</aside></div></section>
+<section class="section" aria-labelledby="fta-process-title"><div class="wrap"><div class="section-header"><div><p class="eyebrow">طريقة عمل واضحة</p><h2 id="fta-process-title">من الاستفسار إلى الخطوة التالية.</h2></div></div><div class="fta-process-grid">{process}</div></div></section>
+<section class="section fta-credentials" id="tax-credentials" aria-labelledby="fta-credentials-title"><div class="wrap fta-detail-grid"><div><p class="eyebrow">الخلفية المهنية</p><h2 id="fta-credentials-title">خبرة تدعم المراجعة.</h2><p>تشمل خبرة د. أحمد حلواني أكثر من خمسة عشر عاماً في المحاسبة والتمويل والضرائب في الإمارات، والعمل مع قطاعات منها الرعاية الصحية والعقارات والصناعة. ويحمل دكتوراه في إدارة الأعمال من <bdi lang="en">SBS Swiss Business School</bdi>.</p><p>يعمل وكيلاً ضريبياً مع بونارد لوسون دبي. وبصفته الشريك الإداري لدى <bdi lang="en">PLS Accounting</bdi>، يدعم أيضاً السجلات المحاسبية والتقارير المالية وعمليات زوهو.</p><div class="profile-links">{link(s['links']['biography'],'السيرة المهنية لدى بونارد لوسون',glyph='external')}{link('/ahmad-helwani/','الملف المهني الكامل')}</div></div><aside class="fta-verification"><p class="eyebrow">التحقق من القيد</p><h3>دليل الوكلاء الضريبيين لدى الهيئة</h3><dl><div><dt>الاسم المسجّل</dt><dd><bdi lang="en">Ahmad Abdulmomen Helwani</bdi></dd></div><div><dt>رقم الوكيل الضريبي</dt><dd><bdi lang="en">TAAN 20004461</bdi></dd></div><div><dt>الجهة المدرجة</dt><dd><bdi lang="en">Bonnard Lawson (Dubai Branch)</bdi></dd></div></dl><p>ابحث عن <bdi lang="en">Helwani</bdi> في الدليل الرسمي وافتح النتيجة المطابقة. تاريخ التحقق المرجعي: 5 نوفمبر 2026.</p>{link(s['links']['ftaDirectory'],'افتح دليل الهيئة','text-link','external')}<p class="fta-verification-note">التسجيل المهني لا يعني أن الوكيل موظف لدى الهيئة أو تابع لها.</p></aside></div></section>
+<section class="section faq-section" id="tax-questions" aria-labelledby="fta-faq-title"><div class="wrap faq-grid"><div><p class="eyebrow">قبل التواصل</p><h2 id="fta-faq-title">أسئلة شائعة.</h2><p>معلومات عملية لبدء مناقشة نطاق العمل.</p></div><div class="faq fta-faq">{faq_html}</div></div></section>
+<section class="section fta-resources" aria-labelledby="tax-guidance-title"><div class="wrap"><div class="section-header"><div><p class="eyebrow">تعرّف إلى الموضوع</p><h2 id="tax-guidance-title">شروحات تساعدك على تحديد السؤال.</h2></div><p>تدعم PLS السجلات المحاسبية والاستفسارات عن الخدمات. ويضم موقع <bdi lang="en">UAE Taxes</bdi> شروحات د. أحمد حلواني المفصّلة لمسائل ضريبة القيمة المضافة وضريبة الشركات.</p></div><div class="fta-resource-links">{link(s['links']['taxArticles'],'مقالات وشروحات UAE Taxes','button secondary','external')}{link(s['links']['vat'],'موضوعات ضريبة القيمة المضافة','text-link','external')}{link(s['links']['corporateTax'],'موضوعات ضريبة الشركات','text-link','external')}</div></div></section>
+<section class="contact-section fta-contact" id="tax-enquiry" aria-labelledby="fta-contact-title"><div class="wrap contact-grid"><div><p class="eyebrow">لنبدأ بالمناقشة</p><h2 id="fta-contact-title">ما الذي تحتاج إلى بحثه؟</h2><p>أرسل وصفاً مختصراً للنشاط، والسؤال الضريبي، والفترة المعنية، وأي موعد قريب. سنتواصل لتحديد المعلومات اللازمة لمناقشة نطاق العمل.</p><p class="fta-contact-scope">نرحّب بالاستفسارات من دبي وأبوظبي ومختلف إمارات الدولة.<br>العربية والإنجليزية · إمكانية تنسيق العمل عن بُعد.</p></div><div class="contact-box"><a class="email-link" href="mailto:{h(s['email'])}"><bdi lang="en">{h(s['email'])}</bdi>{icon('mail')}</a><p class="contact-phone"><a href="tel:{h(s['telephone'])}"><bdi lang="en">{h(s['phoneDisplay'])}</bdi></a></p><p>الاثنين–الجمعة، 8 صباحاً–5 مساءً (بتوقيت دبي)</p><p>خدمات الوكيل الضريبي: بونارد لوسون دبي.<br>المحاسبة ومسك الدفاتر: <bdi lang="en">PLS Accounting</bdi>.</p></div></div></section>'''
+        person = self.person()
+        person.update({'name': 'د. أحمد حلواني', 'alternateName': ['Dr. Ahmad Helwani', 'Ahmad Abdulmomen Helwani'], 'jobTitle': 'الشريك الإداري', 'description': a['introduction']})
+        person_id = person['@id']
+        service_id = self.base + path + '#service'
+        service = {'@type': 'Service', '@id': service_id, 'name': 'خدمات الوكيل الضريبي — د. أحمد حلواني', 'description': a['description'], 'url': self.base + path, 'provider': {'@id': person_id}, 'serviceType': ['ضريبة القيمة المضافة في الإمارات', 'ضريبة الشركات في الإمارات', 'خدمات الوكيل الضريبي'], 'areaServed': {'@type': 'Country', 'name': 'United Arab Emirates'}, 'availableLanguage': ['Arabic', 'English']}
+        webpage = {'@type': 'WebPage', '@id': self.base + path + '#page', 'name': a['title'], 'url': self.base + path, 'description': a['description'], 'mainEntity': {'@id': service_id}, 'author': {'@id': person_id}, 'dateModified': SERVICE_MODIFIED[path], 'inLanguage': 'ar'}
+        faq = {'@type': 'FAQPage', '@id': self.base + path + '#questions', 'inLanguage': 'ar', 'mainEntity': [{'@type': 'Question', 'name': item['question'], 'acceptedAnswer': {'@type': 'Answer', 'text': item['answer']}} for item in a['faqs']]}
+        return self.page(a['title'], a['description'], path, content, [self.company(), person, service, webpage, faq], active='services', image=self.base+'/assets/ahmad-helwani-home-approved.png', image_alt='د. أحمد حلواني، وكيل ضريبي لدى بونارد لوسون دبي', lang='ar', alternates=TAX_AGENT_ALTERNATES)
 
     def service_page(self, path, title, description, lead, body, enquiry_hint, service_types):
         related = ''.join(f'<li>{link(other_path, other_title)}</li>' for other_path, _, other_title in SERVICE_LINKS if other_path != path)
@@ -538,6 +593,7 @@ class Builder:
                 shutil.copy2(ROOT / logo, target)
         pages={'index.html':self.home(),'ahmad-helwani/index.html':self.profile(),'articles/index.html':self.article_index(),'404.html':self.not_found(),
                'fta-tax-agent/index.html':self.fta_tax_agent_page(),
+               'ar/fta-tax-agent/index.html':self.fta_tax_agent_ar_page(),
                'services/accounting-bookkeeping-dubai/index.html':self.accounting_service(),
                'services/corporate-tax-dubai/index.html':self.corporate_tax_service(),
                'services/vat-reviews-dubai/index.html':self.vat_review_service(),
@@ -566,12 +622,14 @@ class Builder:
             destination.parent.mkdir(parents=True,exist_ok=True)
             destination.write_text(html,encoding='utf-8')
         locations=[('/',None),('/ahmad-helwani/',None),('/articles/',None)]+[(path,SERVICE_MODIFIED[path]) for path,_,_ in SERVICE_LINKS]+[(f'/articles/{a["slug"]}/',parse_time(a.get('dateModified',published_time(a).isoformat())).date().isoformat()) for a in self.articles]
+        locations.append(('/ar/fta-tax-agent/', SERVICE_MODIFIED['/ar/fta-tax-agent/']))
         if self.site.get('clients'):
             locations.append(('/clients/', '2026-10-30'))
         page_images = {
             '/': ['assets/ahmad-helwani-home-approved.png'],
             '/ahmad-helwani/': ['assets/ahmad-helwani-profile-approved.png'],
             '/fta-tax-agent/': ['assets/ahmad-helwani-home-approved.png'],
+            '/ar/fta-tax-agent/': ['assets/ahmad-helwani-home-approved.png'],
             **{f'/articles/{article["slug"]}/': [article['coverImage']] for article in self.articles},
         }
         if self.site.get('clients'):

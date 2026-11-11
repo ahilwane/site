@@ -108,3 +108,32 @@
 @media(max-width:800px){.fta-hero{padding:26px 0 45px}.fta-hero-grid{grid-template-columns:minmax(0,1fr) 240px;gap:30px}.fta-hero-copy h1{font-size:43px}.fta-lead{font-size:18px}.fta-role{font-size:14px}.fta-trust-list{gap:10px 16px}.fta-adviser-caption{padding:20px}.fta-adviser-caption h2{font-size:22px}.fta-service-grid{gap:17px}.fta-service-card{padding:25px}.fta-service-card h3{font-size:23px}.fta-detail-grid{grid-template-columns:1fr;gap:30px}.fta-records,.fta-verification{max-width:650px}.fta-process-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}.fta-section-nav .wrap{gap:25px;justify-content:flex-start}.fta-detail-grid h2{font-size:34px}}
 @media(max-width:550px){.fta-hero .breadcrumbs{margin-bottom:27px}.fta-hero-grid{grid-template-columns:1fr;gap:30px}.fta-hero-copy h1{font-size:43px}.fta-lead{font-size:19px}.fta-role{font-size:14px}.fta-hero .button-row{align-items:stretch}.fta-hero .button-row .button{flex:1 1 auto}.fta-trust-list{font-size:10px;gap:10px 17px;margin-top:23px}.fta-adviser-card{display:grid;grid-template-columns:110px minmax(0,1fr);max-width:460px;border-radius:9px;align-items:center;box-shadow:0 9px 25px #25317c0c}.fta-portrait{align-self:stretch}.fta-portrait img{height:100%;object-fit:cover;object-position:center top}.fta-adviser-caption{padding:17px 18px}.fta-adviser-caption h2{font-size:21px;margin-bottom:9px}.fta-adviser-caption p{font-size:10px;line-height:1.7;margin-bottom:10px}.fta-adviser-caption .text-link{font-size:10px;gap:7px}.fta-adviser-caption svg{width:14px;height:14px}.fta-service-grid{grid-template-columns:1fr;gap:18px}.fta-service-card{padding:26px}.fta-service-card h3{font-size:24px}.fta-service-card li{font-size:14px}.fta-service-card>p{font-size:14px}.fta-service-card .service-icon{margin-bottom:20px}.fta-scope-note{font-size:11px;padding-left:14px;margin-top:24px}.fta-records,.fta-verification{padding:26px}.fta-process-grid{gap:27px 22px}.fta-process-grid h3{font-size:19px}.fta-process-grid p{font-size:13px}.fta-faq summary{font-size:14px}.fta-faq details p{font-size:13px}.fta-detail-grid h2{font-size:32px}.fta-contact .email-link{font-size:25px}.fta-contact .contact-box{padding-top:26px}}
 @media(max-width:370px){.fta-hero-copy h1{font-size:38px}.fta-adviser-card{grid-template-columns:94px minmax(0,1fr)}.fta-adviser-caption{padding:14px}.fta-adviser-caption h2{font-size:19px}.fta-process-grid{grid-template-columns:1fr}.fta-service-card{padding:24px}.fta-trust-list{gap:10px 13px}}
+
+/* Tax-agent language counterparts share the existing brand and page hierarchy. */
+.language-switch{margin:0 0 18px;font-size:13px;font-weight:600}.language-switch a{text-decoration:underline;text-underline-offset:4px}
+.fta-resource-links{display:flex;align-items:center;flex-wrap:wrap;gap:20px 28px}
+html[dir="rtl"] body{font-family:Tahoma,Arial,sans-serif;line-height:1.9}
+html[dir="rtl"] h1,html[dir="rtl"] h2,html[dir="rtl"] h3,html[dir="rtl"] .eyebrow{letter-spacing:normal;line-height:1.5}
+html[dir="rtl"] .eyebrow{font-size:12px}
+html[dir="rtl"] .skip{left:auto;right:20px}
+html[dir="rtl"] .service-nav-menu{left:auto;right:-15px}
+html[dir="rtl"] .fta-hero-copy h1{font-size:clamp(39px,4.2vw,58px);line-height:1.45;margin-bottom:22px}
+html[dir="rtl"] .fta-role,html[dir="rtl"] .fta-lead{line-height:1.95}
+html[dir="rtl"] .fta-service-card h3{font-size:24px;line-height:1.6}
+html[dir="rtl"] .fta-service-card ul{padding-left:0;padding-right:18px}
+html[dir="rtl"] .fta-service-card li{padding-left:0;padding-right:3px;line-height:2}
+html[dir="rtl"] .fta-scope-note{padding-left:0;padding-right:18px;border-left:0;border-right:3px solid #cbd2eb}
+html[dir="rtl"] .fta-checklist li{padding-left:0;padding-right:24px}
+html[dir="rtl"] .fta-checklist li::before{left:auto;right:2px}
+html[dir="rtl"] .fta-adviser-caption h2{line-height:1.6}
+html[dir="rtl"] .fta-process-grid h3{line-height:1.6}
+html[dir="rtl"] .contact-box{padding-left:0;padding-right:65px;border-left:0;border-right:1px solid #ffffff35}
+html[dir="rtl"] .fta-resource-links .text-link,html[dir="rtl"] .fta-resource-links .button{line-height:1.8}
+html[dir="rtl"] .text-link svg,html[dir="rtl"] .button svg{transform:scaleX(-1)}
+html[dir="rtl"] .email-link,html[dir="rtl"] bdi{unicode-bidi:isolate}
+html[dir="rtl"] .fta-verification dt{letter-spacing:normal;font-size:12px}
+html[dir="rtl"] .fta-verification dd{overflow-wrap:anywhere}
+@media(max-width:1100px){html[dir="rtl"] .contact-box{padding-right:35px}}
+@media(max-width:800px){html[dir="rtl"] .service-nav-menu{right:auto;padding-left:0;padding-right:15px}html[dir="rtl"] .contact-box{padding:24px 0 0;border-right:0}html[dir="rtl"] .fta-hero-copy h1{font-size:43px}html[dir="rtl"] .profile-links{align-items:flex-start}}
+@media(max-width:550px){html[dir="rtl"] .fta-hero-copy h1{font-size:39px}html[dir="rtl"] .fta-trust-list{font-size:11px}html[dir="rtl"] .fta-service-card h3{font-size:23px}html[dir="rtl"] .fta-adviser-caption{padding:17px}html[dir="rtl"] .fta-portrait img{object-fit:contain}html[dir="rtl"] .fta-scope-note{padding-right:14px}html[dir="rtl"] .fta-resource-links{align-items:stretch;flex-direction:column;gap:20px}html[dir="rtl"] .fta-resource-links a{max-width:100%}html[dir="rtl"] .fta-contact .email-link{font-size:24px}}
+@media(max-width:370px){html[dir="rtl"] .fta-hero-copy h1{font-size:35px}html[dir="rtl"] .fta-adviser-caption{padding:13px}html[dir="rtl"] .fta-adviser-caption h2{font-size:18px}html[dir="rtl"] .fta-trust-list{font-size:10px}}
