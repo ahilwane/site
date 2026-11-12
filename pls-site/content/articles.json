@@ -487,6 +487,41 @@
       "wordCountApprox": 727,
       "servicePath": "/services/accounting-bookkeeping-dubai/",
       "category": "Accounting"
+    },
+    {
+      "id": "nil-corporate-tax-return-records-checklist-uae",
+      "title": "Zero Tax Payable? The Records Your UAE Company Still Needs",
+      "seoTitle": "Nil Corporate Tax Return: Records Checklist | PLS",
+      "slug": "nil-corporate-tax-return-records-checklist-uae",
+      "date": "2026-11-12",
+      "dateText": "12 November 2026",
+      "publicationAt": "2026-11-12T06:50:46+00:00",
+      "status": "published",
+      "includeInCurrentPublicBuild": true,
+      "description": "Prepare the records behind a UAE Corporate Tax return, including loss-making, inactive and Small Business Relief companies. A practical bookkeeping checklist.",
+      "imageAlt": "PLS Accounting title graphic: Zero tax payable? The records your UAE company still needs.",
+      "author": "Dr. Ahmad Helwani",
+      "contactEmail": "ah@pls-uae.com",
+      "bodyFragment": "content/articles/nil-corporate-tax-return-records-checklist-uae.html",
+      "coverImage": "assets/articles/nil-corporate-tax-return-records-checklist-uae.png",
+      "imageCaption": "PLS Accounting: a practical bookkeeping checklist for UAE Corporate Tax records.",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageBytes": 81446,
+      "bodyFragmentSha256": "d2cc4353d8b93ee1f6cc55ea3a1cf3918bfe8078f41bfc174d8894c851fce752",
+      "coverImageSha256": "489c80ed57ce5a85a3ec542a4b23dff9df72bac6f0be3125c35793a4066bff51",
+      "sourceLinks": [
+        "https://tax.gov.ae/en/faq.aspx?keyword=I+did+not+make+a+profit+for+the+Tax+Period%2C+do+I+have+to+complete+a+UAE+CT+return%3F",
+        "https://tax.gov.ae/en/faq.aspx?keyword=I+do+not+have+any+income+%2F+or+my+company+is+dormant%2C+do+I+have+to+complete+a+UAE+CT+return%3F",
+        "https://tax.gov.ae/DataFolder/Files/Pdf/2024/Determination%20of%20Taxable%20Income%20-%2031%2007%202024.pdf",
+        "https://tax.gov.ae/en/media.centre/news/federal.tax.authority.calls.on.all.persons.subject.to.corporate.tax.to.file.their.tax.returns.and.pay.the.corporate.tax.due.within.the.specified.timeframes.to.avoid.latepayment.penalties.aspx",
+        "https://tax.gov.ae/en/taxes/corporate.tax/corporate.tax.topics.aspx",
+        "https://mof.gov.ae/wp-content/uploads/2026/08/Ministerial-Decision-No.-131-of-2026-Amending-Certain-Provisions-of-Ministerial-Decision-No.-73-of-2023-on-Small-Business-Relief-for-the-Purposes-of-Federal-Decree-Law-No.-47-of-2022-EN.pdf",
+        "https://tax.gov.ae/en/media.centre/News/pr.28082025.aspx"
+      ],
+      "wordCountApprox": 430,
+      "servicePath": "/services/accounting-bookkeeping-dubai/",
+      "category": "Corporate Tax"
     }
   ]
 }

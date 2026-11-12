@@ -147,3 +147,8 @@ The page is linked from the Services menu, footer and homepage specialist-tax se
 The Arabic visible verification information and Person/Service data retain Ahmad Abdulmomen Helwani’s individual TAAN 20004461 and Bonnard Lawson Dubai role. The 5 November directory-check date remains an explicitly dated reference; no new credential expiry or verification date is invented. Existing article bodies, dates, release gates, company contacts and address are preserved.
 
 Both tax-agent pages now include a short resource section connecting service enquiries and accounting support at PLS with Dr. Ahmad Helwani’s detailed tax guidance on UAE Taxes. It links to the existing `/tax-insights`, `/vat` and `/corporate-tax` destinations without duplicating those articles. The PLS homepage remains focused on accounting and bookkeeping. Validate the two published language pages, navigation, contact actions and resource links after deployment; a successful local build does not establish live publication or search indexing.
+
+
+### Nil Corporate Tax records checklist — 12 November 2026
+
+`/articles/nil-corporate-tax-return-records-checklist-uae/` is the approved PLS companion checklist for taxable UAE companies with no tax payable. Its body retains linked FTA/MoF references, the current Small Business Relief qualifying-period end date of 31 December 2029 under Ministerial Decision No. 131 of 2026, and the distinction between PLS bookkeeping support and Dr. Ahmad Helwani’s tax-agent role with Bonnard Lawson Dubai. The cover is a typeset PLS title graphic with no photograph or AI imagery. The optional `seoTitle` article field supplies a reviewed search title without changing the visible headline. Source publication eligibility does not by itself verify live deployment.
