@@ -562,8 +562,8 @@ class Builder:
         posting={"@type":"BlogPosting","@id":self.base+path+'#article',"headline":article['title'],"description":article['description'],"url":self.base+path,"mainEntityOfPage":{"@type":"WebPage","@id":self.base+path},"datePublished":publication_datetime,"dateModified":article.get('dateModified',actual.isoformat()),"author":{"@id":self.base+'/ahmad-helwani/#person'},"publisher":{"@id":self.base+'/#company'},"image":{"@type":"ImageObject","url":image,"width":article['imageWidth'],"height":article['imageHeight']},"inLanguage":"en","isAccessibleForFree":True,"citation":article['sourceLinks']}
         if article.get('originalSource'):
             posting['isBasedOn'] = article['originalSource']
-        page_title = article['title'] + ' | PLS Accounting'
-        if len(page_title) > 70:
+        page_title = article.get('seoTitle') or article['title'] + ' | PLS Accounting'
+        if not article.get('seoTitle') and len(page_title) > 70:
             page_title = article['title']
         return self.page(page_title,article['description'],path,content,[self.company(),self.person(),posting],active='articles',image=image,image_alt=article['imageAlt'],article=True)
 
