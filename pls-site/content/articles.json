@@ -137,7 +137,7 @@
       "imageBytes": 1614927,
       "sourceImageBytes": 1831804,
       "sourceHtmlSha256": "1319a3346d061645475fedbf76136946dad059eed3a296d9ecf2b6af53079ea1",
-      "bodyFragmentSha256": "ae74d4f15856deaee1eb49f0eb1120348635a96a29d26160b23c45cd9c9b6a76",
+      "bodyFragmentSha256": "5da0d34e98ef56e3f411a5ead581d4252bd70b928cad595ac79d252b461e1281",
       "coverImageSha256": "3b266e46664d0da588db3394e99c2511af9a622e1020cc242c8e1f3003e5dff7",
       "sourceLinks": [
         "https://mof.gov.ae/wp-content/uploads/2026/05/Ministerial-Resolution-No.-66-of-2026-Amending-Certain-Provisions-of-Ministerial-Resolution-No.-244-of-2025-Regarding-the-Implementation-of-the-Electronic-Invoicing-System-En-20260514.pdf",
@@ -147,7 +147,8 @@
         "https://mof.gov.ae/wp-content/uploads/2026/10/Ministerial-Decision-No.-197-of-2026-%E2%80%93-Amending-Certain-Provisions-of-Ministerial-Decision-No.-243-of-2025-on-the-Electronic-Invoicing-System_En.pdf"
       ],
       "sourceLinkInstances": 5,
-      "wordCountApprox": 844
+      "wordCountApprox": 844,
+      "dateModified": "2026-11-15T00:00:00+04:00"
     },
     {
       "originalTitle": "GAAP and IFRS: What's the Difference?",
@@ -522,6 +523,37 @@
       "wordCountApprox": 430,
       "servicePath": "/services/accounting-bookkeeping-dubai/",
       "category": "Corporate Tax"
+    },
+    {
+      "coverImage": "assets/articles/uae-einvoicing-readiness.jpg",
+      "coverImageSha256": "293806a95f50acce271433fade67a6aa68eaecf02911086e430f33da4b857d83",
+      "imageWidth": 1536,
+      "imageHeight": 1024,
+      "imageBytes": 224257,
+      "imageAlt": "Conceptual illustration of an accounting desk with digital and paper invoices.",
+      "imageCaption": "AI-generated conceptual topic image.",
+      "id": "uae-einvoicing-faq-invoice-checks",
+      "title": "UAE E-Invoicing FAQs: Three Invoice Scenarios to Test",
+      "seoTitle": "UAE E-Invoicing FAQs: Three Invoice Checks | PLS",
+      "slug": "uae-e-invoicing-faq-invoice-checks",
+      "date": "2026-11-15",
+      "dateText": "15 November 2026",
+      "publicationAt": "2026-11-15T00:00:00+04:00",
+      "status": "published",
+      "includeInCurrentPublicBuild": true,
+      "description": "Practical checks for export e-invoices, 0% VAT supplies and customers not yet on the network. Prepare invoice data, test workflows and assign owners.",
+      "author": "Dr. Ahmad Helwani",
+      "contactEmail": "ah@pls-uae.com",
+      "bodyFragment": "content/articles/uae-einvoicing-faq-invoice-checks.html",
+      "bodyFragmentSha256": "84c664b9cb97535d08005af8a2f7dc1c4eeb20e0b37f808e9d12fd4c034f9f55",
+      "servicePath": "/services/accounting-bookkeeping-dubai/",
+      "category": "E-Invoicing",
+      "sourceLinks": [
+        "https://www.tax.gov.ae/en/content/uae.einvoicing.aspx",
+        "https://docs.peppol.eu/poac/ae/pint-ae/trn-invoice/codelist/Aligned-TaxCategoryCodes/",
+        "https://mof.gov.ae/wp-content/uploads/2026/10/UAE-Electronic-Invoicing-Guidelines_En.pdf"
+      ],
+      "wordCountApprox": 557
     }
   ]
 }
