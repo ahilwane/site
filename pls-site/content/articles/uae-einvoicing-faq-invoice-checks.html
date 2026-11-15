@@ -1,33 +1,47 @@
-<p>Before going live with UAE e-invoicing, test the invoices that need the most care: an export, a supply subject to 0% VAT and a sale to a customer who has not joined the network yet. Each test should connect the commercial records, the approved tax treatment and the invoice data produced by your accounting system.</p>
-<p>For the wider readiness process, start with <a href="/articles/uae-e-invoicing-are-you-ready/">UAE E-Invoicing: Are You Ready?</a> This companion FAQ focuses on the working file and software checks behind three everyday questions.</p>
+<p>Can we send an e-invoice to an overseas customer? What if the VAT rate is 0%? And what happens when the customer has not joined the network?</p>
+<p>These are practical questions to settle with your accounting team and chosen Accredited Service Provider (ASP). Here are short answers and checks you can use when preparing your system.</p>
 
-<h2 id="export-invoices">1. How do we prepare e-invoices for exports?</h2>
-<p>The FTA distinguishes delivery to a foreign buyer from reporting to the authority. Where an overseas buyer is not on Peppol, the supplier's provider still reports the data, and the supplier delivers the invoice to the buyer separately. <a href="#faq-source-fta">[1]</a></p>
-<p>Prepare a transaction file containing the contract or purchase order, customer details, invoice and relevant commercial support. Compare the legal name, country, address and available identifiers across those records. Document the reviewed treatment before the software team configures the invoice.</p>
-<p>Ask your chosen Accredited Service Provider to demonstrate the relevant workflow using a sample from your business. Retain the reporting confirmation and the evidence of customer delivery together.</p>
+<h2 id="export-invoices">1. How do we e-invoice an export?</h2>
+<p>If the overseas business is on Peppol, use its electronic address. If it is not, your ASP still reports the invoice data to the FTA, and you deliver the invoice to the customer separately, for example by email.</p>
+<p>For an export-classified transaction with a receiver not registered in Peppol, the prescribed address is <code>0235:9900000099</code>. An overseas address alone does not establish that the transaction qualifies as an export.</p>
+<p><strong>Check now:</strong> add the customer's country, available identifiers and network status to its customer record. Test how the customer will receive the invoice.</p>
 
-<h2 id="zero-rated-invoices">2. What should we check for e-invoices charged at 0% VAT?</h2>
-<p>PINT-AE identifies zero-rated supplies with category <code>Z</code>; exempt and outside-scope supplies have separate categories. <a href="#faq-source-categories">[2]</a> Your accounting-system label should represent the approved treatment accurately.</p>
-<p>Review the tax codes staff currently select. A code named “0%” may be used inconsistently or connected to an unsuitable setting. Choose a representative invoice, document the approved treatment and compare the resulting invoice data with that decision.</p>
-<p>Keep the test result and record who reviewed it. If your business has invoices with several types of supply, include one in the test set so the team can inspect the individual lines.</p>
+<span id="faq-source-categories" aria-hidden="true"></span>
+<h2 id="zero-rated-invoices">2. How do we e-invoice a supply charged at 0% VAT?</h2>
+<p>Use the zero-rated category <code>Z</code>, with a zero VAT rate and amount. Do not use invoice type <code>480</code> for a zero-rated supply: that type is for transactions exclusively outside the scope of VAT.</p>
+<p><strong>Example:</strong> if a reviewed supply of AED 12,000 qualifies for 0% VAT, the invoice shows AED 12,000 before VAT and AED 0 VAT. Zero-rated, exempt and outside-scope supplies need different tax mappings.</p>
+<p><strong>Check now:</strong> ask your software team what the system's “0%” code actually sends to your ASP.</p>
 
 <h2 id="customer-not-on-network">3. How do we e-invoice a customer who has not joined the network yet?</h2>
-<p>Confirm the buyer's onboarding position with your provider. The Ministry's transitional treatment is not a universal solution for missing identifiers. <a href="#faq-source-mof">[3]</a> Keep a dated record of the customer's response.</p>
-<p>Give the relevant facts to your chosen provider and agree how the transaction will be processed and how the customer will receive its invoice. Assign someone to follow up when the customer's status changes, and include this scenario in testing before the first live invoice.</p>
+<p>During the rollout, a buyer may not yet be required to implement and may have no network identifier. The prescribed transitional route uses <code>0235:9900000098</code>, with a regular tax invoice, such as a PDF, also delivered to the customer.</p>
+<p>This is not a general solution for every missing identifier. Ask your ASP to confirm the buyer's position, particularly if its implementation deadline has already passed.</p>
 
-<h2>Keep a simple test record</h2>
-<ul>
-<li><strong>Scenario and records:</strong> what is being supplied, to whom, and which supporting documents were reviewed?</li>
-<li><strong>Decision and owner:</strong> who confirmed the treatment and who maintains the customer and software settings?</li>
-<li><strong>Result and action:</strong> what did the test produce, what remains unresolved, and who will follow up?</li>
-</ul>
-<p>PLS Accounting can help review accounting data, invoicing workflows and software readiness, working with your chosen provider. For specialist transaction analysis, Dr. Ahmad Helwani's FTA tax-agent role is with Bonnard Lawson Dubai.</p>
-<p>Explore <a href="/services/zoho-books-e-invoicing-uae/">Zoho Books and e-invoicing readiness support</a>, or email <a href="mailto:ah@pls-uae.com">ah@pls-uae.com</a> with your business activity, current accounting software and the invoice scenario you need to test. Further tax guidance is available on <a href="https://uae-taxes.com/">UAE Taxes</a>.</p>
+<h2 id="tin-and-trn">4. Is our TIN the same as our VAT TRN?</h2>
+<p>A TIN has <strong>10 digits</strong>. A VAT TRN has <strong>15 digits</strong>. They serve different purposes in e-invoicing. Do not enter a Corporate Tax TRN in the seller's VAT-identifier field.</p>
+<p><strong>Check now:</strong> confirm the numbers against your EmaraTax records and provider onboarding details. Avoid copying a number into every tax field simply because it belongs to the same company.</p>
 
-<h2>Official references</h2>
-<ol>
-<li id="faq-source-fta"><a href="https://www.tax.gov.ae/en/content/uae.einvoicing.aspx">FTA: UAE e-invoicing questions and answers</a> — overseas buyers, delivery and reporting.</li>
-<li id="faq-source-categories"><a href="https://docs.peppol.eu/poac/ae/pint-ae/trn-invoice/codelist/Aligned-TaxCategoryCodes/">PINT-AE VAT category codes</a> — zero-rated, exempt and outside-scope classifications.</li>
-<li id="faq-source-mof"><a href="https://mof.gov.ae/wp-content/uploads/2026/10/UAE-Electronic-Invoicing-Guidelines_En.pdf">Ministry of Finance: Electronic Invoicing Guidelines, Version 2.0, 26 October 2026</a> — transitional buyers, section 10.2.2.</li>
-</ol>
-<p><small>Official sources reviewed on 15 November 2026.</small></p>
+<h2 id="advance-payments">5. How do we invoice advance payments?</h2>
+<p>Invoice the advance when received. The later invoice covers the outstanding balance and refers to the advance invoice.</p>
+<p><strong>Example, before VAT:</strong> a contract is AED 24,000 and an advance of AED 6,000 has already been invoiced. The remaining invoice is AED 18,000. Link both records in your accounting system so the advance is not billed twice.</p>
+
+<h2 id="free-zone-customers">6. What changes when our customer is in a Free Zone?</h2>
+<p>Identify who ultimately benefits from the supply. If that is the customer, the beneficiary details can match. Otherwise, record the actual beneficiary.</p>
+<p><strong>Example:</strong> ask whether the customer is buying the service for its own staff or for another group company. Record the answer before preparing the invoice.</p>
+
+<h2 id="invoice-storage">7. Can our provider store invoices for us?</h2>
+<p>Yes, storage can be arranged with the provider. Your business remains responsible for keeping the required records accessible.</p>
+<p><strong>Check now:</strong> ask how to retrieve an older invoice, export the records and keep access if you change providers. Test retrieval before relying on the arrangement.</p>
+
+<h2 id="hsn-codes">8. Do we need HSN product codes now?</h2>
+<p>HSN codes are currently optional. Mandatory timing will be announced separately.</p>
+<p><strong>Check now:</strong> tidy your item descriptions and discuss product-data requirements with your provider so later changes are easier to manage.</p>
+
+<h2 id="pdf-invoices">9. Is emailing a PDF enough?</h2>
+<p>A PDF alone is not a structured e-invoice. It can serve as a customer-readable copy where appropriate, but it does not replace the required electronic data process.</p>
+
+<h2>Start with three invoices</h2>
+<p>Pick an export, a zero-rated sale and a customer not yet on the network. Ask your team to show the customer details, tax mapping, reporting result and delivery method for each. Record any missing information and give someone responsibility for resolving it.</p>
+<p>PLS Accounting can help with <a href="/services/zoho-books-e-invoicing-uae/">accounting data, Zoho Books and e-invoicing readiness</a>. Email <a href="mailto:ah@pls-uae.com">ah@pls-uae.com</a> with your accounting software and the invoice question you need to resolve.</p>
+<p>For the wider preparation steps, read <a href="/articles/uae-e-invoicing-are-you-ready/">UAE E-Invoicing: Are You Ready?</a> Specialist tax guidance is available through <a href="https://uae-taxes.com/">UAE Taxes</a>. Dr. Ahmad Helwani's FTA tax-agent role is with Bonnard Lawson Dubai.</p>
+<span id="faq-source-fta" aria-hidden="true"></span><span id="faq-source-mof" aria-hidden="true"></span>
+<p><small>Official source: <a href="https://mof.gov.ae/wp-content/uploads/2026/10/UAE-Electronic-Invoicing-Guidelines_En.pdf">UAE Ministry of Finance — Electronic Invoicing Guidelines, Version 2.0, 26 October 2026</a>. Reviewed 15 November 2026.</small></p>
