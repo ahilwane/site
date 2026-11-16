@@ -545,14 +545,15 @@
       "author": "Dr. Ahmad Helwani",
       "contactEmail": "ah@pls-uae.com",
       "bodyFragment": "content/articles/uae-einvoicing-faq-invoice-checks.html",
-      "bodyFragmentSha256": "6c50f0a956b8d0902f19fb721a09c6901c07ee2453c2aaf787c9fedddc62bc9e",
+      "bodyFragmentSha256": "52a8976d4cb94624884f5b5f211fd71b72bf1a45e31dcee4f75ad30b91cb6040",
       "servicePath": "/services/accounting-bookkeeping-dubai/",
       "category": "E-Invoicing",
       "sourceLinks": [
-        "https://mof.gov.ae/wp-content/uploads/2026/10/UAE-Electronic-Invoicing-Guidelines_En.pdf"
+        "https://mof.gov.ae/wp-content/uploads/2026/10/UAE-Electronic-Invoicing-Guidelines_En.pdf",
+        "https://mof.gov.ae/wp-content/uploads/2026/10/UAE-Electronic-Invoice-Mandatory-Field-Requirements.pdf"
       ],
-      "wordCountApprox": 766,
-      "dateModified": "2026-11-15T18:23:27+04:00"
+      "wordCountApprox": 790,
+      "dateModified": "2026-11-16T09:21:34+04:00"
     }
   ]
 }
