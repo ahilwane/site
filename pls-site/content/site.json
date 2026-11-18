@@ -82,7 +82,7 @@
   "faq": [
     {
       "question": "Where is PLS Accounting based?",
-      "answer": "PLS Accounting is based at Al Musalla Tower, Dubai, United Arab Emirates. Business hours are Monday–Friday, 8 AM–5 PM, Dubai time. Enquiries are welcome in English or Arabic."
+      "answer": "PLS Accounting is based in Dubai, United Arab Emirates. Business hours are Monday–Friday, 8 AM–5 PM, Dubai time. Enquiries are welcome in English or Arabic."
     },
     {
       "question": "What services does PLS Accounting provide?",
@@ -129,7 +129,7 @@
   "telephone": "+971585951040",
   "phoneDisplay": "+971 58 595 1040",
   "address": {
-    "building": "Al Musalla Tower",
+    "building": "",
     "city": "Dubai",
     "country": "United Arab Emirates",
     "countryCode": "AE"
