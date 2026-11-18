@@ -554,6 +554,35 @@
       ],
       "wordCountApprox": 790,
       "dateModified": "2026-11-16T09:21:34+04:00"
+    },
+    {
+      "id": "card-payment-settlement-reconciliation-uae",
+      "title": "Card Sales and Bank Payouts: A Settlement Reconciliation Guide",
+      "slug": "card-payment-settlement-reconciliation-uae",
+      "seoTitle": "Card Payment Settlement Reconciliation UAE | PLS",
+      "date": "2026-11-18",
+      "dateText": "18 November 2026",
+      "publicationAt": "2026-11-18T08:55:02+04:00",
+      "status": "published",
+      "includeInCurrentPublicBuild": true,
+      "description": "Reconcile card collections, processor fees, refunds and bank payouts with a practical settlement checklist, an illustrative example and Zoho Books review steps.",
+      "author": "Dr. Ahmad Helwani",
+      "contactEmail": "ah@pls-uae.com",
+      "bodyFragment": "content/articles/card-payment-settlement-reconciliation-uae.html",
+      "bodyFragmentSha256": "daaad9ae96e614fc059cefe077a56b33baacd18d173bbaa3e0593cf61b926acf",
+      "coverImage": "assets/articles/card-payment-settlement-reconciliation.svg",
+      "coverImageSha256": "2233e2ebd4c91553d574465b6280252bd4f27037a2d25b107a407cf98b10bf85",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageBytes": 732,
+      "imageAlt": "PLS Accounting: reconcile card collections, deductions and outstanding settlements.",
+      "imageCaption": "PLS Accounting settlement reconciliation checklist.",
+      "servicePath": "/services/accounting-bookkeeping-dubai/",
+      "category": "Accounting",
+      "sourceLinks": [
+        "https://tax.gov.ae/datafolder/Files/Guides/CT/Accounting%20Standards%20Guide%20-%2006%2011%202023.pdf"
+      ],
+      "dateModified": "2026-11-18T08:55:02+04:00"
     }
   ]
 }
