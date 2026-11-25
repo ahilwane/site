@@ -583,6 +583,35 @@
         "https://tax.gov.ae/datafolder/Files/Guides/CT/Accounting%20Standards%20Guide%20-%2006%2011%202023.pdf"
       ],
       "dateModified": "2026-11-18T08:55:02+04:00"
+    },
+    {
+      "id": "supplier-credit-note-reconciliation",
+      "title": "How to Reconcile a Supplier Credit Note with a Bill or Bank Refund",
+      "slug": "supplier-credit-note-reconciliation",
+      "seoTitle": "Supplier Credit Note Reconciliation in the UAE | PLS Accounting",
+      "date": "2026-11-25",
+      "dateText": "25 November 2026",
+      "publicationAt": "2026-11-25T08:12:52+04:00",
+      "status": "published",
+      "includeInCurrentPublicBuild": true,
+      "description": "Trace a supplier credit from the original bill to a bank refund or future purchase. See a worked example and the three dates to keep for a UAE VAT review.",
+      "author": "Dr. Ahmad Helwani",
+      "contactEmail": "ah@pls-uae.com",
+      "bodyFragment": "content/articles/supplier-credit-note-reconciliation.html",
+      "bodyFragmentSha256": "32cedc6a906361e6d953abebda9dca161bde692570ed721c9cd14d96de2dc436",
+      "coverImage": "assets/articles/supplier-credit-note-reconciliation.svg",
+      "coverImageSha256": "5357eb65f8d320a05151fa2bb50b8d610a58b367b0bab469241c7fa8a1cb9092",
+      "imageWidth": 1200,
+      "imageHeight": 800,
+      "imageBytes": 729,
+      "imageAlt": "Match the supplier bill and credit note, then trace the refund or bill adjustment.",
+      "imageCaption": "PLS Accounting supplier reconciliation checklist.",
+      "servicePath": "/services/accounting-bookkeeping-dubai/",
+      "category": "Accounting",
+      "sourceLinks": [
+        "https://tax.gov.ae/Datafolder/Files/Legislation/2025/Federal-Decree-Law-No-8-of-2017-and-amendments.pdf"
+      ],
+      "dateModified": "2026-11-25T08:12:52+04:00"
     }
   ]
 }
