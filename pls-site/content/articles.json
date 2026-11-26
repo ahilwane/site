@@ -612,6 +612,41 @@
         "https://tax.gov.ae/Datafolder/Files/Legislation/2025/Federal-Decree-Law-No-8-of-2017-and-amendments.pdf"
       ],
       "dateModified": "2026-11-25T08:12:52+04:00"
+    },
+    {
+      "coverImage": "assets/articles/corporate-tax-readiness-archive.jpg",
+      "coverImageSha256": "39e855b3ed73b35b5f04f8878d9bc74f28de0c89b1704f065d3bf72c300b1f01",
+      "imageWidth": 1536,
+      "imageHeight": 1024,
+      "imageBytes": 267218,
+      "imageAlt": "Illustrative organised accounting records, laptop and calculator prepared for a corporate tax review.",
+      "imageCaption": "AI-generated illustrative editorial photograph.",
+      "id": "uae-corporate-tax-accounting-profit-and-taxable-income",
+      "title": "Why taxable income can exceed your UAE company’s accounting profit",
+      "slug": "uae-corporate-tax-accounting-profit-and-taxable-income",
+      "seoTitle": "UAE Corporate Tax: Accounting Profit and Taxable Income | PLS",
+      "date": "2026-11-26",
+      "dateText": "26 November 2026",
+      "publicationAt": "2026-11-26T13:24:19+04:00",
+      "dateModified": "2026-11-26T13:24:19+04:00",
+      "status": "published",
+      "includeInCurrentPublicBuild": true,
+      "description": "See how a Dubai company reconciles AED 480,000 of accounting profit to AED 488,000 of taxable income, with a worked example in English and Arabic.",
+      "author": "Dr. Ahmad Helwani",
+      "contactEmail": "ah@pls-uae.com",
+      "bodyFragment": "content/articles/uae-corporate-tax-accounting-profit-and-taxable-income.html",
+      "bodyFragmentSha256": "3d9293f79c96a0ef945e1f9c9217686130eb14ae9575344a8402b40ba0d4466a",
+      "servicePath": "/services/corporate-tax-dubai/",
+      "category": "Corporate Tax",
+      "inLanguage": [
+        "en",
+        "ar"
+      ],
+      "sourceLinks": [
+        "https://mof.gov.ae/wp-content/uploads/2026/01/Federal-Decree-Law-No.-47-of-2022-and-its-amendments-en-v13.1.26.pdf",
+        "https://tax.gov.ae/en/content/determination.of.taxable.income.aspx",
+        "https://tax.gov.ae/ar/content/Determination.of.Taxable.Income.AR.aspx"
+      ]
     }
   ]
 }
